@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SIGNAL // PORTFOLIO</title>
+<title>Anthony Licausi // Builder</title>
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=Syne:wght@400;800&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -11,13 +11,12 @@
     --cyan: #00ffe7;
     --magenta: #ff00c8;
     --yellow: #ffe600;
+    --green: #00ff88;
     --white: #e8eaf0;
-    --dim: #1a1d2e;
     --grid: rgba(0,255,231,0.04);
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -29,653 +28,273 @@
     min-height: 100vh;
   }
 
-  /* CUSTOM CURSOR */
   #cursor {
-    position: fixed;
-    width: 12px; height: 12px;
-    background: var(--cyan);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
+    position: fixed; width: 12px; height: 12px;
+    background: var(--cyan); border-radius: 50%;
+    pointer-events: none; z-index: 9999;
     transform: translate(-50%, -50%);
-    transition: transform 0.1s, background 0.2s;
     mix-blend-mode: screen;
     box-shadow: 0 0 20px var(--cyan), 0 0 40px var(--cyan);
   }
   #cursor-ring {
-    position: fixed;
-    width: 36px; height: 36px;
-    border: 1px solid var(--cyan);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
+    position: fixed; width: 36px; height: 36px;
+    border: 1px solid var(--cyan); border-radius: 50%;
+    pointer-events: none; z-index: 9998;
     transform: translate(-50%, -50%);
-    transition: transform 0.15s ease-out, width 0.3s, height 0.3s, border-color 0.3s;
-    opacity: 0.5;
+    transition: width 0.3s, height 0.3s, border-color 0.3s; opacity: 0.5;
   }
-  body:has(a:hover) #cursor-ring, body:has(.project-card:hover) #cursor-ring {
-    width: 60px; height: 60px;
-    border-color: var(--magenta);
-  }
+  .cursor-big #cursor-ring { width: 60px; height: 60px; border-color: var(--magenta); }
 
-  /* SCANLINES */
   body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: repeating-linear-gradient(
-      to bottom,
-      transparent 0px,
-      transparent 3px,
-      rgba(0,0,0,0.15) 3px,
-      rgba(0,0,0,0.15) 4px
-    );
-    pointer-events: none;
-    z-index: 9000;
+    content: ''; position: fixed; inset: 0;
+    background: repeating-linear-gradient(to bottom, transparent 0px, transparent 3px, rgba(0,0,0,0.12) 3px, rgba(0,0,0,0.12) 4px);
+    pointer-events: none; z-index: 9000;
   }
-
-  /* GRID BG */
   body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(var(--grid) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
-    z-index: 0;
+    content: ''; position: fixed; inset: 0;
+    background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 60px 60px; pointer-events: none; z-index: 0;
   }
-
-  /* NOISE TEXTURE */
   .noise {
-    position: fixed;
-    inset: 0;
-    opacity: 0.03;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 200px 200px;
-    pointer-events: none;
-    z-index: 1;
+    position: fixed; inset: 0; opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px 200px; pointer-events: none; z-index: 1;
   }
 
-  /* HERO */
-  #hero {
-    position: relative;
-    z-index: 2;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 80px 60px;
-    overflow: hidden;
-  }
-
-  .signal-badge {
-    font-size: 11px;
-    letter-spacing: 0.3em;
-    color: var(--cyan);
-    margin-bottom: 30px;
-    opacity: 0;
-    animation: fadeIn 0.5s 0.3s forwards;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .signal-badge::before {
-    content: '';
-    display: inline-block;
-    width: 8px; height: 8px;
-    background: var(--cyan);
-    border-radius: 50%;
-    animation: blink 1s infinite;
-    box-shadow: 0 0 10px var(--cyan);
-  }
-
-  h1.hero-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(80px, 15vw, 180px);
-    line-height: 0.9;
-    letter-spacing: -0.02em;
-    color: var(--white);
-    opacity: 0;
-    animation: slideUp 0.8s 0.5s cubic-bezier(0.16,1,0.3,1) forwards;
-    position: relative;
-    z-index: 2;
-  }
-  h1.hero-name span.accent {
-    color: var(--cyan);
-    display: block;
-    text-shadow: 0 0 60px rgba(0,255,231,0.3);
-  }
-
-  .hero-glitch {
-    position: absolute;
-    top: 0; left: 0;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(80px, 15vw, 180px);
-    line-height: 0.9;
-    color: var(--magenta);
-    opacity: 0;
-    pointer-events: none;
-    animation: glitchA 4s 2s infinite;
-    clip-path: polygon(0 30%, 100% 30%, 100% 50%, 0 50%);
-  }
-
-  .hero-sub {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(14px, 2vw, 20px);
-    color: rgba(232,234,240,0.5);
-    max-width: 500px;
-    margin-top: 30px;
-    line-height: 1.7;
-    opacity: 0;
-    animation: fadeIn 0.8s 1s forwards;
-  }
-
-  .hero-stats {
-    display: flex;
-    gap: 50px;
-    margin-top: 60px;
-    opacity: 0;
-    animation: fadeIn 0.8s 1.3s forwards;
-  }
-  .stat {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  .stat-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 42px;
-    color: var(--cyan);
-    text-shadow: 0 0 30px rgba(0,255,231,0.4);
-  }
-  .stat-label {
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    color: rgba(232,234,240,0.4);
-  }
-
-  /* SCROLL INDICATOR */
-  .scroll-hint {
-    position: absolute;
-    bottom: 40px; left: 60px;
-    font-size: 10px;
-    letter-spacing: 0.3em;
-    color: rgba(232,234,240,0.3);
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    opacity: 0;
-    animation: fadeIn 1s 2s forwards;
-  }
-  .scroll-line {
-    width: 60px; height: 1px;
-    background: rgba(232,234,240,0.2);
-    position: relative;
-    overflow: hidden;
-  }
-  .scroll-line::after {
-    content: '';
-    position: absolute;
-    top: 0; left: -100%;
-    width: 100%; height: 100%;
-    background: var(--cyan);
-    animation: scanRight 2s 2s infinite;
-  }
-
-  /* ORBITING ELEMENT */
-  .orbit-container {
-    position: absolute;
-    right: 8%;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 300px; height: 300px;
-    opacity: 0;
-    animation: fadeIn 1s 1.5s forwards;
-  }
-  .orbit-ring {
-    position: absolute;
-    inset: 0;
-    border: 1px solid rgba(0,255,231,0.15);
-    border-radius: 50%;
-    animation: spin 20s linear infinite;
-  }
-  .orbit-ring:nth-child(2) {
-    inset: 30px;
-    border-color: rgba(255,0,200,0.1);
-    animation-duration: 15s;
-    animation-direction: reverse;
-  }
-  .orbit-ring:nth-child(3) {
-    inset: 60px;
-    border-color: rgba(255,230,0,0.08);
-    animation-duration: 10s;
-  }
-  .orbit-dot {
-    position: absolute;
-    top: -4px; left: 50%;
-    width: 8px; height: 8px;
-    background: var(--cyan);
-    border-radius: 50%;
-    transform: translateX(-50%);
-    box-shadow: 0 0 15px var(--cyan);
-  }
-  .orbit-dot-2 {
-    top: 50%;
-    left: -4px;
-    background: var(--magenta);
-    box-shadow: 0 0 15px var(--magenta);
-  }
-  .orbit-center {
-    position: absolute;
-    inset: 90px;
-    border: 1px solid rgba(0,255,231,0.3);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    color: rgba(0,255,231,0.6);
-    text-align: center;
-    line-height: 1.6;
-  }
-
-  /* NAV */
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 24px 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: linear-gradient(to bottom, rgba(3,5,8,0.9), transparent);
-    backdrop-filter: blur(2px);
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 24px 60px; display: flex; justify-content: space-between; align-items: center;
+    background: linear-gradient(to bottom, rgba(3,5,8,0.95), transparent);
   }
-  .nav-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 24px;
-    letter-spacing: 0.1em;
-    color: var(--white);
-    text-decoration: none;
-  }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.1em; color: var(--white); text-decoration: none; }
   .nav-logo span { color: var(--cyan); }
-  .nav-links {
-    display: flex;
-    gap: 40px;
-    list-style: none;
-  }
-  .nav-links a {
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    color: rgba(232,234,240,0.5);
-    text-decoration: none;
-    transition: color 0.3s;
-    text-transform: uppercase;
-  }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a { font-size: 10px; letter-spacing: 0.25em; color: rgba(232,234,240,0.45); text-decoration: none; text-transform: uppercase; transition: color 0.3s; }
   .nav-links a:hover { color: var(--cyan); }
 
-  /* SECTION LABEL */
+  .ticker-wrap {
+    position: relative; z-index: 2; padding-top: 72px;
+    border-bottom: 1px solid rgba(255,255,255,0.05); overflow: hidden; background: rgba(0,255,231,0.015);
+  }
+  .ticker-inner { padding: 13px 0; overflow: hidden; }
+  .ticker-track { display: flex; animation: ticker 30s linear infinite; white-space: nowrap; }
+  .ticker-item { font-size: 10px; letter-spacing: 0.35em; color: rgba(0,255,231,0.45); padding: 0 40px; display: inline-flex; align-items: center; gap: 20px; }
+  .ticker-item::after { content: '◆'; font-size: 5px; opacity: 0.4; }
+
+  #hero {
+    position: relative; z-index: 2; min-height: 100vh; padding: 80px 60px;
+    display: flex; flex-direction: column; justify-content: center; overflow: hidden;
+  }
+  .signal-badge {
+    font-size: 10px; letter-spacing: 0.35em; color: var(--cyan); margin-bottom: 32px;
+    opacity: 0; animation: fadeIn 0.5s 0.3s forwards; display: flex; align-items: center; gap: 12px;
+  }
+  .signal-badge::before {
+    content: ''; display: inline-block; width: 7px; height: 7px;
+    background: var(--cyan); border-radius: 50%; animation: blink 1s infinite; box-shadow: 0 0 10px var(--cyan);
+  }
+  h1.hero-name {
+    font-family: 'Bebas Neue', sans-serif; font-size: clamp(80px, 14vw, 170px);
+    line-height: 0.9; letter-spacing: -0.02em; color: var(--white);
+    opacity: 0; animation: slideUp 0.8s 0.5s cubic-bezier(0.16,1,0.3,1) forwards; position: relative; z-index: 2;
+  }
+  h1.hero-name .accent { color: var(--cyan); display: block; text-shadow: 0 0 60px rgba(0,255,231,0.25); }
+  .hero-glitch {
+    position: absolute; top: 0; left: 0; font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(80px, 14vw, 170px); line-height: 0.9; color: var(--magenta);
+    opacity: 0; pointer-events: none; animation: glitchA 5s 2s infinite;
+    clip-path: polygon(0 30%, 100% 30%, 100% 50%, 0 50%);
+  }
+  .hero-tagline {
+    font-family: 'Syne', sans-serif; font-size: clamp(14px, 1.8vw, 19px);
+    color: rgba(232,234,240,0.45); max-width: 540px; margin-top: 28px; line-height: 1.8;
+    opacity: 0; animation: fadeIn 0.8s 1s forwards;
+  }
+  .hero-stats { display: flex; gap: 50px; margin-top: 60px; opacity: 0; animation: fadeIn 0.8s 1.3s forwards; flex-wrap: wrap; }
+  .stat { display: flex; flex-direction: column; gap: 4px; }
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 44px; color: var(--cyan); text-shadow: 0 0 30px rgba(0,255,231,0.35); }
+  .stat-label { font-size: 9px; letter-spacing: 0.25em; color: rgba(232,234,240,0.35); }
+
+  .scroll-hint {
+    position: absolute; bottom: 40px; left: 60px; font-size: 9px; letter-spacing: 0.35em;
+    color: rgba(232,234,240,0.25); display: flex; align-items: center; gap: 16px;
+    opacity: 0; animation: fadeIn 1s 2s forwards;
+  }
+  .scroll-line { width: 60px; height: 1px; background: rgba(232,234,240,0.15); position: relative; overflow: hidden; }
+  .scroll-line::after {
+    content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+    background: var(--cyan); animation: scanRight 2s 2.5s infinite;
+  }
+
+  .orbit-container {
+    position: absolute; right: 7%; top: 50%; transform: translateY(-50%);
+    width: 280px; height: 280px; opacity: 0; animation: fadeIn 1s 1.5s forwards;
+  }
+  .orbit-ring { position: absolute; inset: 0; border: 1px solid rgba(0,255,231,0.12); border-radius: 50%; animation: spin 20s linear infinite; }
+  .orbit-ring:nth-child(2) { inset: 28px; border-color: rgba(255,0,200,0.09); animation-duration: 14s; animation-direction: reverse; }
+  .orbit-ring:nth-child(3) { inset: 56px; border-color: rgba(255,230,0,0.07); animation-duration: 9s; }
+  .orbit-dot { position: absolute; top: -4px; left: 50%; width: 7px; height: 7px; background: var(--cyan); border-radius: 50%; transform: translateX(-50%); box-shadow: 0 0 12px var(--cyan); }
+  .orbit-dot-2 { top: 50%; left: -4px; background: var(--magenta); box-shadow: 0 0 12px var(--magenta); }
+  .orbit-center {
+    position: absolute; inset: 84px; border: 1px solid rgba(0,255,231,0.25); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; letter-spacing: 0.12em; color: rgba(0,255,231,0.55); text-align: center; line-height: 1.7;
+  }
+
   .section-label {
-    font-size: 10px;
-    letter-spacing: 0.4em;
-    color: var(--cyan);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
+    font-size: 9px; letter-spacing: 0.45em; color: var(--cyan); margin-bottom: 18px;
+    display: flex; align-items: center; gap: 14px;
   }
-  .section-label::after {
-    content: '';
-    flex: 1;
-    max-width: 80px;
-    height: 1px;
-    background: var(--cyan);
-    opacity: 0.4;
-  }
+  .section-label::after { content: ''; flex: 1; max-width: 70px; height: 1px; background: var(--cyan); opacity: 0.35; }
 
-  /* PROJECTS */
-  #projects {
-    position: relative;
-    z-index: 2;
-    padding: 120px 60px;
-  }
-
-  .projects-header {
-    margin-bottom: 80px;
-  }
-  .projects-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(50px, 8vw, 100px);
-    line-height: 0.95;
-    letter-spacing: -0.02em;
-  }
-
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 2px;
-  }
+  #projects { position: relative; z-index: 2; padding: 120px 60px; }
+  .projects-header { margin-bottom: 70px; }
+  .projects-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(50px, 8vw, 100px); line-height: 0.93; letter-spacing: -0.02em; }
+  .projects-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2px; }
 
   .project-card {
-    position: relative;
-    background: rgba(10,13,20,0.8);
-    border: 1px solid rgba(255,255,255,0.06);
-    padding: 40px;
-    cursor: none;
-    overflow: hidden;
+    position: relative; background: rgba(8,11,18,0.9);
+    border: 1px solid rgba(255,255,255,0.055); padding: 40px;
+    cursor: none; overflow: hidden; text-decoration: none; color: inherit; display: block;
     transition: border-color 0.4s;
-    text-decoration: none;
-    color: inherit;
-    display: block;
   }
-  .project-card:nth-child(1) { grid-column: span 7; min-height: 420px; }
-  .project-card:nth-child(2) { grid-column: span 5; min-height: 420px; }
-  .project-card:nth-child(3) { grid-column: span 4; min-height: 360px; }
-  .project-card:nth-child(4) { grid-column: span 8; min-height: 360px; }
-  .project-card:nth-child(5) { grid-column: span 6; min-height: 400px; }
-  .project-card:nth-child(6) { grid-column: span 6; min-height: 400px; }
+  .card-adrelamo { grid-column: span 7; min-height: 480px; }
+  .card-crm { grid-column: span 5; min-height: 480px; }
+  .card-tradecoach { grid-column: span 12; min-height: 320px; }
+  .card-future1 { grid-column: span 4; min-height: 280px; }
+  .card-future2 { grid-column: span 4; min-height: 280px; }
+  .card-future3 { grid-column: span 4; min-height: 280px; }
 
-  .project-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(0,255,231,0.05) 0%, transparent 60%);
-    opacity: 0;
-    transition: opacity 0.4s;
-  }
+  .project-card::before { content: ''; position: absolute; inset: 0; opacity: 0; transition: opacity 0.4s; }
   .project-card:hover::before { opacity: 1; }
-  .project-card:hover { border-color: rgba(0,255,231,0.3); }
+  .card-adrelamo::before { background: linear-gradient(135deg, rgba(0,255,231,0.06) 0%, transparent 60%); }
+  .card-adrelamo:hover { border-color: rgba(0,255,231,0.35); }
+  .card-crm::before { background: linear-gradient(135deg, rgba(255,0,200,0.07) 0%, transparent 60%); }
+  .card-crm:hover { border-color: rgba(255,0,200,0.35); }
+  .card-tradecoach::before { background: linear-gradient(135deg, rgba(255,230,0,0.06) 0%, transparent 60%); }
+  .card-tradecoach:hover { border-color: rgba(255,230,0,0.35); }
+  .card-future1::before { background: linear-gradient(135deg, rgba(0,255,136,0.05) 0%, transparent 60%); }
+  .card-future1:hover { border-color: rgba(0,255,136,0.25); }
+  .card-future2::before { background: linear-gradient(135deg, rgba(0,255,231,0.05) 0%, transparent 60%); }
+  .card-future2:hover { border-color: rgba(0,255,231,0.25); }
+  .card-future3::before { background: linear-gradient(135deg, rgba(255,0,200,0.05) 0%, transparent 60%); }
+  .card-future3:hover { border-color: rgba(255,0,200,0.25); }
 
-  /* Color variants per card */
-  .project-card:nth-child(2)::before { background: linear-gradient(135deg, rgba(255,0,200,0.06) 0%, transparent 60%); }
-  .project-card:nth-child(2):hover { border-color: rgba(255,0,200,0.3); }
-  .project-card:nth-child(3)::before { background: linear-gradient(135deg, rgba(255,230,0,0.06) 0%, transparent 60%); }
-  .project-card:nth-child(3):hover { border-color: rgba(255,230,0,0.3); }
-  .project-card:nth-child(4)::before { background: linear-gradient(135deg, rgba(0,255,231,0.05) 0%, transparent 60%); }
-  .project-card:nth-child(5)::before { background: linear-gradient(135deg, rgba(255,0,200,0.06) 0%, transparent 60%); }
-  .project-card:nth-child(5):hover { border-color: rgba(255,0,200,0.3); }
-  .project-card:nth-child(6)::before { background: linear-gradient(135deg, rgba(255,230,0,0.06) 0%, transparent 60%); }
-  .project-card:nth-child(6):hover { border-color: rgba(255,230,0,0.3); }
-
-  /* Glitch line on hover */
   .project-card::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0;
-    width: 0; height: 2px;
-    background: var(--cyan);
+    content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
     transition: width 0.5s cubic-bezier(0.16,1,0.3,1);
-    box-shadow: 0 0 10px var(--cyan);
   }
   .project-card:hover::after { width: 100%; }
-  .project-card:nth-child(2)::after, .project-card:nth-child(5)::after { background: var(--magenta); box-shadow: 0 0 10px var(--magenta); }
-  .project-card:nth-child(3)::after, .project-card:nth-child(6)::after { background: var(--yellow); box-shadow: 0 0 10px var(--yellow); }
+  .card-adrelamo::after { background: var(--cyan); box-shadow: 0 0 12px var(--cyan); }
+  .card-crm::after { background: var(--magenta); box-shadow: 0 0 12px var(--magenta); }
+  .card-tradecoach::after { background: var(--yellow); box-shadow: 0 0 12px var(--yellow); }
+  .card-future1::after { background: var(--green); }
+  .card-future2::after { background: var(--cyan); }
+  .card-future3::after { background: var(--magenta); }
 
-  .card-num {
-    font-size: 11px;
-    letter-spacing: 0.3em;
-    color: rgba(232,234,240,0.25);
-    margin-bottom: 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .card-status {
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    color: var(--cyan);
-    padding: 3px 8px;
-    border: 1px solid rgba(0,255,231,0.3);
-  }
-  .card-status.beta { color: var(--yellow); border-color: rgba(255,230,0,0.3); }
-  .card-status.new { color: var(--magenta); border-color: rgba(255,0,200,0.3); }
+  .card-num { font-size: 10px; letter-spacing: 0.3em; color: rgba(232,234,240,0.2); margin-bottom: 44px; display: flex; justify-content: space-between; align-items: center; }
+  .card-status { font-size: 8px; letter-spacing: 0.2em; padding: 3px 9px; border: 1px solid; text-transform: uppercase; }
+  .status-live { color: var(--cyan); border-color: rgba(0,255,231,0.35); }
+  .status-beta { color: var(--yellow); border-color: rgba(255,230,0,0.35); }
+  .status-building { color: var(--magenta); border-color: rgba(255,0,200,0.35); animation: blink 1.5s infinite; }
+  .status-soon { color: rgba(232,234,240,0.25); border-color: rgba(232,234,240,0.08); }
 
-  .card-icon {
-    font-size: 48px;
-    margin-bottom: 20px;
-    line-height: 1;
-    filter: grayscale(0.3);
-  }
-
-  .card-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: clamp(22px, 3vw, 34px);
-    line-height: 1.1;
-    margin-bottom: 16px;
-    letter-spacing: -0.02em;
-  }
-
-  .card-desc {
-    font-size: 13px;
-    line-height: 1.7;
-    color: rgba(232,234,240,0.45);
-    max-width: 400px;
-  }
-
-  .card-tags {
-    position: absolute;
-    bottom: 40px; left: 40px;
-    right: 40px;
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-  .tag {
-    font-size: 9px;
-    letter-spacing: 0.15em;
-    color: rgba(232,234,240,0.35);
-    padding: 4px 10px;
-    border: 1px solid rgba(255,255,255,0.08);
-    text-transform: uppercase;
-  }
+  .card-icon { font-size: 44px; margin-bottom: 18px; line-height: 1; }
+  .card-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(22px, 2.8vw, 36px); line-height: 1.08; margin-bottom: 10px; letter-spacing: -0.02em; }
+  .card-subtitle { font-size: 11px; letter-spacing: 0.12em; color: var(--cyan); margin-bottom: 16px; opacity: 0.65; }
+  .card-desc { font-size: 13px; line-height: 1.78; color: rgba(232,234,240,0.42); max-width: 420px; }
+  .card-tags { position: absolute; bottom: 40px; left: 40px; right: 40px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .tag { font-size: 8px; letter-spacing: 0.15em; color: rgba(232,234,240,0.28); padding: 3px 9px; border: 1px solid rgba(255,255,255,0.07); text-transform: uppercase; }
 
   .card-arrow {
-    position: absolute;
-    top: 40px; right: 40px;
-    width: 36px; height: 36px;
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    transition: all 0.3s;
-    color: rgba(232,234,240,0.4);
+    position: absolute; top: 38px; right: 38px; width: 34px; height: 34px;
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; transition: all 0.3s; color: rgba(232,234,240,0.3);
   }
-  .project-card:hover .card-arrow {
-    border-color: var(--cyan);
-    color: var(--cyan);
-    transform: rotate(45deg);
-    box-shadow: 0 0 15px rgba(0,255,231,0.2);
-  }
+  .project-card:hover .card-arrow { transform: rotate(45deg); }
+  .card-adrelamo:hover .card-arrow { border-color: var(--cyan); color: var(--cyan); }
+  .card-crm:hover .card-arrow { border-color: var(--magenta); color: var(--magenta); }
+  .card-tradecoach:hover .card-arrow { border-color: var(--yellow); color: var(--yellow); }
 
-  /* Animated noise bg per card */
   .card-bg-glow {
-    position: absolute;
-    width: 200px; height: 200px;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0;
-    transition: opacity 0.5s;
-    pointer-events: none;
-    right: -50px; bottom: -50px;
+    position: absolute; width: 250px; height: 250px; border-radius: 50%;
+    filter: blur(90px); opacity: 0; transition: opacity 0.5s; pointer-events: none; right: -60px; bottom: -60px;
   }
-  .project-card:hover .card-bg-glow { opacity: 0.15; }
-  .project-card:nth-child(1) .card-bg-glow { background: var(--cyan); }
-  .project-card:nth-child(2) .card-bg-glow { background: var(--magenta); }
-  .project-card:nth-child(3) .card-bg-glow { background: var(--yellow); }
-  .project-card:nth-child(4) .card-bg-glow { background: var(--cyan); }
-  .project-card:nth-child(5) .card-bg-glow { background: var(--magenta); }
-  .project-card:nth-child(6) .card-bg-glow { background: var(--yellow); }
+  .project-card:hover .card-bg-glow { opacity: 0.12; }
+  .card-adrelamo .card-bg-glow { background: var(--cyan); }
+  .card-crm .card-bg-glow { background: var(--magenta); }
+  .card-tradecoach .card-bg-glow { background: var(--yellow); }
+  .card-future1 .card-bg-glow { background: var(--green); }
+  .card-future2 .card-bg-glow { background: var(--cyan); }
+  .card-future3 .card-bg-glow { background: var(--magenta); }
 
-  /* ABOUT STRIP */
+  /* TradeCoach wide layout */
+  .card-tradecoach .card-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+  .trade-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .trade-metric { background: rgba(255,230,0,0.03); border: 1px solid rgba(255,230,0,0.1); padding: 16px 20px; }
+  .trade-metric-label { font-size: 8px; letter-spacing: 0.2em; color: rgba(232,234,240,0.28); margin-bottom: 8px; }
+  .trade-metric-val { font-family: 'Bebas Neue', sans-serif; font-size: 30px; color: var(--yellow); }
+  .trade-metric-val.up { color: var(--green); }
+  .trade-metric-val.down { color: var(--magenta); }
+
+  /* CRM vs badge */
+  .vs-badge {
+    display: inline-flex; align-items: center; gap: 8px; font-size: 9px; letter-spacing: 0.15em;
+    color: rgba(255,0,200,0.65); padding: 4px 12px; border: 1px solid rgba(255,0,200,0.2); margin-bottom: 14px; margin-top: 6px;
+  }
+
   #about {
-    position: relative;
-    z-index: 2;
-    padding: 120px 60px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
+    position: relative; z-index: 2; padding: 120px 60px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
   }
-
-  .about-text h2 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(50px, 7vw, 90px);
-    line-height: 0.95;
-    margin-bottom: 30px;
-  }
-  .about-text p {
-    font-size: 15px;
-    line-height: 1.9;
-    color: rgba(232,234,240,0.5);
-    max-width: 480px;
-  }
-
-  .about-terminal {
-    background: rgba(0,255,231,0.02);
-    border: 1px solid rgba(0,255,231,0.12);
-    padding: 30px;
-    font-size: 13px;
-    line-height: 2;
-  }
-  .terminal-line { color: rgba(232,234,240,0.4); }
-  .terminal-line .cmd { color: var(--cyan); }
-  .terminal-line .out { color: rgba(232,234,240,0.7); }
-  .terminal-line .comment { color: rgba(232,234,240,0.2); }
-  .terminal-cursor {
-    display: inline-block;
-    width: 8px; height: 14px;
-    background: var(--cyan);
-    vertical-align: middle;
-    animation: blink 1s infinite;
-    margin-left: 4px;
-  }
-  .terminal-header {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid rgba(0,255,231,0.1);
-  }
+  .about-text h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(50px, 7vw, 90px); line-height: 0.93; margin-bottom: 28px; }
+  .about-text p { font-size: 14px; line-height: 1.9; color: rgba(232,234,240,0.48); max-width: 480px; }
+  .about-terminal { background: rgba(0,255,231,0.02); border: 1px solid rgba(0,255,231,0.1); padding: 28px; font-size: 13px; line-height: 2.1; }
+  .terminal-header { display: flex; gap: 8px; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid rgba(0,255,231,0.08); }
   .term-dot { width: 10px; height: 10px; border-radius: 50%; }
   .term-dot:nth-child(1) { background: #ff5f57; }
   .term-dot:nth-child(2) { background: #febc2e; }
   .term-dot:nth-child(3) { background: #28c840; }
+  .cmd { color: var(--cyan); }
+  .out { color: rgba(232,234,240,0.75); }
+  .comment { color: rgba(232,234,240,0.2); font-size: 11px; }
+  .terminal-cursor { display: inline-block; width: 7px; height: 13px; background: var(--cyan); vertical-align: middle; animation: blink 1s infinite; margin-left: 3px; }
 
-  /* CONTACT */
   #contact {
-    position: relative;
-    z-index: 2;
-    padding: 80px 60px 120px;
-    border-top: 1px solid rgba(255,255,255,0.06);
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    gap: 40px;
+    position: relative; z-index: 2; padding: 80px 60px 120px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 40px;
   }
-
-  .contact-left h2 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(50px, 8vw, 110px);
-    line-height: 0.9;
-  }
-  .contact-left h2 span {
-    display: block;
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(232,234,240,0.3);
-  }
-
-  .contact-links {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    align-items: flex-end;
-  }
+  .contact-left h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(50px, 8vw, 110px); line-height: 0.9; }
+  .contact-left h2 span { display: block; color: transparent; -webkit-text-stroke: 1px rgba(232,234,240,0.22); }
+  .contact-links { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
   .contact-link {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-    color: rgba(232,234,240,0.5);
-    font-size: 13px;
-    letter-spacing: 0.1em;
-    transition: color 0.3s;
-    padding: 12px 20px;
-    border: 1px solid transparent;
-    transition: all 0.3s;
+    display: flex; align-items: center; gap: 14px; text-decoration: none;
+    color: rgba(232,234,240,0.45); font-size: 12px; letter-spacing: 0.1em;
+    padding: 12px 20px; border: 1px solid transparent; transition: all 0.3s;
   }
-  .contact-link:hover {
-    color: var(--cyan);
-    border-color: rgba(0,255,231,0.2);
-    background: rgba(0,255,231,0.03);
-  }
-  .contact-link .link-icon { font-size: 18px; }
+  .contact-link:hover { color: var(--cyan); border-color: rgba(0,255,231,0.2); background: rgba(0,255,231,0.03); }
+  .link-icon { font-size: 16px; }
 
-  /* TICKER */
-  .ticker-wrap {
-    position: relative;
-    z-index: 2;
-    border-top: 1px solid rgba(255,255,255,0.06);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    padding: 14px 0;
-    overflow: hidden;
-    background: rgba(0,255,231,0.02);
-  }
-  .ticker-track {
-    display: flex;
-    gap: 0;
-    animation: ticker 25s linear infinite;
-    white-space: nowrap;
-  }
-  .ticker-item {
-    font-size: 11px;
-    letter-spacing: 0.3em;
-    color: rgba(0,255,231,0.5);
-    padding: 0 40px;
-    display: inline-flex;
-    align-items: center;
-    gap: 20px;
-  }
-  .ticker-item::after {
-    content: '◆';
-    font-size: 6px;
-    opacity: 0.4;
-  }
-
-  /* ANIMATIONS */
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-  @keyframes scanRight { from { left: -100%; } to { left: 100%; } }
-  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-  @keyframes glitchA {
-    0%, 95%, 100% { opacity: 0; transform: translate(0); }
-    96% { opacity: 0.6; transform: translate(-4px, 2px); }
-    97% { opacity: 0; transform: translate(4px); }
-    98% { opacity: 0.5; transform: translate(-2px); }
-    99% { opacity: 0; }
-  }
-
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    nav, #hero, #projects, #about, #contact { padding-left: 24px; padding-right: 24px; }
-    .project-card:nth-child(n) { grid-column: span 12; }
-    .orbit-container { display: none; }
-    #about { grid-template-columns: 1fr; }
-    .hero-stats { gap: 30px; flex-wrap: wrap; }
-  }
-
-  /* SCROLL REVEAL */
-  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s, transform 0.8s; }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s, transform 0.8s; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @keyframes fadeIn { from{opacity:0}to{opacity:1} }
+  @keyframes slideUp { from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)} }
+  @keyframes blink { 0%,100%{opacity:1}50%{opacity:0} }
+  @keyframes spin { from{transform:rotate(0deg)}to{transform:rotate(360deg)} }
+  @keyframes scanRight { from{left:-100%}to{left:100%} }
+  @keyframes ticker { from{transform:translateX(0)}to{transform:translateX(-50%)} }
+  @keyframes glitchA { 0%,94%,100%{opacity:0;transform:translate(0)}95%{opacity:0.5;transform:translate(-4px,2px)}97%{opacity:0;transform:translate(4px)}98%{opacity:0.4;transform:translate(-2px)}99%{opacity:0} }
+
+  @media (max-width: 900px) {
+    nav,#hero,#projects,#about,#contact { padding-left:24px;padding-right:24px; }
+    .card-adrelamo,.card-crm,.card-tradecoach,.card-future1,.card-future2,.card-future3 { grid-column:span 12; }
+    .card-tradecoach .card-inner { grid-template-columns:1fr; }
+    .orbit-container { display:none; }
+    #about { grid-template-columns:1fr; }
+  }
 </style>
 </head>
 <body>
@@ -684,302 +303,281 @@
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
 
-<!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">SIG<span>//</span>NAL</a>
+  <a href="#" class="nav-logo">AL<span>//</span></a>
   <ul class="nav-links">
-    <li><a href="#projects">Work</a></li>
+    <li><a href="#projects">Products</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
-<!-- TICKER -->
-<div class="ticker-wrap" style="position:relative;z-index:2;margin-top:0;padding-top:80px;">
-  <div class="ticker-track">
-    <span class="ticker-item">BUILDER</span>
-    <span class="ticker-item">CREATIVE DEVELOPER</span>
-    <span class="ticker-item">PRODUCT MAKER</span>
-    <span class="ticker-item">INDIE HACKER</span>
-    <span class="ticker-item">SIGNAL DETECTED</span>
-    <span class="ticker-item">BUILDER</span>
-    <span class="ticker-item">CREATIVE DEVELOPER</span>
-    <span class="ticker-item">PRODUCT MAKER</span>
-    <span class="ticker-item">INDIE HACKER</span>
-    <span class="ticker-item">SIGNAL DETECTED</span>
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <div class="ticker-track">
+      <span class="ticker-item">RELATIONSHIP INTELLIGENCE</span>
+      <span class="ticker-item">AI-NATIVE CRM OS</span>
+      <span class="ticker-item">TRADE COACH</span>
+      <span class="ticker-item">BUILDER</span>
+      <span class="ticker-item">SHIPPING FAST</span>
+      <span class="ticker-item">ADRELAMO</span>
+      <span class="ticker-item">TRADECOACH</span>
+      <span class="ticker-item">SIGNAL ACTIVE</span>
+      <span class="ticker-item">RELATIONSHIP INTELLIGENCE</span>
+      <span class="ticker-item">AI-NATIVE CRM OS</span>
+      <span class="ticker-item">TRADE COACH</span>
+      <span class="ticker-item">BUILDER</span>
+      <span class="ticker-item">SHIPPING FAST</span>
+      <span class="ticker-item">ADRELAMO</span>
+      <span class="ticker-item">TRADECOACH</span>
+      <span class="ticker-item">SIGNAL ACTIVE</span>
+    </div>
   </div>
 </div>
 
-<!-- HERO -->
 <section id="hero">
-  <div class="signal-badge">TRANSMISSION RECEIVED // PORTFOLIO v2.0</div>
-
+  <div class="signal-badge">TRANSMISSION ACTIVE // ANTHONY LICAUSI // BUILDER</div>
   <div style="position:relative;">
     <h1 class="hero-name">
-      YOUR<br>
-      <span class="accent">NAME.</span>
+      ANTHONY<br>
+      <span class="accent">LICAUSI.</span>
     </h1>
-    <div class="hero-glitch">YOUR<br>NAME.</div>
+    <div class="hero-glitch">ANTHONY<br>LICAUSI.</div>
   </div>
-
-  <p class="hero-sub">
-    I build things that didn't exist before. Apps, products, tools—each one a signal sent into the world. Scroll down and catch them.
+  <p class="hero-tagline">
+    I turn ideas into products at a speed that shouldn't be possible.<br>
+    Relationship intelligence. AI-native sales OS. Trading psychology.<br>
+    Each one a signal sent into the world.
   </p>
-
   <div class="hero-stats">
     <div class="stat">
-      <div class="stat-num" data-count="6">0</div>
-      <div class="stat-label">Products Shipped</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num" data-count="1200">0</div>
-      <div class="stat-label">Users & Counting</div>
+      <div class="stat-num" data-count="3">0</div>
+      <div class="stat-label">Products Live</div>
     </div>
     <div class="stat">
       <div class="stat-num" data-count="3">0</div>
-      <div class="stat-label">Years Building</div>
+      <div class="stat-label">More in Build</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" data-count="2026">0</div>
+      <div class="stat-label">Year of the Ship</div>
     </div>
   </div>
-
   <div class="scroll-hint">
     <span class="scroll-line"></span>
     SCROLL TO EXPLORE
   </div>
-
-  <!-- Orbit -->
   <div class="orbit-container">
-    <div class="orbit-ring">
-      <div class="orbit-dot"></div>
-    </div>
-    <div class="orbit-ring">
-      <div class="orbit-dot orbit-dot-2"></div>
-    </div>
+    <div class="orbit-ring"><div class="orbit-dot"></div></div>
+    <div class="orbit-ring"><div class="orbit-dot orbit-dot-2"></div></div>
     <div class="orbit-ring"></div>
-    <div class="orbit-center">ORBIT<br>SYSTEM<br>ACTIVE</div>
+    <div class="orbit-center">3<br>PRODUCTS<br>ACTIVE</div>
   </div>
 </section>
 
-<!-- PROJECTS -->
 <section id="projects">
   <div class="projects-header reveal">
-    <div class="section-label">TRANSMISSIONS</div>
-    <h2 class="projects-title">WORK<br><span style="color:var(--cyan)">SIGNALS</span></h2>
+    <div class="section-label">ACTIVE TRANSMISSIONS</div>
+    <h2 class="projects-title">THE<br><span style="color:var(--cyan)">PRODUCTS.</span></h2>
   </div>
-
   <div class="projects-grid">
 
-    <a href="#" class="project-card reveal">
+    <!-- ADRELAMO -->
+    <a href="https://nexus-opal-phi.vercel.app/" target="_blank" class="project-card card-adrelamo reveal">
       <div class="card-bg-glow"></div>
-      <div class="card-num"><span>01 / 06</span> <span class="card-status">LIVE</span></div>
+      <div class="card-num"><span>01 / 06</span><span class="card-status status-live">LIVE</span></div>
       <div class="card-arrow">↗</div>
-      <div class="card-icon">🚀</div>
-      <div class="card-title">Project Alpha</div>
-      <div class="card-desc">Your flagship product. A bold description of what it does and why it matters. Replace with your real project details.</div>
+      <div class="card-icon">◈</div>
+      <div class="card-title">AdRelamo</div>
+      <div class="card-subtitle">RELATIONSHIP INTELLIGENCE PLATFORM</div>
+      <div class="card-desc">Your network, modeled and evolving. Psychological portraits, pre-meet briefs, health scores, and AI dossiers on every person that matters — updated in real time. The more you use it, the smarter it gets.</div>
       <div class="card-tags">
-        <span class="tag">React</span>
-        <span class="tag">Node.js</span>
-        <span class="tag">SaaS</span>
+        <span class="tag">AI Engine</span>
+        <span class="tag">Psych Profiles</span>
+        <span class="tag">Pre-Meet Briefs</span>
+        <span class="tag">Network OS</span>
       </div>
     </a>
 
-    <a href="#" class="project-card reveal">
+    <!-- CRM -->
+    <div class="project-card card-crm reveal">
       <div class="card-bg-glow"></div>
-      <div class="card-num"><span>02 / 06</span> <span class="card-status new">NEW</span></div>
-      <div class="card-arrow">↗</div>
+      <div class="card-num"><span>02 / 06</span><span class="card-status status-building">BUILDING</span></div>
       <div class="card-icon">⚡</div>
-      <div class="card-title">Project Beta</div>
-      <div class="card-desc">A tool, app, or experiment that solves a real problem. Describe it here — what it is, who it's for.</div>
+      <div class="card-title">Unnamed CRM</div>
+      <div class="card-subtitle">AI-NATIVE OUTBOUND OS</div>
+      <div class="vs-badge">⚔ HubSpot + Apollo + Clay — killed</div>
+      <div class="card-desc">Scrape → Enrich → Sequences → AI Scoring → Predictive Analytics → Call Transcription → Gmail Sync. This isn't a lead scraper. This is the all-in-one outbound operating system that makes the old stack obsolete.</div>
       <div class="card-tags">
-        <span class="tag">Swift</span>
-        <span class="tag">iOS</span>
-        <span class="tag">AI</span>
+        <span class="tag">$149–$499/mo</span>
+        <span class="tag">AI Scoring</span>
+        <span class="tag">Sequences</span>
+        <span class="tag">Enrichment</span>
+      </div>
+    </div>
+
+    <!-- TRADECOACH -->
+    <a href="https://lzlaze.github.io/morning-report/" target="_blank" class="project-card card-tradecoach reveal">
+      <div class="card-bg-glow"></div>
+      <div class="card-num"><span>03 / 06</span><span class="card-status status-live">LIVE</span></div>
+      <div class="card-arrow">↗</div>
+      <div class="card-inner">
+        <div>
+          <div class="card-icon">📈</div>
+          <div class="card-title">TradeCoach</div>
+          <div class="card-subtitle" style="color:var(--yellow);opacity:0.75;">MARKET INTELLIGENCE + TRADING PSYCHOLOGY</div>
+          <div class="card-desc" style="max-width:100%">
+            AI-graded economic reports delivered every morning. Pre-market intelligence, sector breakdowns, futures snapshot, trade logging, and performance analysis. Most importantly — your emotional edge. Know the market. Know yourself. Stay locked in.
+          </div>
+          <div style="margin-top:24px;display:flex;gap:8px;flex-wrap:wrap;">
+            <span class="tag" style="color:rgba(255,230,0,0.6);border-color:rgba(255,230,0,0.15);">Morning Brief</span>
+            <span class="tag" style="color:rgba(255,230,0,0.6);border-color:rgba(255,230,0,0.15);">AI Grading</span>
+            <span class="tag" style="color:rgba(255,230,0,0.6);border-color:rgba(255,230,0,0.15);">Trade Journal</span>
+            <span class="tag" style="color:rgba(255,230,0,0.6);border-color:rgba(255,230,0,0.15);">Psychology</span>
+          </div>
+        </div>
+        <div class="trade-metrics">
+          <div class="trade-metric">
+            <div class="trade-metric-label">ES FUTURES</div>
+            <div class="trade-metric-val">LIVE</div>
+          </div>
+          <div class="trade-metric">
+            <div class="trade-metric-label">VIX</div>
+            <div class="trade-metric-val down">TRACKED</div>
+          </div>
+          <div class="trade-metric">
+            <div class="trade-metric-label">MORNING BRIEF</div>
+            <div class="trade-metric-val up">DAILY</div>
+          </div>
+          <div class="trade-metric">
+            <div class="trade-metric-label">EMOTION CHECK</div>
+            <div class="trade-metric-val" style="color:var(--cyan)">AI</div>
+          </div>
+        </div>
       </div>
     </a>
 
-    <a href="#" class="project-card reveal">
+    <!-- FUTURE SLOTS -->
+    <div class="project-card card-future1 reveal" style="cursor:default;">
       <div class="card-bg-glow"></div>
-      <div class="card-num"><span>03 / 06</span> <span class="card-status beta">BETA</span></div>
-      <div class="card-arrow">↗</div>
-      <div class="card-icon">🧠</div>
-      <div class="card-title">Project Gamma</div>
-      <div class="card-desc">Something experimental. An idea you took from 0 to 1.</div>
-      <div class="card-tags">
-        <span class="tag">Python</span>
-        <span class="tag">ML</span>
-      </div>
-    </a>
-
-    <a href="#" class="project-card reveal">
+      <div class="card-num"><span>04 / 06</span><span class="card-status status-soon">SOON</span></div>
+      <div style="font-size:36px;margin-bottom:20px;opacity:0.2;">◻</div>
+      <div class="card-title" style="color:rgba(232,234,240,0.2);">Next Signal</div>
+      <div class="card-desc" style="color:rgba(232,234,240,0.15);">Something new is in the lab. Drop it here when it ships.</div>
+    </div>
+    <div class="project-card card-future2 reveal" style="cursor:default;">
       <div class="card-bg-glow"></div>
-      <div class="card-num"><span>04 / 06</span> <span class="card-status">LIVE</span></div>
-      <div class="card-arrow">↗</div>
-      <div class="card-icon">🌐</div>
-      <div class="card-title">Project Delta — The One That Changed Things</div>
-      <div class="card-desc">This is the big one. Give it more real estate in the layout. Tell the story of why you built it and what it unlocked. Don't be modest here — this card spans more columns for a reason.</div>
-      <div class="card-tags">
-        <span class="tag">Next.js</span>
-        <span class="tag">Postgres</span>
-        <span class="tag">Stripe</span>
-        <span class="tag">Web</span>
-      </div>
-    </a>
-
-    <a href="#" class="project-card reveal">
+      <div class="card-num"><span>05 / 06</span><span class="card-status status-soon">SOON</span></div>
+      <div style="font-size:36px;margin-bottom:20px;opacity:0.2;">◻</div>
+      <div class="card-title" style="color:rgba(232,234,240,0.2);">Next Signal</div>
+      <div class="card-desc" style="color:rgba(232,234,240,0.15);">The next idea. The next build. The next ship.</div>
+    </div>
+    <div class="project-card card-future3 reveal" style="cursor:default;">
       <div class="card-bg-glow"></div>
-      <div class="card-num"><span>05 / 06</span> <span class="card-status new">NEW</span></div>
-      <div class="card-arrow">↗</div>
-      <div class="card-icon">🎯</div>
-      <div class="card-title">Project Epsilon</div>
-      <div class="card-desc">Built fast, shipped faster. What did you learn building this one?</div>
-      <div class="card-tags">
-        <span class="tag">TypeScript</span>
-        <span class="tag">API</span>
-      </div>
-    </a>
-
-    <a href="#" class="project-card reveal">
-      <div class="card-bg-glow"></div>
-      <div class="card-num"><span>06 / 06</span> <span class="card-status beta">BETA</span></div>
-      <div class="card-arrow">↗</div>
-      <div class="card-icon">🔮</div>
-      <div class="card-title">Project Zeta</div>
-      <div class="card-desc">Something mysterious. Still cooking. Or something you're particularly proud of.</div>
-      <div class="card-tags">
-        <span class="tag">Rust</span>
-        <span class="tag">WebAssembly</span>
-      </div>
-    </a>
+      <div class="card-num"><span>06 / 06</span><span class="card-status status-soon">SOON</span></div>
+      <div style="font-size:36px;margin-bottom:20px;opacity:0.2;">◻</div>
+      <div class="card-title" style="color:rgba(232,234,240,0.2);">Next Signal</div>
+      <div class="card-desc" style="color:rgba(232,234,240,0.15);">Still building. Always building.</div>
+    </div>
 
   </div>
 </section>
 
-<!-- ABOUT -->
 <section id="about">
   <div class="about-text reveal">
     <div class="section-label">ORIGIN SIGNAL</div>
-    <h2>WHO<br>I AM.</h2>
-    <p>
-      Replace this with your story. You're a builder, a creator, someone who gets obsessed with ideas and won't stop until they ship. Talk about what drives you, your background, and what you're chasing next.
-    </p>
-    <p style="margin-top:20px; font-size:13px; color:rgba(232,234,240,0.35); line-height:1.7;">
-      Based somewhere on Earth · Available for select collaborations.
+    <h2>THE<br>GPU.</h2>
+    <p>Raw horsepower. I turn ideas into products at a speed that shouldn't be possible. Building at the intersection of AI, sales intelligence, and financial tools — each one solving a real problem I've felt firsthand.</p>
+    <p style="margin-top:20px;font-size:12px;color:rgba(232,234,240,0.28);line-height:1.7;">
+      Co-founder @ AdRelamo · New York<br>
+      Open to collabs that move fast.
     </p>
   </div>
-
   <div class="about-terminal reveal">
     <div class="terminal-header">
-      <div class="term-dot"></div>
-      <div class="term-dot"></div>
-      <div class="term-dot"></div>
+      <div class="term-dot"></div><div class="term-dot"></div><div class="term-dot"></div>
     </div>
-    <div class="terminal-line"><span class="comment">// system profile</span></div>
-    <div class="terminal-line"><span class="cmd">name</span> = <span class="out">"Your Name"</span></div>
-    <div class="terminal-line"><span class="cmd">role</span> = <span class="out">"Builder & Maker"</span></div>
-    <div class="terminal-line"><span class="cmd">stack</span> = <span class="out">["React", "Node", "Python"]</span></div>
-    <div class="terminal-line"><span class="cmd">currently</span> = <span class="out">"shipping something new"</span></div>
+    <div style="color:rgba(232,234,240,0.4)"><span class="comment">// system profile</span></div>
+    <div style="color:rgba(232,234,240,0.4)"><span class="cmd">name</span> = <span class="out">"Anthony Licausi"</span></div>
+    <div style="color:rgba(232,234,240,0.4)"><span class="cmd">alias</span> = <span class="out">"THE GPU"</span></div>
+    <div style="color:rgba(232,234,240,0.4)"><span class="cmd">twitter</span> = <span class="out">"@anthonywlicausi"</span></div>
     <br>
-    <div class="terminal-line"><span class="comment">// interests</span></div>
-    <div class="terminal-line"><span class="cmd">loves</span> = <span class="out">["making things", "shipping fast"]</span></div>
-    <div class="terminal-line"><span class="cmd">hates</span> = <span class="out">["over-engineering", "waiting"]</span></div>
+    <div style="color:rgba(232,234,240,0.4)"><span class="comment">// active builds</span></div>
+    <div style="color:rgba(232,234,240,0.4)"><span class="cmd">live</span> = <span class="out">["AdRelamo", "TradeCoach"]</span></div>
+    <div style="color:rgba(232,234,240,0.4)"><span class="cmd">building</span> = <span class="out">["Unnamed CRM OS"]</span></div>
+    <div style="color:rgba(232,234,240,0.4)"><span class="cmd">mode</span> = <span class="out">"ship fast, iterate faster"</span></div>
     <br>
-    <div class="terminal-line"><span class="cmd">status</span> = <span style="color:var(--cyan)">"ONLINE"</span><span class="terminal-cursor"></span></div>
+    <div style="color:rgba(232,234,240,0.4)"><span class="cmd">status</span> = <span style="color:var(--cyan)">"ONLINE"</span><span class="terminal-cursor"></span></div>
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
   <div class="contact-left reveal">
     <div class="section-label">OPEN CHANNEL</div>
-    <h2>LET'S<br><span>TALK.</span></h2>
+    <h2>LET'S<br><span>BUILD.</span></h2>
   </div>
-
   <div class="contact-links reveal">
-    <a href="mailto:you@email.com" class="contact-link">
-      <span class="link-icon">✉</span>
-      <span>you@email.com</span>
+    <a href="https://twitter.com/anthonywlicausi" target="_blank" class="contact-link">
+      <span class="link-icon">𝕏</span><span>@anthonywlicausi</span>
     </a>
-    <a href="https://twitter.com" target="_blank" class="contact-link">
-      <span class="link-icon">𝕏</span>
-      <span>@yourhandle</span>
+    <a href="https://nexus-opal-phi.vercel.app/" target="_blank" class="contact-link">
+      <span class="link-icon">◈</span><span>AdRelamo</span>
     </a>
-    <a href="https://github.com" target="_blank" class="contact-link">
-      <span class="link-icon">⌥</span>
-      <span>github.com/you</span>
+    <a href="https://lzlaze.github.io/morning-report/" target="_blank" class="contact-link">
+      <span class="link-icon">📈</span><span>TradeCoach</span>
     </a>
-    <a href="https://linkedin.com" target="_blank" class="contact-link">
-      <span class="link-icon">in</span>
-      <span>linkedin.com/in/you</span>
+    <a href="https://github.com/anthonywlicausi/portfolio" target="_blank" class="contact-link">
+      <span class="link-icon">⌥</span><span>github.com/anthonywlicausi</span>
     </a>
   </div>
 </section>
 
 <script>
-  // Custom cursor
   const cursor = document.getElementById('cursor');
-  const cursorRing = document.getElementById('cursor-ring');
-  let cx = 0, cy = 0, rx = 0, ry = 0;
-
+  const ring = document.getElementById('cursor-ring');
+  let cx=0,cy=0,rx=0,ry=0;
   document.addEventListener('mousemove', e => {
-    cx = e.clientX; cy = e.clientY;
-    cursor.style.left = cx + 'px';
-    cursor.style.top = cy + 'px';
+    cx=e.clientX; cy=e.clientY;
+    cursor.style.left=cx+'px'; cursor.style.top=cy+'px';
   });
+  document.querySelectorAll('a,.project-card').forEach(el => {
+    el.addEventListener('mouseenter', ()=>document.body.classList.add('cursor-big'));
+    el.addEventListener('mouseleave', ()=>document.body.classList.remove('cursor-big'));
+  });
+  (function animRing(){
+    rx+=(cx-rx)*0.12; ry+=(cy-ry)*0.12;
+    ring.style.left=rx+'px'; ring.style.top=ry+'px';
+    requestAnimationFrame(animRing);
+  })();
 
-  function animateRing() {
-    rx += (cx - rx) * 0.12;
-    ry += (cy - ry) * 0.12;
-    cursorRing.style.left = rx + 'px';
-    cursorRing.style.top = ry + 'px';
-    requestAnimationFrame(animateRing);
-  }
-  animateRing();
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+  },{threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-  // Scroll reveal
-  const revealEls = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), 80);
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  revealEls.forEach(el => obs.observe(el));
-
-  // Count-up animation
-  function countUp(el, target) {
-    const suffix = target > 100 ? '+' : '';
-    const duration = 1500;
-    const start = performance.now();
-    function update(time) {
-      const progress = Math.min((time - start) / duration, 1);
-      const ease = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.floor(ease * target) + (progress === 1 ? suffix : '');
-      if (progress < 1) requestAnimationFrame(update);
+  function countUp(el,target){
+    const dur=1800,start=performance.now();
+    function upd(t){
+      const p=Math.min((t-start)/dur,1);
+      const ease=1-Math.pow(1-p,3);
+      const val=Math.floor(ease*target);
+      el.textContent = target===2026 ? val : val+(p===1?'+':'');
+      if(p<1) requestAnimationFrame(upd);
     }
-    requestAnimationFrame(update);
+    requestAnimationFrame(upd);
   }
+  const sObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){countUp(e.target,parseInt(e.target.dataset.count));sObs.unobserve(e.target);}});
+  },{threshold:0.5});
+  document.querySelectorAll('.stat-num').forEach(el=>sObs.observe(el));
 
-  const statNums = document.querySelectorAll('.stat-num');
-  const statObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        countUp(e.target, parseInt(e.target.dataset.count));
-        statObs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.5 });
-  statNums.forEach(el => statObs.observe(el));
-
-  // Glitch effect on name randomly
-  const heroName = document.querySelector('h1.hero-name');
-  setInterval(() => {
-    if (Math.random() > 0.85) {
-      heroName.style.transform = `translate(${(Math.random()-0.5)*4}px, ${(Math.random()-0.5)*2}px)`;
-      setTimeout(() => heroName.style.transform = '', 80);
+  const heroName=document.querySelector('h1.hero-name');
+  setInterval(()=>{
+    if(Math.random()>0.87){
+      heroName.style.transform=`translate(${(Math.random()-.5)*5}px,${(Math.random()-.5)*2}px)`;
+      setTimeout(()=>heroName.style.transform='',80);
     }
-  }, 2000);
+  },2500);
 </script>
-
 </body>
 </html>
