@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anthony Licausi // Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=Syne:wght@400;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #030508;
+    --cyan: #00ffe7;
+    --magenta: #ff00c8;
+    --yellow: #ffe600;
+    --green: #00ff88;
+    --white: #e8eaf0;
+    --grid: rgba(0,255,231,0.04);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Share Tech Mono', monospace;
+    cursor: none;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  #cursor {
+    position: fixed; width: 12px; height: 12px;
+    background: var(--cyan); border-radius: 50%;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: screen;
+    box-shadow: 0 0 20px var(--cyan), 0 0 40px var(--cyan);
+  }
+  #cursor-ring {
+    position: fixed; width: 36px; height: 36px;
+    border: 1px solid var(--cyan); border-radius: 50%;
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, border-color 0.3s; opacity: 0.5;
+  }
+  .cursor-big #cursor-ring { width: 60px; height: 60px; border-color: var(--magenta); }
+
+  body::after {
+    content: ''; position: fixed; inset: 0;
+    background: repeating-linear-gradient(to bottom, transparent 0px, transparent 3px, rgba(0,0,0,0.12) 3px, rgba(0,0,0,0.12) 4px);
+    pointer-events: none; z-index: 9000;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 60px 60px; pointer-events: none; z-index: 0;
+  }
+  .noise {
+    position: fixed; inset: 0; opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px 200px; pointer-events: none; z-index: 1;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 24px 60px; display: flex; justify-content: space-between; align-items: center;
+    background: linear-gradient(to bottom, rgba(3,5,8,0.95), transparent);
+  }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.1em; color: var(--white); text-decoration: none; }
+  .nav-logo span { color: var(--cyan); }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a { font-size: 10px; letter-spacing: 0.25em; color: rgba(232,234,240,0.45); text-decoration: none; text-transform: uppercase; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--cyan); }
+
+  .ticker-wrap {
+    position: relative; z-index: 2; padding-top: 72px;
+    border-bottom: 1px solid rgba(255,255,255,0.05); overflow: hidden; background: rgba(0,255,231,0.015);
+  }
+  .ticker-inner { padding: 13px 0; overflow: hidden; }
+  .ticker-track { display: flex; animation: ticker 30s linear infinite; white-space: nowrap; }
+  .ticker-item { font-size: 10px; letter-spacing: 0.35em; color: rgba(0,255,231,0.45); padding: 0 40px; display: inline-flex; align-items: center; gap: 20px; }
+  .ticker-item::after { content: '◆'; font-size: 5px; opacity: 0.4; }
+
+  #hero {
+    position: relative; z-index: 2; min-height: 100vh; padding: 80px 60px;
+    display: flex; flex-direction: column; justify-content: center; overflow: hidden;
+  }
+  .signal-badge {
+    font-size: 10px; letter-spacing: 0.35em; color: var(--cyan); margin-bottom: 32px;
+    opacity: 0; animation: fadeIn 0.5s 0.3s forwards; display: flex; align-items: center; gap: 12px;
+  }
+  .signal-badge::before {
+    content: ''; display: inline-block; width: 7px; height: 7px;
+    background: var(--cyan); border-radius: 50%; animation: blink 1s infinite; box-shadow: 0 0 10px var(--cyan);
+  }
+  h1.hero-name {
+    font-family: 'Bebas Neue', sans-serif; font-size: clamp(80px, 14vw, 170px);
+    line-height: 0.9; letter-spacing: -0.02em; color: var(--white);
+    opacity: 0; animation: slideUp 0.8s 0.5s cubic-bezier(0.16,1,0.3,1) forwards; position: relative; z-index: 2;
+  }
+  h1.hero-name .accent { color: var(--cyan); display: block; text-shadow: 0 0 60px rgba(0,255,231,0.25); }
+  .hero-glitch {
+    position: absolute; top: 0; left: 0; font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(80px, 14vw, 170px); line-height: 0.9; color: var(--magenta);
+    opacity: 0; pointer-events: none; animation: glitchA 5s 2s infinite;
+    clip-path: polygon(0 30%, 100% 30%, 100% 50%, 0 50%);
+  }
+  .hero-tagline {
+    font-family: 'Syne', sans-serif; font-size: clamp(14px, 1.8vw, 19px);
+    color: rgba(232,234,240,0.45); max-width: 540px; margin-top: 28px; line-height: 1.8;
+    opacity: 0; animation: fadeIn 0.8s 1s forwards;
+  }
+  .hero-stats { display: flex; gap: 50px; margin-top: 60px; opacity: 0; animation: fadeIn 0.8s 1.3s forwards; flex-wrap: wrap; }
+  .stat { display: flex; flex-direction: column; gap: 4px; }
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 44px; color: var(--cyan); text-shadow: 0 0 30px rgba(0,255,231,0.35); }
+  .stat-label { font-size: 9px; letter-spacing: 0.25em; color: rgba(232,234,240,0.35); }
+
+  .scroll-hint {
+    position: absolute; bottom: 40px; left: 60px; font-size: 9px; letter-spacing: 0.35em;
+    color: rgba(232,234,240,0.25); display: flex; align-items: center; gap: 16px;
+    opacity: 0; animation: fadeIn 1s 2s forwards;
+  }
+  .scroll-line { width: 60px; height: 1px; background: rgba(232,234,240,0.15); position: relative; overflow: hidden; }
+  .scroll-line::after {
+    content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+    background: var(--cyan); animation: scanRight 2s 2.5s infinite;
+  }
+
+  .orbit-container {
+    position: absolute; right: 7%; top: 50%; transform: translateY(-50%);
+    width: 280px; height: 280px; opacity: 0; animation: fadeIn 1s 1.5s forwards;
+  }
+  .orbit-ring { position: absolute; inset: 0; border: 1px solid rgba(0,255,231,0.12); border-radius: 50%; animation: spin 20s linear infinite; }
+  .orbit-ring:nth-child(2) { inset: 28px; border-color: rgba(255,0,200,0.09); animation-duration: 14s; animation-direction: reverse; }
+  .orbit-ring:nth-child(3) { inset: 56px; border-color: rgba(255,230,0,0.07); animation-duration: 9s; }
+  .orbit-dot { position: absolute; top: -4px; left: 50%; width: 7px; height: 7px; background: var(--cyan); border-radius: 50%; transform: translateX(-50%); box-shadow: 0 0 12px var(--cyan); }
+  .orbit-dot-2 { top: 50%; left: -4px; background: var(--magenta); box-shadow: 0 0 12px var(--magenta); }
+  .orbit-center {
+    position: absolute; inset: 84px; border: 1px solid rgba(0,255,231,0.25); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; letter-spacing: 0.12em; color: rgba(0,255,231,0.55); text-align: center; line-height: 1.7;
+  }
+
+  .section-label {
+    font-size: 9px; letter-spacing: 0.45em; color: var(--cyan); margin-bottom: 18px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .section-label::after { content: ''; flex: 1; max-width: 70px; height: 1px; background: var(--cyan); opacity: 0.35; }
+
+  #projects { position: relative; z-index: 2; padding: 120px 60px; }
+  .projects-header { margin-bottom: 70px; }
+  .projects-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(50px, 8vw, 100px); line-height: 0.93; letter-spacing: -0.02em; }
+  .projects-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2px; }
+
+  .project-card {
+    position: relative; background: rgba(8,11,18,0.9);
+    border: 1px solid rgba(255,255,255,0.055); padding: 40px;
+    cursor: none; overflow: hidden; text-decoration: none; color: inherit; display: block;
+    transition: border-color 0.4s;
+  }
+  .card-adrelamo { grid-column: span 7; min-height: 480px; }
+  .card-crm { grid-column: span 5; min-height: 480px; }
+  .card-tradecoach { grid-column: span 12; min-height: 320px; }
+  .card-future1 { grid-column: span 4; min-height: 280px; }
+  .card-future2 { grid-column: span 4; min-height: 280px; }
+  .card-future3 { grid-column: span 4; min-height: 280px; }
+
+  .project-card::before { content: ''; position: absolute; inset: 0; opacity: 0; transition: opacity 0.4s; }
+  .project-card:hover::before { opacity: 1; }
+  .card-adrelamo::before { background: linear-gradient(135deg, rgba(0,255,231,0.06) 0%, transparent 60%); }
+  .card-adrelamo:hover { border-color: rgba(0,255,231,0.35); }
+  .card-crm::before { background: linear-gradient(135deg, rgba(255,0,200,0.07) 0%, transparent 60%); }
+  .card-crm:hover { border-color: rgba(255,0,200,0.35); }
+  .card-tradecoach::before { background: linear-gradient(135deg, rgba(255,230,0,0.06) 0%, transparent 60%); }
+  .card-tradecoach:hover { border-color: rgba(255,230,0,0.35); }
+  .card-future1::before { background: linear-gradient(135deg, rgba(0,255,136,0.05) 0%, transparent 60%); }
+  .card-future1:hover { border-color: rgba(0,255,136,0.25); }
+  .card-future2::before { background: linear-gradient(135deg, rgba(0,255,231,0.05) 0%, transparent 60%); }
+  .card-future2:hover { border-color: rgba(0,255,231,0.25); }
+  .card-future3::before { background: linear-gradient(135deg, rgba(255,0,200,0.05) 0%, transparent 60%); }
+  .card-future3:hover { border-color: rgba(255,0,200,0.25); }
+
+  .project-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
+    transition: width 0.5s cubic-bezier(0.16,1,0.3,1);
+  }
+  .project-card:hover::after { width: 100%; }
+  .card-adrelamo::after { background: var(--cyan); box-shadow: 0 0 12px var(--cyan); }
+  .card-crm::after { background: var(--magenta); box-shadow: 0 0 12px var(--magenta); }
+  .card-tradecoach::after { background: var(--yellow); box-shadow: 0 0 12px var(--yellow); }
+  .card-future1::after { background: var(--green); }
+  .card-future2::after { background: var(--cyan); }
+  .card-future3::after { background: var(--magenta); }
+
+  .card-num { font-size: 10px; letter-spacing: 0.3em; color: rgba(232,234,240,0.2); margin-bottom: 44px; display: flex; justify-content: space-between; align-items: center; }
+  .card-status { font-size: 8px; letter-spacing: 0.2em; padding: 3px 9px; border: 1px solid; text-transform: uppercase; }
+  .status-live { color: var(--cyan); border-color: rgba(0,255,231,0.35); }
+  .status-beta { color: var(--yellow); border-color: rgba(255,230,0,0.35); }
+  .status-building { color: var(--magenta); border-color: rgba(255,0,200,0.35); animation: blink 1.5s infinite; }
+  .status-soon { color: rgba(232,234,240,0.25); border-color: rgba(232,234,240,0.08); }
+
+  .card-icon { font-size: 44px; margin-bottom: 18px; line-height: 1; }
+  .card-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(22px, 2.8vw, 36px); line-height: 1.08; margin-bottom: 10px; letter-spacing: -0.02em; }
+  .card-subtitle { font-size: 11px; letter-spacing: 0.12em; color: var(--cyan); margin-bottom: 16px; opacity: 0.65; }
+  .card-desc { font-size: 13px; line-height: 1.78; color: rgba(232,234,240,0.42); max-width: 420px; }
+  .card-tags { position: absolute; bottom: 40px; left: 40px; right: 40px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .tag { font-size: 8px; letter-spacing: 0.15em; color: rgba(232,234,240,0.28); padding: 3px 9px; border: 1px solid rgba(255,255,255,0.07); text-transform: uppercase; }
+
+  .card-arrow {
+    position: absolute; top: 38px; right: 38px; width: 34px; height: 34px;
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; transition: all 0.3s; color: rgba(232,234,240,0.3);
+  }
+  .project-card:hover .card-arrow { transform: rotate(45deg); }
+  .card-adrelamo:hover .card-arrow { border-color: var(--cyan); color: var(--cyan); }
+  .card-crm:hover .card-arrow { border-color: var(--magenta); color: var(--magenta); }
+  .card-tradecoach:hover .card-arrow { border-color: var(--yellow); color: var(--yellow); }
+
+  .card-bg-glow {
+    position: absolute; width: 250px; height: 250px; border-radius: 50%;
+    filter: blur(90px); opacity: 0; transition: opacity 0.5s; pointer-events: none; right: -60px; bottom: -60px;
+  }
+  .project-card:hover .card-bg-glow { opacity: 0.12; }
+  .card-adrelamo .card-bg-glow { background: var(--cyan); }
+  .card-crm .card-bg-glow { background: var(--magenta); }
+  .card-tradecoach .card-bg-glow { background: var(--yellow); }
+  .card-future1 .card-bg-glow { background: var(--green); }
+  .card-future2 .card-bg-glow { background: var(--cyan); }
+  .card-future3 .card-bg-glow { background: var(--magenta); }
+
+  /* TradeCoach wide layout */
+  .card-tradecoach .card-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+  .trade-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .trade-metric { background: rgba(255,230,0,0.03); border: 1px solid rgba(255,230,0,0.1); padding: 16px 20px; }
+  .trade-metric-label { font-size: 8px; letter-spacing: 0.2em; color: rgba(232,234,240,0.28); margin-bottom: 8px; }
+  .trade-metric-val { font-family: 'Bebas Neue', sans-serif; font-size: 30px; color: var(--yellow); }
+  .trade-metric-val.up { color: var(--green); }
+  .trade-metric-val.down { color: var(--magenta); }
+
+  /* CRM vs badge */
+  .vs-badge {
+    display: inline-flex; align-items: center; gap: 8px; font-size: 9px; letter-spacing: 0.15em;
+    color: rgba(255,0,200,0.65); padding: 4px 12px; border: 1px solid rgba(255,0,200,0.2); margin-bottom: 14px; margin-top: 6px;
+  }
+
+  #about {
+    position: relative; z-index: 2; padding: 120px 60px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .about-text h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(50px, 7vw, 90px); line-height: 0.93; margin-bottom: 28px; }
+  .about-text p { font-size: 14px; line-height: 1.9; color: rgba(232,234,240,0.48); max-width: 480px; }
+  .about-terminal { background: rgba(0,255,231,0.02); border: 1px solid rgba(0,255,231,0.1); padding: 28px; font-size: 13px; line-height: 2.1; }
+  .terminal-header { display: flex; gap: 8px; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid rgba(0,255,231,0.08); }
+  .term-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .term-dot:nth-child(1) { background: #ff5f57; }
+  .term-dot:nth-child(2) { background: #febc2e; }
+  .term-dot:nth-child(3) { background: #28c840; }
+  .cmd { color: var(--cyan); }
+  .out { color: rgba(232,234,240,0.75); }
+  .comment { color: rgba(232,234,240,0.2); font-size: 11px; }
+  .terminal-cursor { display: inline-block; width: 7px; height: 13px; background: var(--cyan); vertical-align: middle; animation: blink 1s infinite; margin-left: 3px; }
+
+  #contact {
+    position: relative; z-index: 2; padding: 80px 60px 120px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 40px;
+  }
+  .contact-left h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(50px, 8vw, 110px); line-height: 0.9; }
+  .contact-left h2 span { display: block; color: transparent; -webkit-text-stroke: 1px rgba(232,234,240,0.22); }
+  .contact-links { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
+  .contact-link {
+    display: flex; align-items: center; gap: 14px; text-decoration: none;
+    color: rgba(232,234,240,0.45); font-size: 12px; letter-spacing: 0.1em;
+    padding: 12px 20px; border: 1px solid transparent; transition: all 0.3s;
+  }
+  .contact-link:hover { color: var(--cyan); border-color: rgba(0,255,231,0.2); background: rgba(0,255,231,0.03); }
+  .link-icon { font-size: 16px; }
+
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s, transform 0.8s; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @keyframes fadeIn { from{opacity:0}to{opacity:1} }
+  @keyframes slideUp { from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)} }
+  @keyframes blink { 0%,100%{opacity:1}50%{opacity:0} }
+  @keyframes spin { from{transform:rotate(0deg)}to{transform:rotate(360deg)} }
+  @keyframes scanRight { from{left:-100%}to{left:100%} }
+  @keyframes ticker { from{transform:translateX(0)}to{transform:translateX(-50%)} }
+  @keyframes glitchA { 0%,94%,100%{opacity:0;transform:translate(0)}95%{opacity:0.5;transform:translate(-4px,2px)}97%{opacity:0;transform:translate(4px)}98%{opacity:0.4;transform:translate(-2px)}99%{opacity:0} }
+
+  @media (max-width: 900px) {
+    nav,#hero,#projects,#about,#contact { padding-left:24px;padding-right:24px; }
+    .card-adrelamo,.card-crm,.card-tradecoach,.card-future1,.card-future2,.card-future3 { grid-column:span 12; }
+    .card-tradecoach .card-inner { grid-template-columns:1fr; }
+    .orbit-container { display:none; }
+    #about { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="noise"></div>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav>
+  <a href="#" class="nav-logo">AL<span>//</span></a>
+  <ul class="nav-links">
+    <li><a href="#projects">Products</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <div class="ticker-track">
+      <span class="ticker-item">RELATIONSHIP INTELLIGENCE</span>
+      <span class="ticker-item">NURTUO</span>
+      <span class="ticker-item">TRADE COACH</span>
+      <span class="ticker-item">BUILDER</span>
+      <span class="ticker-item">SHIPPING FAST</span>
+      <span class="ticker-item">ADRELAMO</span>
+      <span class="ticker-item">TRADECOACH</span>
+      <span class="ticker-item">SIGNAL ACTIVE</span>
+      <span class="ticker-item">RELATIONSHIP INTELLIGENCE</span>
+      <span class="ticker-item">NURTUO</span>
+      <span class="ticker-item">TRADE COACH</span>
+      <span class="ticker-item">BUILDER</span>
+      <span class="ticker-item">SHIPPING FAST</span>
+      <span class="ticker-item">ADRELAMO</span>
+      <span class="ticker-item">TRADECOACH</span>
+      <span class="ticker-item">SIGNAL ACTIVE</span>
+    </div>
+  </div>
+</div>
+
+<section id="hero">
+  <div class="signal-badge">TRANSMISSION ACTIVE // ANTHONY LICAUSI // BUILDER</div>
+  <div style="position:relative;">
+    <h1 class="hero-name">
+      ANTHONY<br>
+      <span class="accent">LICAUSI.</span>
+    </h1>
+    <div class="hero-glitch">ANTHONY<br>LICAUSI.</div>
+  </div>
+  <p class="hero-tagline">
+    I turn ideas into products at a speed that shouldn't be possible.<br>
+    Relationship intelligence. AI-native sales OS. Trading psychology.<br>
+    Each one a signal sent into the world.
+  </p>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num" data-count="3">0</div>
+      <div class="stat-label">Products Live</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" data-count="3">0</div>
+      <div class="stat-label">More in Build</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" data-count="2026">0</div>
+      <div class="stat-label">Year of the Ship</div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span class="scroll-line"></span>
+    SCROLL TO EXPLORE
+  </div>
+  <div class="orbit-container">
+    <div class="orbit-ring"><div class="orbit-dot"></div></div>
+    <div class="orbit-ring"><div class="orbit-dot orbit-dot-2"></div></div>
+    <div class="orbit-ring"></div>
+    <div class="orbit-center">3<br>PRODUCTS<br>ACTIVE</div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="projects-header reveal">
+    <div class="section-label">ACTIVE TRANSMISSIONS</div>
+    <h2 class="projects-title">THE<br><span style="color:var(--cyan)">PRODUCTS.</span></h2>
+  </div>
+  <div class="projects-grid">
+
+    <!-- ADRELAMO -->
+    <a href="https://nexus-opal-phi.vercel.app/" target="_blank" class="project-card card-adrelamo reveal">
+      <div class="card-bg-glow"></div>
+      <div class="card-num"><span>01 / 06</span><span class="card-status status-live">LIVE</span></div>
+      <div class="card-arrow">↗</div>
+      <div class="card-icon">◈</div>
+      <div class="card-title">AdRelamo</div>
+      <div class="card-subtitle">RELATIONSHIP INTELLIGENCE PLATFORM</div>
+      <div class="card-desc">Your network, modeled and evolving. Psychological portraits, pre-meet briefs, health scores, and AI dossiers on every person that matters — updated in real time. The more you use it, the smarter it gets.</div>
+      <div class="card-tags">
+        <span class="tag">AI Engine</span>
+        <span class="tag">Psych Profiles</span>
+        <span class="tag">Pre-Meet Briefs</span>
+        <span class="tag">Network OS</span>
+      </div>
+    </a>
+
+    <!-- NURTUO -->
+    <div class="project-card card-crm reveal">
+      <div class="card-bg-glow"></div>
+      <div class="card-num"><span>02 / 06</span><span class="card-status status-building">BUILDING</span></div>
+      <div class="card-icon" style="font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:0.1em;color:var(--magenta);text-shadow:0 0 30px rgba(255,0,200,0.4);margin-bottom:14px;">NURTUO</div>
+      <div class="card-title">Outrun Your<br>Competition.</div>
+      <div class="card-subtitle">AI-NATIVE OUTBOUND OPERATING SYSTEM</div>
+      <div class="vs-badge">⚔ HubSpot + Apollo + Clay — obsolete</div>
+      <div class="card-desc">Scrape → Enrich → Sequences → AI Scoring → Predictive Analytics → Call Transcription → Gmail Sync. One system. Total outbound dominance. Built for teams that don't have time to lose.</div>
+      <div class="card-tags">
+        <span class="tag">$149–$499/mo</span>
+        <span class="tag">AI Scoring</span>
+        <span class="tag">Sequences</span>
+        <span class="tag">Enrichment</span>
+      </div>
+    </div>
+
+    <!-- GEX TRADER -->
+    <a href="https://tradecoach-terminal.onrender.com/" target="_blank" class="project-card card-tradecoach reveal">
+      <div class="card-bg-glow"></div>
+      <div class="card-num"><span>03 / 06</span><span class="card-status status-live">LIVE</span></div>
+      <div class="card-arrow">↗</div>
+      <div class="card-inner">
+        <div>
+          <div class="card-icon">⚙️</div>
+          <div class="card-title">GEX Trader</div>
+          <div class="card-subtitle" style="color:var(--yellow);opacity:0.75;">DEALER POSITIONING + PROBABILITY ENGINE</div>
+          <div class="card-desc" style="max-width:100%">
+            AI-powered gamma exposure analysis delivered for futures market. Options chain parsing, GEX level calculation, dealer positioning, and directional probability engine. Most importantly — your structural edge. Know your levels. Know your bias. Stay locked in.
+          </div>
+          <div style="margin-top:24px;display:flex;gap:8px;flex-wrap:wrap;">
+            <span class="tag" style="color:rgba(255,230,0,0.6);border-color:rgba(255,230,0,0.15);">GEX Analysis</span>
+            <span class="tag" style="color:rgba(255,230,0,0.6);border-color:rgba(255,230,0,0.15);">Options Chain</span>
+            <span class="tag" style="color:rgba(255,230,0,0.6);border-color:rgba(255,230,0,0.15);">Dealer Positioning</span>
+            <span class="tag" style="color:rgba(255,230,0,0.6);border-color:rgba(255,230,0,0.15);">Probability Engine</span>
+          </div>
+        </div>
+        <div class="trade-metrics">
+          <div class="trade-metric">
+            <div class="trade-metric-label">GEX LEVELS</div>
+            <div class="trade-metric-val">LIVE</div>
+          </div>
+          <div class="trade-metric">
+            <div class="trade-metric-label">DEALER BIAS</div>
+            <div class="trade-metric-val down">TRACKED</div>
+          </div>
+          <div class="trade-metric">
+            <div class="trade-metric-label">OPTIONS CHAIN</div>
+            <div class="trade-metric-val up">PARSED</div>
+          </div>
+          <div class="trade-metric">
+            <div class="trade-metric-label">DIRECTION PROB</div>
+            <div class="trade-metric-val" style="color:var(--cyan)">AI</div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <!-- FUTURE SLOTS -->
+    <div class="project-card card-future1 reveal" style="cursor:default;">
+      <div class="card-bg-glow"></div>
+      <div class="card-num"><span>04 / 06</span><span class="card-status status-soon">SOON</span></div>
+      <div style="font-size:36px;margin-bottom:20px;opacity:0.2;">◻</div>
+      <div class="card-title" style="color:rgba(232,234,240,0.2);">Next Signal</div>
+      <div class="card-desc" style="color:rgba(232,234,240,0.15);">Something new is in the lab. Drop it here when it ships.</div>
+    </div>
+    <div class="project-card card-future2 reveal" style="cursor:default;">
+      <div class="card-bg-glow"></div>
+      <div class="card-num"><span>05 / 06</span><span class="card-status status-soon">SOON</span></div>
+      <div style="font-size:36px;margin-bottom:20px;opacity:0.2;">◻</div>
+      <div class="card-title" style="color:rgba(232,234,240,0.2);">Next Signal</div>
+      <div class="card-desc" style="color:rgba(232,234,240,0.15);">The next idea. The next build. The next ship.</div>
+    </div>
+    <div class="project-card card-future3 reveal" style="cursor:default;">
+      <div class="card-bg-glow"></div>
+      <div class="card-num"><span>06 / 06</span><span class="card-status status-soon">SOON</span></div>
+      <div style="font-size:36px;margin-bottom:20px;opacity:0.2;">◻</div>
+      <div class="card-title" style="color:rgba(232,234,240,0.2);">Next Signal</div>
+      <div class="card-desc" style="color:rgba(232,234,240,0.15);">Still building. Always building.</div>
+    </div>
+
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-text reveal">
+    <div class="section-label">ORIGIN SIGNAL</div>
+    <h2>THE<br>GPU.</h2>
+    <p>Raw horsepower. I turn ideas into products at a speed that shouldn't be possible. Building at the intersection of AI, sales intelligence, and financial tools — each one solving a real problem I've felt firsthand.</p>
+    <p style="margin-top:20px;font-size:12px;color:rgba(232,234,240,0.28);line-height:1.7;">
+      Co-founder @ AdRelamo · New York<br>
+      Open to collabs that move fast.
+    </p>
+  </div>
+  <div class="about-terminal reveal">
+    <div class="terminal-header">
+      <div class="term-dot"></div><div class="term-dot"></div><div class="term-dot"></div>
+    </div>
+    <div style="color:rgba(232,234,240,0.4)"><span class="comment">// system profile</span></div>
+    <div style="color:rgba(232,234,240,0.4)"><span class="cmd">name</span> = <span class="out">"Anthony Licausi"</span></div>
+    <div style="color:rgba(232,234,240,0.4)"><span class="cmd">alias</span> = <span class="out">"THE GPU"</span></div>
+    <div style="color:rgba(232,234,240,0.4)"><span class="cmd">twitter</span> = <span class="out">"@anthonywlicausi"</span></div>
+    <br>
+    <div style="color:rgba(232,234,240,0.4)"><span class="comment">// active builds</span></div>
+    <div style="color:rgba(232,234,240,0.4)"><span class="cmd">live</span> = <span class="out">["AdRelamo", "TradeCoach"]</span></div>
+    <div style="color:rgba(232,234,240,0.4)"><span class="cmd">building</span> = <span class="out">["Nurtuo"]</span></div>
+    <div style="color:rgba(232,234,240,0.4)"><span class="cmd">mode</span> = <span class="out">"ship fast, iterate faster"</span></div>
+    <br>
+    <div style="color:rgba(232,234,240,0.4)"><span class="cmd">status</span> = <span style="color:var(--cyan)">"ONLINE"</span><span class="terminal-cursor"></span></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-left reveal">
+    <div class="section-label">OPEN CHANNEL</div>
+    <h2>LET'S<br><span>BUILD.</span></h2>
+  </div>
+  <div class="contact-links reveal">
+    <a href="https://twitter.com/anthonywlicausi" target="_blank" class="contact-link">
+      <span class="link-icon">𝕏</span><span>@anthonywlicausi</span>
+    </a>
+    <a href="https://nexus-opal-phi.vercel.app/" target="_blank" class="contact-link">
+      <span class="link-icon">◈</span><span>AdRelamo</span>
+    </a>
+    <a href="https://lzlaze.github.io/morning-report/" target="_blank" class="contact-link">
+      <span class="link-icon">📈</span><span>TradeCoach</span>
+    </a>
+    <a href="https://github.com/anthonywlicausi/portfolio" target="_blank" class="contact-link">
+      <span class="link-icon">⌥</span><span>github.com/anthonywlicausi</span>
+    </a>
+  </div>
+</section>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  let cx=0,cy=0,rx=0,ry=0;
+  document.addEventListener('mousemove', e => {
+    cx=e.clientX; cy=e.clientY;
+    cursor.style.left=cx+'px'; cursor.style.top=cy+'px';
+  });
+  document.querySelectorAll('a,.project-card').forEach(el => {
+    el.addEventListener('mouseenter', ()=>document.body.classList.add('cursor-big'));
+    el.addEventListener('mouseleave', ()=>document.body.classList.remove('cursor-big'));
+  });
+  (function animRing(){
+    rx+=(cx-rx)*0.12; ry+=(cy-ry)*0.12;
+    ring.style.left=rx+'px'; ring.style.top=ry+'px';
+    requestAnimationFrame(animRing);
+  })();
+
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+  },{threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+  function countUp(el,target){
+    const dur=1800,start=performance.now();
+    function upd(t){
+      const p=Math.min((t-start)/dur,1);
+      const ease=1-Math.pow(1-p,3);
+      const val=Math.floor(ease*target);
+      el.textContent = target===2026 ? val : val+(p===1?'+':'');
+      if(p<1) requestAnimationFrame(upd);
+    }
+    requestAnimationFrame(upd);
+  }
+  const sObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){countUp(e.target,parseInt(e.target.dataset.count));sObs.unobserve(e.target);}});
+  },{threshold:0.5});
+  document.querySelectorAll('.stat-num').forEach(el=>sObs.observe(el));
+
+  const heroName=document.querySelector('h1.hero-name');
+  setInterval(()=>{
+    if(Math.random()>0.87){
+      heroName.style.transform=`translate(${(Math.random()-.5)*5}px,${(Math.random()-.5)*2}px)`;
+      setTimeout(()=>heroName.style.transform='',80);
+    }
+  },2500);
+</script>
+</body>
+</html>
