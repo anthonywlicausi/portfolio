@@ -282,15 +282,10 @@ h1.hero-name .last { color: var(--amber); display: block; }
 .pcard-crm:hover { border-color: rgba(91,127,255,0.28); }
 .pcard-crm::after { background: var(--blue); box-shadow: 0 0 12px rgba(91,127,255,0.5); }
 
-.pcard-obsidian { grid-column: span 7; min-height: 380px; }
+.pcard-obsidian { grid-column: span 12; min-height: 340px; }
 .pcard-obsidian::before { background: linear-gradient(135deg, rgba(46,207,144,0.06), transparent 65%); }
 .pcard-obsidian:hover { border-color: rgba(46,207,144,0.28); }
 .pcard-obsidian::after { background: var(--green); box-shadow: 0 0 12px rgba(46,207,144,0.5); }
-
-.pcard-gex { grid-column: span 5; min-height: 380px; }
-.pcard-gex::before { background: linear-gradient(135deg, rgba(255,220,0,0.06), transparent 65%); }
-.pcard-gex:hover { border-color: rgba(255,220,0,0.28); }
-.pcard-gex::after { background: #ffd700; box-shadow: 0 0 12px rgba(255,220,0,0.5); }
 
 /* Card glow */
 .card-glow {
@@ -488,7 +483,7 @@ h1.hero-name .last { color: var(--amber); display: block; }
 /* ── Mobile ──────────────────────────────────────────────────────────── */
 @media (max-width: 960px) {
   nav, #hero, #products, #about, #contact { padding-left: 24px; padding-right: 24px; }
-  .pcard-dealithic, .pcard-crm, .pcard-obsidian, .pcard-gex { grid-column: span 12; }
+  .pcard-dealithic, .pcard-crm, .pcard-obsidian { grid-column: span 12; }
   .obsidian-inner { grid-template-columns: 1fr; }
   .orbital { display: none; }
   #about { grid-template-columns: 1fr; gap: 48px; }
@@ -526,7 +521,6 @@ h1.hero-name .last { color: var(--amber); display: block; }
       <span class="ticker-item">DEAL INTELLIGENCE</span>
       <span class="ticker-item">FOUNDER</span>
       <span class="ticker-item">OBSIDIAN QUANT</span>
-      <span class="ticker-item">GEX TRADER</span>
       <span class="ticker-item">AI-NATIVE</span>
       <span class="ticker-item">SEED ROUND OPEN</span>
       <span class="ticker-item">BUILDING</span>
@@ -535,7 +529,6 @@ h1.hero-name .last { color: var(--amber); display: block; }
       <span class="ticker-item">DEAL INTELLIGENCE</span>
       <span class="ticker-item">FOUNDER</span>
       <span class="ticker-item">OBSIDIAN QUANT</span>
-      <span class="ticker-item">GEX TRADER</span>
       <span class="ticker-item">AI-NATIVE</span>
       <span class="ticker-item">SEED ROUND OPEN</span>
       <span class="ticker-item">BUILDING</span>
@@ -560,7 +553,7 @@ h1.hero-name .last { color: var(--amber); display: block; }
   </p>
   <div class="hero-stats">
     <div class="stat-item">
-      <div class="stat-num" data-target="4">0</div>
+      <div class="stat-num" data-target="3">0</div>
       <div class="stat-label">Products Live</div>
     </div>
     <div class="stat-item">
@@ -598,7 +591,7 @@ h1.hero-name .last { color: var(--amber); display: block; }
     <a href="https://dealithic.co" target="_blank" rel="noopener" class="pcard pcard-dealithic reveal">
       <div class="card-glow"></div>
       <div class="card-hdr">
-        <span class="card-num">01 / 04</span>
+        <span class="card-num">01 / 03</span>
         <span class="card-status status-amber">LIVE</span>
       </div>
       <div class="card-arrow">↗</div>
@@ -622,7 +615,7 @@ h1.hero-name .last { color: var(--amber); display: block; }
     <a href="https://crm.dealithic.co" target="_blank" rel="noopener" class="pcard pcard-crm reveal">
       <div class="card-glow"></div>
       <div class="card-hdr">
-        <span class="card-num">02 / 04</span>
+        <span class="card-num">02 / 03</span>
         <span class="card-status status-blue">LIVE</span>
       </div>
       <div class="card-arrow">↗</div>
@@ -642,10 +635,10 @@ h1.hero-name .last { color: var(--amber); display: block; }
     </a>
 
     <!-- OBSIDIAN QUANT -->
-    <a href="https://quant.barenbergcapital.com/trade" target="_blank" rel="noopener" class="pcard pcard-obsidian reveal" style="flex-direction:column;justify-content:space-between;">
+    <a href="https://quant.barenbergcapital.com/trade" target="_blank" rel="noopener" class="pcard pcard-obsidian reveal">
       <div class="card-glow"></div>
       <div class="card-hdr">
-        <span class="card-num">03 / 04</span>
+        <span class="card-num">03 / 03</span>
         <span class="card-status status-green">LIVE</span>
       </div>
       <div class="card-arrow">↗</div>
@@ -676,28 +669,6 @@ h1.hero-name .last { color: var(--amber); display: block; }
             <div class="obs-metric-val amber">CODE</div>
           </div>
         </div>
-      </div>
-    </a>
-
-    <!-- GEX TRADER -->
-    <a href="https://tradecoach-terminal.onrender.com/" target="_blank" rel="noopener" class="pcard pcard-gex reveal">
-      <div class="card-glow" style="background:#ffd700;"></div>
-      <div class="card-hdr">
-        <span class="card-num">04 / 04</span>
-        <span class="card-status" style="color:#ffd700;border-color:rgba(255,215,0,0.3);background:rgba(255,215,0,0.08);">LIVE</span>
-      </div>
-      <div class="card-arrow">↗</div>
-      <span class="card-wordmark" style="color:#ffd700;">GEX TRADER</span>
-      <div class="card-title">Know Your<br>Levels.</div>
-      <div class="card-subtitle" style="color:#ffd700;">DEALER POSITIONING + PROBABILITY ENGINE</div>
-      <p class="card-story">
-        <strong>Most traders look at price. I built something that looks at where dealers are forced to hedge.</strong> GEX Trader parses the options chain, calculates live gamma exposure levels, tracks dealer positioning, and outputs a directional probability signal. Your structural edge — codified.
-      </p>
-      <div class="card-tags">
-        <span class="tag" style="color:rgba(255,215,0,0.7);border-color:rgba(255,215,0,0.15);">GEX Analysis</span>
-        <span class="tag" style="color:rgba(255,215,0,0.7);border-color:rgba(255,215,0,0.15);">Options Chain</span>
-        <span class="tag" style="color:rgba(255,215,0,0.7);border-color:rgba(255,215,0,0.15);">Dealer Positioning</span>
-        <span class="tag" style="color:rgba(255,215,0,0.7);border-color:rgba(255,215,0,0.15);">Probability Engine</span>
       </div>
     </a>
 
@@ -776,9 +747,6 @@ h1.hero-name .last { color: var(--amber); display: block; }
     </a>
     <a href="https://twitter.com/anthonywlicausi" target="_blank" rel="noopener" class="clink">
       <span class="clink-icon">𝕏</span><span>@anthonywlicausi</span>
-    </a>
-    <a href="https://tradecoach-terminal.onrender.com/" target="_blank" rel="noopener" class="clink">
-      <span class="clink-icon">◎</span><span>GEX Trader</span>
     </a>
     <a href="https://github.com/anthonywlicausi" target="_blank" rel="noopener" class="clink">
       <span class="clink-icon">⌥</span><span>github.com/anthonywlicausi</span>
