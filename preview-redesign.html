@@ -408,7 +408,10 @@ footer {
 /* ── Reveal ────────────────────────────────── */
 .reveal { opacity:0; transform:translateY(18px); transition:opacity .65s,transform .65s; }
 .reveal.in { opacity:1; transform:translateY(0); }
-@media (max-width:1024px) { .reveal { transform:none; transition:opacity .5s; } }
+@media (max-width:1024px) {
+  .reveal, .reveal.in { opacity:1 !important; transform:none !important; transition:none !important; }
+  .scroll-cue { display:none; }
+}
 
 /* ── Keyframes ─────────────────────────────── */
 @keyframes fadeUp  { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
