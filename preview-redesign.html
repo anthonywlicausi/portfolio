@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anthony Licausi — Preview Redesign</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Syne:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+/* ── Variables ─────────────────────────────── */
+:root {
+  --bg:         #020407;
+  --bg2:        #060a10;
+  --bg3:        #0a0f18;
+  --amber:      #e08840;
+  --amber-lo:   rgba(224,136,64,0.10);
+  --blue:       #5b7fff;
+  --blue-lo:    rgba(91,127,255,0.10);
+  --green:      #2ecf90;
+  --green-lo:   rgba(46,207,144,0.10);
+  --violet:     #a78bff;
+  --violet-lo:  rgba(167,139,255,0.10);
+  --rose:       #ff7fa8;
+  --rose-lo:    rgba(255,127,168,0.10);
+  --white:      #eaecf2;
+  --text:       rgba(234,236,242,0.78);
+  --text-dim:   rgba(234,236,242,0.44);
+  --border:     rgba(255,255,255,0.055);
+  --border-med: rgba(255,255,255,0.10);
+}
+
+/* ── Reset ─────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Syne', sans-serif;
+  font-weight: 400;
+  cursor: none;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a { text-decoration: none; color: inherit; }
+
+/* ── Cursor ────────────────────────────────── */
+#cur { position:fixed; width:8px; height:8px; background:var(--amber); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); box-shadow:0 0 12px var(--amber); transition:transform .08s; }
+#cur-ring { position:fixed; width:28px; height:28px; border:1px solid rgba(224,136,64,.45); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:width .22s,height .22s,border-color .22s; }
+body.hov #cur-ring { width:48px; height:48px; border-color:rgba(224,136,64,.25); }
+
+/* ── Overlays ──────────────────────────────── */
+.noise { position:fixed; inset:0; pointer-events:none; z-index:9000; opacity:.025; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size:180px 180px; }
+.grid-bg { position:fixed; inset:0; pointer-events:none; z-index:0; background-image:linear-gradient(rgba(224,136,64,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(224,136,64,.018) 1px,transparent 1px); background-size:72px 72px; }
+
+/* ── Nav ───────────────────────────────────── */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:200;
+  padding: 20px 64px;
+  display: flex; justify-content:space-between; align-items:center;
+  background: linear-gradient(to bottom, rgba(2,4,7,.97) 60%, transparent);
+  border-bottom: 1px solid rgba(255,255,255,.03);
+}
+.nav-logo { font-family:'Bebas Neue',sans-serif; font-size:21px; letter-spacing:.12em; color:var(--white); }
+.nav-logo em { color:var(--amber); font-style:normal; }
+.nav-center { display:flex; gap:36px; list-style:none; }
+.nav-center a { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.26em; color:var(--text-dim); text-transform:uppercase; transition:color .22s; }
+.nav-center a:hover { color:var(--white); }
+.nav-cta {
+  font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.22em;
+  padding: 8px 18px; border:1px solid rgba(224,136,64,.3);
+  color:var(--amber); text-transform:uppercase; transition:all .22s;
+}
+.nav-cta:hover { background:rgba(224,136,64,.08); border-color:rgba(224,136,64,.6); }
+
+/* ── Ticker ────────────────────────────────── */
+.ticker-wrap { position:relative; z-index:2; padding-top:62px; border-bottom:1px solid var(--border); overflow:hidden; }
+.ticker-inner { padding:10px 0; overflow:hidden; }
+.ticker-track { display:flex; white-space:nowrap; animation:ticker 36s linear infinite; }
+.ticker-item { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.38em; color:rgba(224,136,64,.36); padding:0 32px; display:inline-flex; align-items:center; gap:16px; }
+.ticker-item::after { content:'◆'; font-size:5px; opacity:.3; }
+
+/* ── Hero ──────────────────────────────────── */
+#hero {
+  position: relative; z-index:2;
+  min-height: 100vh; padding:0 64px;
+  display: grid; grid-template-columns: 1fr 420px; gap:0;
+  align-items: center;
+  overflow: hidden;
+}
+.hero-left { padding:60px 0; }
+.hero-kicker {
+  font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.4em;
+  color:var(--amber); margin-bottom:28px;
+  display:flex; align-items:center; gap:12px;
+  opacity:0; animation:fadeUp .6s .2s forwards;
+}
+.hero-kicker::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--amber); box-shadow:0 0 8px var(--amber); animation:blink 1.4s infinite; flex-shrink:0; }
+h1.hero-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(78px,11vw,152px);
+  line-height: 0.875; letter-spacing:-.01em;
+  color: var(--white);
+  opacity:0; animation:fadeUp .9s .35s cubic-bezier(.16,1,.3,1) forwards;
+}
+h1.hero-headline .hl { color:var(--amber); }
+h1.hero-headline .outline-text { -webkit-text-stroke:1px rgba(234,236,242,.22); color:transparent; }
+
+.hero-sub {
+  margin-top: 32px;
+  font-family:'Playfair Display', serif; font-size:clamp(16px,1.5vw,20px);
+  font-style:italic; line-height:1.75; color:var(--text);
+  max-width: 520px;
+  opacity:0; animation:fadeUp .8s .7s forwards;
+}
+.hero-sub strong { color:var(--white); font-style:normal; font-family:'Syne',sans-serif; font-weight:700; }
+
+.domain-tags {
+  display:flex; flex-wrap:wrap; gap:8px; margin-top:32px;
+  opacity:0; animation:fadeUp .8s .95s forwards;
+}
+.dtag {
+  font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.2em;
+  padding:4px 12px; border:1px solid; text-transform:uppercase;
+}
+.dtag-finance  { color:var(--amber);  border-color:rgba(224,136,64,.3);  background:rgba(224,136,64,.04); }
+.dtag-tech     { color:var(--blue);   border-color:rgba(91,127,255,.3);   background:rgba(91,127,255,.04); }
+.dtag-philosophy { color:var(--violet); border-color:rgba(167,139,255,.3); background:rgba(167,139,255,.04); }
+.dtag-psychology { color:var(--rose);   border-color:rgba(255,127,168,.3); background:rgba(255,127,168,.04); }
+.dtag-mathematics { color:var(--green); border-color:rgba(46,207,144,.3); background:rgba(46,207,144,.04); }
+
+.hero-actions {
+  display:flex; gap:16px; margin-top:44px; flex-wrap:wrap;
+  opacity:0; animation:fadeUp .8s 1.1s forwards;
+}
+.btn-primary {
+  font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.26em;
+  padding:13px 28px; background:var(--amber); color:#020407;
+  text-transform:uppercase; transition:all .22s; display:inline-flex; align-items:center; gap:10px;
+}
+.btn-primary:hover { background:#f0984e; }
+.btn-outline {
+  font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.26em;
+  padding:13px 28px; border:1px solid var(--border-med); color:var(--text-dim);
+  text-transform:uppercase; transition:all .22s;
+}
+.btn-outline:hover { border-color:rgba(255,255,255,.25); color:var(--white); }
+
+.scroll-cue {
+  position:absolute; bottom:36px; left:64px;
+  display:flex; align-items:center; gap:14px;
+  font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.36em;
+  color:rgba(234,236,242,.24);
+  opacity:0; animation:fadeUp 1s 2s forwards;
+}
+.scroll-line { width:52px; height:1px; background:rgba(234,236,242,.1); position:relative; overflow:hidden; }
+.scroll-line::after { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:var(--amber); animation:scan 2.4s 2.6s infinite; }
+
+/* Hero right — live panel */
+.hero-right {
+  position:relative; height:100vh;
+  display:flex; flex-direction:column; justify-content:center;
+  padding:60px 0 60px 48px; border-left:1px solid var(--border);
+  opacity:0; animation:fadeUp .9s 1.3s forwards;
+}
+.live-panel {
+  background:rgba(6,10,16,.8); border:1px solid var(--border);
+  backdrop-filter:blur(12px);
+}
+.lp-header {
+  padding:18px 24px; border-bottom:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between;
+}
+.lp-title { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.3em; color:var(--text-dim); text-transform:uppercase; }
+.lp-live { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.22em; color:var(--green); display:flex; align-items:center; gap:6px; }
+.lp-live::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--green); box-shadow:0 0 8px var(--green); animation:blink 1.4s infinite; }
+
+.lp-product {
+  padding:22px 24px; border-bottom:1px solid var(--border);
+  display:flex; flex-direction:column; gap:8px;
+  transition:background .2s;
+}
+.lp-product:last-of-type { border-bottom:none; }
+.lp-product:hover { background:rgba(255,255,255,.02); }
+.lp-product-top { display:flex; align-items:center; justify-content:space-between; }
+.lp-name { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:.1em; }
+.lp-badge { font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:.18em; padding:2px 8px; border:1px solid; text-transform:uppercase; }
+.lp-desc { font-family:'Syne',sans-serif; font-size:13px; line-height:1.6; color:var(--text-dim); }
+.lp-url { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.14em; color:rgba(234,236,242,.28); }
+
+.hero-stats-row {
+  display:grid; grid-template-columns:1fr 1fr 1fr; gap:1px; margin-top:12px;
+  border:1px solid var(--border); background:var(--border);
+}
+.hs-item { background:var(--bg2); padding:18px 20px; }
+.hs-num { font-family:'Bebas Neue',sans-serif; font-size:34px; color:var(--amber); line-height:1; }
+.hs-label { font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:.22em; color:var(--text-dim); text-transform:uppercase; margin-top:5px; }
+
+/* ── Section meta ──────────────────────────── */
+.section-meta {
+  font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.42em;
+  color:var(--amber); text-transform:uppercase; margin-bottom:18px;
+  display:flex; align-items:center; gap:14px;
+}
+.section-meta::after { content:''; height:1px; width:56px; background:var(--amber); opacity:.28; }
+.section-mega {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(52px,7.5vw,96px);
+  line-height:.9; letter-spacing:-.005em; margin-bottom:8px;
+}
+.section-mega span { color:var(--amber); }
+
+/* ── Writing Section ───────────────────────── */
+#thinking {
+  position:relative; z-index:2;
+  padding:100px 64px;
+  border-top:1px solid var(--border);
+}
+.thinking-header {
+  display:grid; grid-template-columns:1fr 1fr; gap:40px;
+  align-items:end; margin-bottom:64px;
+}
+.thinking-desc {
+  font-family:'Playfair Display',serif; font-style:italic;
+  font-size:clamp(16px,1.4vw,19px); line-height:1.8; color:var(--text);
+  padding-top:18px;
+}
+
+/* Featured Essay */
+.essay-featured {
+  display:grid; grid-template-columns:7fr 5fr; gap:2px;
+  margin-bottom:2px;
+}
+.essay-card {
+  position:relative; background:var(--bg2);
+  border:1px solid var(--border); padding:40px;
+  overflow:hidden; transition:border-color .3s;
+  display:flex; flex-direction:column; justify-content:space-between;
+}
+.essay-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:1px; width:0; transition:width .5s cubic-bezier(.16,1,.3,1); }
+.essay-card:hover::after { width:100%; }
+.essay-card:hover { border-color:rgba(234,236,242,.12); }
+
+.essay-card.feat { min-height:420px; cursor:none; }
+.essay-card.feat::after { background:var(--amber); }
+
+.essay-meta { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+.domain-pill {
+  font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:.2em;
+  padding:3px 10px; border:1px solid; text-transform:uppercase;
+}
+.dp-finance    { color:var(--amber);  border-color:rgba(224,136,64,.35); }
+.dp-tech       { color:var(--blue);   border-color:rgba(91,127,255,.35); }
+.dp-philosophy { color:var(--violet); border-color:rgba(167,139,255,.35); }
+.dp-psychology { color:var(--rose);   border-color:rgba(255,127,168,.35); }
+.dp-mathematics{ color:var(--green);  border-color:rgba(46,207,144,.35); }
+
+.essay-date { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.16em; color:var(--text-dim); }
+.essay-read { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.16em; color:var(--text-dim); }
+
+.essay-title-serif {
+  font-family:'Playfair Display',serif; font-weight:700;
+  font-size:clamp(22px,2.4vw,34px); line-height:1.25;
+  color:var(--white); margin-bottom:18px;
+  transition:color .22s;
+}
+.essay-card:hover .essay-title-serif { color:var(--amber); }
+
+.essay-excerpt {
+  font-family:'Syne',sans-serif; font-size:15px; line-height:1.8;
+  color:var(--text); flex:1; margin-bottom:28px;
+}
+
+.essay-footer { display:flex; align-items:center; justify-content:space-between; }
+.essay-read-link {
+  font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.22em;
+  color:var(--amber); text-transform:uppercase; display:flex; align-items:center; gap:8px;
+  transition:gap .2s;
+}
+.essay-card:hover .essay-read-link { gap:14px; }
+
+/* Side stack */
+.essay-side { display:flex; flex-direction:column; gap:2px; }
+.essay-card.sm { min-height:200px; cursor:none; }
+.essay-card.sm::after { background:var(--blue); }
+.essay-card.sm:nth-child(2)::after { background:var(--violet); }
+.essay-card.sm .essay-title-serif { font-size:clamp(16px,1.5vw,21px); }
+
+/* Essay Grid (below feature) */
+.essay-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:2px; }
+.essay-card.grid-card { min-height:280px; cursor:none; }
+.essay-card.grid-card:nth-child(1)::after { background:var(--rose); }
+.essay-card.grid-card:nth-child(2)::after { background:var(--green); }
+.essay-card.grid-card:nth-child(3)::after { background:var(--amber); }
+
+.all-essays-row {
+  margin-top:48px; display:flex; align-items:center; justify-content:space-between;
+}
+.all-essays-count { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.28em; color:var(--text-dim); }
+
+/* ── Products (Compact) ────────────────────── */
+#work {
+  position:relative; z-index:2;
+  padding:100px 64px;
+  border-top:1px solid var(--border);
+}
+.work-header {
+  display:flex; align-items:flex-end; justify-content:space-between;
+  margin-bottom:64px;
+}
+.products-stack { display:flex; flex-direction:column; gap:2px; }
+
+.prow {
+  display:grid; grid-template-columns:80px 1fr 2fr auto; gap:0;
+  background:var(--bg2); border:1px solid var(--border);
+  align-items:stretch; overflow:hidden; position:relative;
+  transition:border-color .3s; cursor:none;
+}
+.prow::after { content:''; position:absolute; left:0; top:0; bottom:0; width:2px; background:transparent; transition:background .3s; }
+.prow:hover { border-color:rgba(234,236,242,.1); }
+.prow-amber::after { background:transparent; }
+.prow:hover.prow-amber::after { background:var(--amber); }
+.prow:hover.prow-blue::after  { background:var(--blue);  }
+.prow:hover.prow-green::after { background:var(--green); }
+
+.prow-num { display:flex; align-items:center; justify-content:center; padding:28px 0; border-right:1px solid var(--border); }
+.prow-num-text { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.2em; color:rgba(234,236,242,.2); writing-mode:vertical-rl; text-orientation:mixed; }
+.prow-brand { display:flex; flex-direction:column; justify-content:center; padding:28px 36px; border-right:1px solid var(--border); min-width:200px; }
+.prow-wordmark { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:.1em; margin-bottom:6px; }
+.prow-sub { font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:.18em; color:var(--text-dim); text-transform:uppercase; }
+.prow-desc { display:flex; align-items:center; padding:28px 36px; border-right:1px solid var(--border); }
+.prow-desc p { font-family:'Syne',sans-serif; font-size:15px; line-height:1.75; color:var(--text); }
+.prow-desc p strong { color:var(--white); font-weight:700; }
+.prow-right { display:flex; flex-direction:column; justify-content:space-between; padding:28px 32px; min-width:200px; }
+.prow-status { font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:.2em; padding:3px 10px; border:1px solid; text-transform:uppercase; align-self:flex-start; }
+.prow-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:12px; }
+.ptag { font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:.14em; padding:2px 8px; border:1px solid rgba(255,255,255,.06); color:rgba(234,236,242,.32); text-transform:uppercase; }
+.prow-arrow { font-size:18px; align-self:flex-end; color:rgba(234,236,242,.18); transition:all .28s; }
+.prow:hover .prow-arrow { transform:rotate(45deg); }
+.prow:hover.prow-amber .prow-arrow { color:var(--amber); }
+.prow:hover.prow-blue .prow-arrow  { color:var(--blue);  }
+.prow:hover.prow-green .prow-arrow { color:var(--green); }
+
+/* ── About (Manifesto) ─────────────────────── */
+#about {
+  position:relative; z-index:2;
+  padding:100px 64px;
+  border-top:1px solid var(--border);
+  display:grid; grid-template-columns:1fr 1fr; gap:96px; align-items:start;
+}
+.about-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(60px,8vw,100px); line-height:.88; letter-spacing:-.005em; margin-bottom:48px; }
+
+.manifesto { display:flex; flex-direction:column; gap:36px; }
+.manifesto-block {}
+.m-label { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.38em; color:var(--amber); margin-bottom:12px; text-transform:uppercase; display:flex; align-items:center; gap:10px; }
+.m-label::after { content:''; width:32px; height:1px; background:rgba(224,136,64,.28); }
+.manifesto-block p { font-family:'Playfair Display',serif; font-size:clamp(16px,1.45vw,19px); line-height:1.88; color:var(--text); }
+.manifesto-block p strong { color:var(--white); font-style:normal; font-family:'Syne',sans-serif; font-weight:700; }
+
+/* Sidebar widgets */
+.about-right { display:flex; flex-direction:column; gap:20px; position:sticky; top:100px; }
+.widget { background:var(--bg2); border:1px solid var(--border); }
+.widget-header { padding:16px 22px; border-bottom:1px solid var(--border); }
+.widget-title { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.3em; color:var(--text-dim); text-transform:uppercase; }
+.widget-body { padding:20px 22px; }
+.now-item { display:flex; flex-direction:column; gap:4px; padding:12px 0; border-bottom:1px solid var(--border); }
+.now-item:last-child { border-bottom:none; padding-bottom:0; }
+.now-type { font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:.22em; color:var(--text-dim); text-transform:uppercase; }
+.now-val { font-family:'Syne',sans-serif; font-size:14px; color:var(--white); font-weight:600; }
+.now-val em { color:var(--amber); font-style:normal; }
+
+/* Equation widget */
+.equation-wrap { padding:22px; font-family:'Share Tech Mono',monospace; font-size:12px; color:var(--text-dim); line-height:2.2; }
+.eq-line { display:flex; gap:8px; }
+.eq-key { color:var(--amber); }
+.eq-comment { color:rgba(234,236,242,.22); font-size:10px; }
+.eq-cursor { display:inline-block; width:7px; height:13px; background:var(--amber); vertical-align:middle; margin-left:4px; animation:blink 1s infinite; }
+
+/* ── Contact ───────────────────────────────── */
+#contact {
+  position:relative; z-index:2;
+  padding:80px 64px 110px;
+  border-top:1px solid var(--border);
+  display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:end;
+}
+.contact-head { }
+.contact-h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(60px,9vw,118px); line-height:.88; }
+.contact-h2 .outline { -webkit-text-stroke:1px rgba(234,236,242,.18); color:transparent; display:block; }
+.contact-sub { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(15px,1.4vw,18px); line-height:1.82; color:var(--text); max-width:420px; margin-top:24px; }
+
+.contact-links { display:flex; flex-direction:column; gap:3px; align-self:end; }
+.clink {
+  display:flex; align-items:center; gap:14px; padding:14px 22px;
+  border:1px solid transparent; color:var(--text-dim);
+  font-family:'Share Tech Mono',monospace; font-size:12px; letter-spacing:.1em;
+  transition:all .24s;
+}
+.clink:hover { color:var(--amber); border-color:rgba(224,136,64,.18); background:rgba(224,136,64,.03); }
+.clink-icon { font-size:13px; width:18px; text-align:center; }
+
+/* ── Footer ────────────────────────────────── */
+footer {
+  position:relative; z-index:2;
+  padding:24px 64px; border-top:1px solid var(--border);
+  display:flex; justify-content:space-between; align-items:center;
+}
+.foot-copy { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.22em; color:rgba(234,236,242,.22); }
+.foot-right { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.16em; color:rgba(234,236,242,.16); }
+
+/* ── Reveal ────────────────────────────────── */
+.reveal { opacity:0; transform:translateY(22px); transition:opacity .8s,transform .8s; }
+.reveal.in { opacity:1; transform:translateY(0); }
+
+/* ── Keyframes ─────────────────────────────── */
+@keyframes fadeUp  { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+@keyframes blink   { 0%,100%{opacity:1} 50%{opacity:0} }
+@keyframes scan    { from{left:-100%} to{left:100%} }
+@keyframes ticker  { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ── Mobile ────────────────────────────────── */
+@media (max-width:1024px) {
+  nav, #hero, #thinking, #work, #about, #contact, footer { padding-left:24px; padding-right:24px; }
+  #hero { grid-template-columns:1fr; }
+  .hero-right { display:none; }
+  .thinking-header { grid-template-columns:1fr; }
+  .essay-featured { grid-template-columns:1fr; }
+  .essay-grid { grid-template-columns:1fr; }
+  .prow { grid-template-columns:1fr; }
+  .prow-num, .prow-brand, .prow-desc { border-right:none; border-bottom:1px solid var(--border); }
+  #about { grid-template-columns:1fr; gap:48px; }
+  .about-right { position:static; }
+  #contact { grid-template-columns:1fr; }
+  .work-header { flex-direction:column; align-items:flex-start; gap:24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="noise"></div>
+<div class="grid-bg"></div>
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">AL<em>.</em></a>
+  <ul class="nav-center">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#thinking">Thinking</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://crm.dealithic.co/book/intro" target="_blank" class="nav-cta">Book a call →</a>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <div class="ticker-track">
+      <span class="ticker-item">DEALITHIC</span>
+      <span class="ticker-item">PRIVATE MARKETS</span>
+      <span class="ticker-item">OBSIDIAN QUANT</span>
+      <span class="ticker-item">KELLY CRITERION</span>
+      <span class="ticker-item">BAYESIAN REASONING</span>
+      <span class="ticker-item">FOUNDER MODE</span>
+      <span class="ticker-item">AI-NATIVE</span>
+      <span class="ticker-item">SEED ROUND OPEN</span>
+      <span class="ticker-item">FINANCE × PHILOSOPHY</span>
+      <span class="ticker-item">ALWAYS BUILDING</span>
+      <span class="ticker-item">DEALITHIC</span>
+      <span class="ticker-item">PRIVATE MARKETS</span>
+      <span class="ticker-item">OBSIDIAN QUANT</span>
+      <span class="ticker-item">KELLY CRITERION</span>
+      <span class="ticker-item">BAYESIAN REASONING</span>
+      <span class="ticker-item">FOUNDER MODE</span>
+      <span class="ticker-item">AI-NATIVE</span>
+      <span class="ticker-item">SEED ROUND OPEN</span>
+      <span class="ticker-item">FINANCE × PHILOSOPHY</span>
+      <span class="ticker-item">ALWAYS BUILDING</span>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-kicker">NEW YORK · FOUNDER · AUTHOR · TRADER</div>
+
+    <h1 class="hero-headline">
+      I BUILD<br>
+      <span class="hl">FASTER</span><br>
+      <span class="outline-text">THAN YOU</span><br>
+      CAN THINK.
+    </h1>
+
+    <p class="hero-sub">
+      At the intersection of <strong>finance, technology, philosophy, psychology,</strong> and <strong>mathematics</strong> — where compounding ideas meet ruthless execution.
+    </p>
+
+    <div class="domain-tags">
+      <span class="dtag dtag-finance">Finance</span>
+      <span class="dtag dtag-tech">Technology</span>
+      <span class="dtag dtag-philosophy">Philosophy</span>
+      <span class="dtag dtag-psychology">Psychology</span>
+      <span class="dtag dtag-mathematics">Mathematics</span>
+    </div>
+
+    <div class="hero-actions">
+      <a href="#thinking" class="btn-primary">Read my thinking →</a>
+      <a href="#work" class="btn-outline">See what I've built</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="live-panel">
+      <div class="lp-header">
+        <span class="lp-title">Live Products</span>
+        <span class="lp-live">3 ACTIVE</span>
+      </div>
+
+      <a href="https://dealithic.co" target="_blank" rel="noopener" class="lp-product">
+        <div class="lp-product-top">
+          <span class="lp-name" style="color:var(--amber)">DEALITHIC</span>
+          <span class="lp-badge" style="color:var(--amber);border-color:rgba(224,136,64,.3)">LIVE</span>
+        </div>
+        <span class="lp-desc">CIM → IC Memo in 20 minutes. AI deal intelligence for private markets.</span>
+        <span class="lp-url">dealithic.co ↗</span>
+      </a>
+
+      <a href="https://crm.dealithic.co" target="_blank" rel="noopener" class="lp-product">
+        <div class="lp-product-top">
+          <span class="lp-name" style="color:var(--blue)">D:CRM</span>
+          <span class="lp-badge" style="color:var(--blue);border-color:rgba(91,127,255,.3)">LIVE</span>
+        </div>
+        <span class="lp-desc">AI outreach OS for founders &amp; deal originators. Built for myself first.</span>
+        <span class="lp-url">crm.dealithic.co ↗</span>
+      </a>
+
+      <a href="https://quant.barenbergcapital.com/trade" target="_blank" rel="noopener" class="lp-product">
+        <div class="lp-product-top">
+          <span class="lp-name" style="color:var(--green)">OBSIDIAN QUANT</span>
+          <span class="lp-badge" style="color:var(--green);border-color:rgba(46,207,144,.3)">LIVE</span>
+        </div>
+        <span class="lp-desc">Algorithmic capital management. The edge belongs to whoever wrote the better algorithm.</span>
+        <span class="lp-url">quant.barenbergcapital.com ↗</span>
+      </a>
+    </div>
+
+    <div class="hero-stats-row">
+      <div class="hs-item">
+        <div class="hs-num">3</div>
+        <div class="hs-label">Products Live</div>
+      </div>
+      <div class="hs-item">
+        <div class="hs-num">$1M</div>
+        <div class="hs-label">Seed Open</div>
+      </div>
+      <div class="hs-item">
+        <div class="hs-num">25K+</div>
+        <div class="hs-label">Investors</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cue">
+    <span class="scroll-line"></span>
+    SCROLL
+  </div>
+</section>
+
+<!-- THINKING / BLOG -->
+<section id="thinking">
+  <div class="thinking-header reveal">
+    <div>
+      <div class="section-meta">LATEST THINKING</div>
+      <div class="section-mega">THE<br><span>WRITING.</span></div>
+    </div>
+    <p class="thinking-desc">
+      Ideas that don't fit inside a product. Notes from the intersection of markets, mathematics, and mind — written fast, published raw, revised never.
+    </p>
+  </div>
+
+  <!-- Featured + Side Stack -->
+  <div class="essay-featured reveal">
+    <!-- Featured Essay -->
+    <a href="#" class="essay-card feat">
+      <div>
+        <div class="essay-meta">
+          <span class="domain-pill dp-mathematics">Mathematics × Finance</span>
+          <span class="essay-date">May 2026</span>
+          <span class="essay-read">8 min read</span>
+        </div>
+        <div class="essay-title-serif">
+          Why Kelly Criterion Is a Life Philosophy, Not Just a Betting System
+        </div>
+        <p class="essay-excerpt">
+          Most people learn the Kelly formula and immediately misapply it. They treat it as a position-sizing tool and miss the deeper point: Kelly is a statement about the relationship between edge, variance, and time. The same logic that tells you how much to bet on a trade tells you how much to commit to a company, a relationship, a belief. Maximizing long-run geometric growth isn't just a finance problem — it's the entire game.
+        </p>
+      </div>
+      <div class="essay-footer">
+        <span class="essay-read-link">Read the essay →</span>
+        <span style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.14em;color:var(--text-dim)">FEATURED</span>
+      </div>
+    </a>
+
+    <!-- Side essays -->
+    <div class="essay-side">
+      <a href="#" class="essay-card sm">
+        <div class="essay-meta">
+          <span class="domain-pill dp-psychology">Psychology × Finance</span>
+          <span class="essay-date">Apr 2026</span>
+        </div>
+        <div class="essay-title-serif">
+          The Psychology of Conviction: Why Smart People Fold Too Early
+        </div>
+        <div class="essay-footer" style="margin-top:auto">
+          <span class="essay-read-link">Read →</span>
+        </div>
+      </a>
+      <a href="#" class="essay-card sm">
+        <div class="essay-meta">
+          <span class="domain-pill dp-philosophy">Philosophy × Tech</span>
+          <span class="essay-date">Mar 2026</span>
+        </div>
+        <div class="essay-title-serif">
+          Speed as a Competitive Moat: A Founder's Theory of Unfair Advantage
+        </div>
+        <div class="essay-footer" style="margin-top:auto">
+          <span class="essay-read-link">Read →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Essay Grid -->
+  <div class="essay-grid reveal">
+    <a href="#" class="essay-card grid-card">
+      <div class="essay-meta">
+        <span class="domain-pill dp-psychology">Psychology</span>
+        <span class="essay-date">Feb 2026</span>
+        <span class="essay-read">6 min</span>
+      </div>
+      <div class="essay-title-serif">
+        The Bayesian Investor: How Updating Beliefs Changes Everything
+      </div>
+      <p class="essay-excerpt" style="font-size:13px;margin-top:12px;margin-bottom:auto">
+        Markets don't reward correct predictions. They reward the correct update. There's a massive difference — and almost nobody acts like there is.
+      </p>
+      <div class="essay-footer" style="margin-top:24px">
+        <span class="essay-read-link">Read →</span>
+      </div>
+    </a>
+
+    <a href="#" class="essay-card grid-card">
+      <div class="essay-meta">
+        <span class="domain-pill dp-mathematics">Mathematics</span>
+        <span class="essay-date">Jan 2026</span>
+        <span class="essay-read">10 min</span>
+      </div>
+      <div class="essay-title-serif">
+        Private Markets as a Complex Adaptive System
+      </div>
+      <p class="essay-excerpt" style="font-size:13px;margin-top:12px;margin-bottom:auto">
+        The emergent behavior of a $12T asset class can't be reduced to a DCF. Complexity theory explains what spreadsheets never will.
+      </p>
+      <div class="essay-footer" style="margin-top:24px">
+        <span class="essay-read-link">Read →</span>
+      </div>
+    </a>
+
+    <a href="#" class="essay-card grid-card">
+      <div class="essay-meta">
+        <span class="domain-pill dp-finance">Finance × Philosophy</span>
+        <span class="essay-date">Dec 2025</span>
+        <span class="essay-read">7 min</span>
+      </div>
+      <div class="essay-title-serif">
+        On Compounding: The Most Underrated Idea in Western Thought
+      </div>
+      <p class="essay-excerpt" style="font-size:13px;margin-top:12px;margin-bottom:auto">
+        It works on money. It works on knowledge. It works on relationships, reputation, and skill. And yet almost everyone treats it like a finance metaphor.
+      </p>
+      <div class="essay-footer" style="margin-top:24px">
+        <span class="essay-read-link">Read →</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="all-essays-row reveal">
+    <span class="all-essays-count">12 ESSAYS PUBLISHED</span>
+    <a href="#" class="btn-outline">View all writing →</a>
+  </div>
+</section>
+
+<!-- WORK / PRODUCTS -->
+<section id="work">
+  <div class="work-header reveal">
+    <div>
+      <div class="section-meta">WHAT I BUILD</div>
+      <div class="section-mega">THE<br><span>PRODUCTS.</span></div>
+    </div>
+    <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:17px;line-height:1.75;color:var(--text);max-width:380px;">
+      Each one started with a problem I couldn't stop thinking about. Every one shipped in days, not quarters.
+    </p>
+  </div>
+
+  <div class="products-stack">
+
+    <a href="https://dealithic.co" target="_blank" rel="noopener" class="prow prow-amber reveal">
+      <div class="prow-num"><span class="prow-num-text">01 / 03</span></div>
+      <div class="prow-brand">
+        <div class="prow-wordmark" style="color:var(--amber)">DEALITHIC</div>
+        <div class="prow-sub">AI Deal Intelligence</div>
+      </div>
+      <div class="prow-desc">
+        <p>
+          <strong>CIM to IC Memo in 20 minutes.</strong> Dealithic takes a fund from document receipt to full investment committee package — LBO model, risk register, thesis — in the time it used to take to format a slide. 25,000+ verified investor profiles in the matching network.
+        </p>
+      </div>
+      <div class="prow-right">
+        <span class="prow-status" style="color:var(--amber);border-color:rgba(224,136,64,.3)">LIVE · Seed Round Open</span>
+        <div>
+          <div class="prow-tags">
+            <span class="ptag">IC Memos</span>
+            <span class="ptag">LBO Models</span>
+            <span class="ptag">Fund Matching</span>
+            <span class="ptag">Deal Rooms</span>
+          </div>
+          <div class="prow-arrow">↗</div>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://crm.dealithic.co" target="_blank" rel="noopener" class="prow prow-blue reveal">
+      <div class="prow-num"><span class="prow-num-text">02 / 03</span></div>
+      <div class="prow-brand">
+        <div class="prow-wordmark" style="color:var(--blue)">D:CRM</div>
+        <div class="prow-sub">AI Outreach OS</div>
+      </div>
+      <div class="prow-desc">
+        <p>
+          <strong>Built it because nothing else fit how founders actually work.</strong> I was managing investor relationships across five disconnected tools — AI calling, sequences, enrichment, lead gen. So I consolidated everything and then realized every founder had the exact same problem.
+        </p>
+      </div>
+      <div class="prow-right">
+        <span class="prow-status" style="color:var(--blue);border-color:rgba(91,127,255,.3)">LIVE</span>
+        <div>
+          <div class="prow-tags">
+            <span class="ptag">AI Calling</span>
+            <span class="ptag">Sequences</span>
+            <span class="ptag">Lead Gen</span>
+            <span class="ptag">Enrichment</span>
+          </div>
+          <div class="prow-arrow">↗</div>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://quant.barenbergcapital.com/trade" target="_blank" rel="noopener" class="prow prow-green reveal">
+      <div class="prow-num"><span class="prow-num-text">03 / 03</span></div>
+      <div class="prow-brand">
+        <div class="prow-wordmark" style="color:var(--green)">OBSIDIAN QUANT</div>
+        <div class="prow-sub">Algorithmic Capital</div>
+      </div>
+      <div class="prow-desc">
+        <p>
+          <strong>The edge doesn't belong to the biggest fund anymore — it belongs to whoever wrote the better algorithm.</strong> I've been obsessed with the intersection of code, markets, and AI since before it was a thesis. Obsidian is the answer to a question I couldn't let go.
+        </p>
+      </div>
+      <div class="prow-right">
+        <span class="prow-status" style="color:var(--green);border-color:rgba(46,207,144,.3)">LIVE</span>
+        <div>
+          <div class="prow-tags">
+            <span class="ptag">Quant</span>
+            <span class="ptag">Algorithmic</span>
+            <span class="ptag">AI Engine</span>
+          </div>
+          <div class="prow-arrow">↗</div>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-left reveal">
+    <div class="section-meta">THE STORY</div>
+    <h2 class="about-title">WHY<br>I BUILD.</h2>
+
+    <div class="manifesto">
+      <div class="manifesto-block">
+        <div class="m-label">01 · The Operating Principle</div>
+        <p>I kept walking into rooms where <strong>smart people were doing slow, manual work.</strong> Deal analysis that should take an hour taking a week. Outreach running through spreadsheets. Capital sitting idle while someone built a PowerPoint. I build when I can't stop thinking about a problem — and I ship before the thinking stops.</p>
+      </div>
+
+      <div class="manifesto-block">
+        <div class="m-label">02 · The Intellectual Obsessions</div>
+        <p>My thinking doesn't stay in one lane. <strong>Mathematics gives me the framework. Finance gives me the feedback loop. Philosophy gives me the why. Psychology gives me the edge over everyone who's only reading the balance sheet.</strong> The writing is where I work these ideas out loud.</p>
+      </div>
+
+      <div class="manifesto-block">
+        <div class="m-label">03 · The Compounding Thesis</div>
+        <p>The intersection of code, markets, and AI is where the next generation of wealth is built. <strong>I didn't arrive at that thesis from a whiteboard — I arrived at it from building, trading, and watching how capital actually moves.</strong> The products are the proof. The writing is the process.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-right reveal">
+    <!-- Currently Widget -->
+    <div class="widget">
+      <div class="widget-header"><div class="widget-title">Currently</div></div>
+      <div class="widget-body">
+        <div class="now-item">
+          <span class="now-type">Building</span>
+          <span class="now-val">Dealithic v2 · <em>Seed Round Open</em></span>
+        </div>
+        <div class="now-item">
+          <span class="now-type">Writing</span>
+          <span class="now-val">Kelly Criterion as Life Philosophy</span>
+        </div>
+        <div class="now-item">
+          <span class="now-type">Reading</span>
+          <span class="now-val">Gödel, Escher, Bach — Hofstadter</span>
+        </div>
+        <div class="now-item">
+          <span class="now-type">Trading</span>
+          <span class="now-val">Running Obsidian Quant · <em>Live</em></span>
+        </div>
+        <div class="now-item">
+          <span class="now-type">Location</span>
+          <span class="now-val">New York</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Equation Widget -->
+    <div class="widget">
+      <div class="widget-header"><div class="widget-title">The Equation I Live By</div></div>
+      <div class="equation-wrap">
+        <div class="eq-line"><span class="eq-comment">// Kelly Criterion</span></div>
+        <div class="eq-line"><span class="eq-key">f*</span> = (bp - q) / b</div>
+        <div class="eq-line">&nbsp;</div>
+        <div class="eq-line"><span class="eq-comment">// where</span></div>
+        <div class="eq-line"><span class="eq-key">b</span> = net odds on win</div>
+        <div class="eq-line"><span class="eq-key">p</span> = probability of win</div>
+        <div class="eq-line"><span class="eq-key">q</span> = 1 - p</div>
+        <div class="eq-line">&nbsp;</div>
+        <div class="eq-line"><span class="eq-comment">// applied to: bets, companies, beliefs</span></div>
+        <div class="eq-line"><span class="eq-key">status</span> = <span style="color:var(--amber)">"BUILDING"</span><span class="eq-cursor"></span></div>
+      </div>
+    </div>
+
+    <!-- Profile -->
+    <div class="widget">
+      <div class="widget-header"><div class="widget-title">Raising</div></div>
+      <div class="widget-body">
+        <div class="now-item">
+          <span class="now-type">Round</span>
+          <span class="now-val"><em>$1M Seed</em></span>
+        </div>
+        <div class="now-item">
+          <span class="now-type">Post-Money Cap</span>
+          <span class="now-val">$10M</span>
+        </div>
+        <div class="now-item">
+          <span class="now-type">Ask</span>
+          <span class="now-val">20 minutes of your time</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-head reveal">
+    <div class="section-meta">OPEN CHANNEL</div>
+    <h2 class="contact-h2">
+      LET'S<br>
+      <span class="outline">BUILD.</span>
+    </h2>
+    <p class="contact-sub">
+      If you're deploying capital and Dealithic fits your thesis — or you just want to argue about the Kelly Criterion — I'll make it worth your 20 minutes.
+    </p>
+  </div>
+
+  <div class="contact-links reveal">
+    <a href="https://dealithic.co" target="_blank" rel="noopener" class="clink">
+      <span class="clink-icon">◈</span><span>dealithic.co</span>
+    </a>
+    <a href="https://crm.dealithic.co" target="_blank" rel="noopener" class="clink">
+      <span class="clink-icon">⬡</span><span>crm.dealithic.co</span>
+    </a>
+    <a href="https://crm.dealithic.co/book/intro" target="_blank" rel="noopener" class="clink" style="color:var(--amber);border-color:rgba(224,136,64,.22);">
+      <span class="clink-icon">→</span><span>Book a 20-min call</span>
+    </a>
+    <a href="mailto:anthonywlicausi@gmail.com" class="clink">
+      <span class="clink-icon">✉</span><span>anthonywlicausi@gmail.com</span>
+    </a>
+    <a href="https://twitter.com/anthonywlicausi" target="_blank" rel="noopener" class="clink">
+      <span class="clink-icon">𝕏</span><span>@anthonywlicausi</span>
+    </a>
+    <a href="https://github.com/anthonywlicausi" target="_blank" rel="noopener" class="clink">
+      <span class="clink-icon">⌥</span><span>github.com/anthonywlicausi</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <span class="foot-copy">© 2026 ANTHONY LICAUSI · NEW YORK</span>
+  <span class="foot-right">ALWAYS BUILDING</span>
+</footer>
+
+<script>
+/* Cursor */
+const cur = document.getElementById('cur');
+const ring = document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
+document.querySelectorAll('a,.prow,.essay-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
+});
+(function loop(){ rx+=(mx-rx)*0.1; ry+=(my-ry)*0.1; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(loop); })();
+
+/* Scroll reveals */
+const ro = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); } });
+},{threshold:0.06});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>
