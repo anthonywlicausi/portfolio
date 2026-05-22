@@ -406,8 +406,9 @@ footer {
 .foot-right { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.16em; color:rgba(234,236,242,.16); }
 
 /* ── Reveal ────────────────────────────────── */
-.reveal { opacity:0; transform:translateY(22px); transition:opacity .8s,transform .8s; }
+.reveal { opacity:0; transform:translateY(18px); transition:opacity .65s,transform .65s; }
 .reveal.in { opacity:1; transform:translateY(0); }
+@media (max-width:1024px) { .reveal { transform:none; transition:opacity .5s; } }
 
 /* ── Keyframes ─────────────────────────────── */
 @keyframes fadeUp  { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
@@ -924,10 +925,13 @@ document.querySelectorAll('a,.prow,.essay-card').forEach(el=>{
 (function loop(){ rx+=(mx-rx)*0.1; ry+=(my-ry)*0.1; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(loop); })();
 
 /* Scroll reveals */
+const revealEls = document.querySelectorAll('.reveal');
 const ro = new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); } });
-},{threshold:0.06});
-document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+},{threshold:0, rootMargin:'0px 0px -40px 0px'});
+revealEls.forEach(el=>ro.observe(el));
+/* Fallback: if IntersectionObserver never fires (e.g. hidden tab, some mobile browsers), reveal after 1.8s */
+setTimeout(()=>{ revealEls.forEach(el=>el.classList.add('in')); }, 1800);
 </script>
 </body>
 </html>
