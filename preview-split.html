@@ -25,19 +25,15 @@
   --l-border:   rgba(26,20,16,0.09);
   --l-border2:  rgba(26,20,16,0.15);
 
-  /* accents — dark versions for dark bg */
+  /* accents */
   --amber:      #e08840;
   --blue:       #5b7fff;
   --green:      #2ecf90;
-  --violet:     #a78bff;
-  --rose:       #ff7fa8;
 
-  /* accents — ink versions for light bg */
+  /* ink accents for light bg */
   --l-amber:    #b05a0a;
   --l-blue:     #1e3fcc;
   --l-green:    #146b45;
-  --l-violet:   #5530b8;
-  --l-rose:     #b5204e;
 }
 
 /* ── Reset ─────────────────────────────────── */
@@ -98,12 +94,8 @@ h1.hero-headline .outline-text { -webkit-text-stroke:1px rgba(234,236,242,.2); c
 .hero-sub { margin-top:32px; font-family:'Playfair Display',serif; font-size:clamp(20px,1.9vw,26px); font-style:italic; line-height:1.75; color:var(--d-text); max-width:520px; opacity:0; animation:fadeUp .8s .7s forwards; }
 .hero-sub strong { color:var(--d-white); font-style:normal; font-family:'Syne',sans-serif; font-weight:700; }
 .domain-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:32px; opacity:0; animation:fadeUp .8s .95s forwards; }
-.dtag { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.2em; padding:4px 12px; border:1px solid; text-transform:uppercase; }
-.dtag-finance    { color:var(--amber);  border-color:rgba(224,136,64,.3);  background:rgba(224,136,64,.05); }
-.dtag-tech       { color:var(--blue);   border-color:rgba(91,127,255,.3);   background:rgba(91,127,255,.05); }
-.dtag-philosophy { color:var(--violet); border-color:rgba(167,139,255,.3);  background:rgba(167,139,255,.05); }
-.dtag-psychology { color:var(--rose);   border-color:rgba(255,127,168,.3);  background:rgba(255,127,168,.05); }
-.dtag-mathematics{ color:var(--green);  border-color:rgba(46,207,144,.3);   background:rgba(46,207,144,.05); }
+.dtag { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.2em; padding:4px 12px; border:1px solid rgba(224,136,64,.3); text-transform:uppercase; color:rgba(234,236,242,.6); background:rgba(224,136,64,.05); }
+.dtag-finance, .dtag-tech, .dtag-philosophy, .dtag-psychology, .dtag-mathematics { color:rgba(234,236,242,.6); border-color:rgba(224,136,64,.28); }
 .hero-actions { display:flex; gap:16px; margin-top:44px; flex-wrap:wrap; opacity:0; animation:fadeUp .8s 1.1s forwards; }
 .btn-primary { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.26em; padding:13px 28px; background:var(--amber); color:#020407; text-transform:uppercase; transition:all .22s; display:inline-flex; align-items:center; gap:10px; }
 .btn-primary:hover { background:#f0984e; }
@@ -202,12 +194,8 @@ h1.hero-headline .outline-text { -webkit-text-stroke:1px rgba(234,236,242,.2); c
 .essay-card.feat { min-height:420px; }
 .essay-card.feat::after { background:var(--l-amber); }
 .essay-meta { display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:20px; }
-.domain-pill { font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:.2em; padding:3px 10px; border:1px solid; text-transform:uppercase; }
-.dp-finance     { color:var(--l-amber);  border-color:rgba(176,90,10,.28); background:rgba(176,90,10,.06); }
-.dp-tech        { color:var(--l-blue);   border-color:rgba(30,63,204,.22); background:rgba(30,63,204,.05); }
-.dp-philosophy  { color:var(--l-violet); border-color:rgba(85,48,184,.22); background:rgba(85,48,184,.05); }
-.dp-psychology  { color:var(--l-rose);   border-color:rgba(181,32,78,.22); background:rgba(181,32,78,.05); }
-.dp-mathematics { color:var(--l-green);  border-color:rgba(20,107,69,.22); background:rgba(20,107,69,.05); }
+.domain-pill { font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:.2em; padding:3px 10px; border:1px solid var(--l-border2); text-transform:uppercase; color:var(--l-text2); background:transparent; }
+.dp-finance, .dp-tech, .dp-philosophy, .dp-psychology, .dp-mathematics { color:var(--l-text2); border-color:var(--l-border2); }
 .essay-date { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.14em; color:var(--l-text2); }
 .essay-read { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.14em; color:var(--l-text2); }
 .essay-title-serif { font-family:'Playfair Display',serif; font-weight:700; font-size:clamp(22px,2.4vw,34px); line-height:1.25; color:var(--l-text); margin-bottom:18px; transition:color .22s; }
@@ -241,7 +229,7 @@ h1.hero-headline .outline-text { -webkit-text-stroke:1px rgba(234,236,242,.2); c
 }
 .about-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(60px,8vw,100px); line-height:.88; color:var(--l-text); margin-bottom:48px; }
 .manifesto { display:flex; flex-direction:column; gap:40px; }
-.m-label { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.38em; color:var(--l-amber); margin-bottom:12px; text-transform:uppercase; display:flex; align-items:center; gap:10px; }
+.m-label { font-family:'Share Tech Mono',monospace; font-size:13px; letter-spacing:.22em; color:var(--l-amber); margin-bottom:14px; text-transform:uppercase; display:flex; align-items:center; gap:12px; font-weight:600; }
 .m-label::after { content:''; width:32px; height:1px; background:rgba(176,90,10,.32); }
 .manifesto-block p { font-family:'Playfair Display',serif; font-size:clamp(20px,1.9vw,26px); line-height:1.92; color:var(--l-text2); }
 .manifesto-block p strong { color:var(--l-text); font-style:normal; font-family:'Syne',sans-serif; font-weight:700; }
@@ -278,10 +266,10 @@ h1.hero-headline .outline-text { -webkit-text-stroke:1px rgba(234,236,242,.2); c
 .clink:hover { color:var(--l-amber); border-color:rgba(176,90,10,.2); background:rgba(176,90,10,.04); }
 .clink-icon { font-size:13px; width:18px; text-align:center; }
 
-/* ── Footer (dark bookend) ─────────────────── */
-footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid var(--d-border); background:var(--d-bg); display:flex; justify-content:space-between; align-items:center; }
-.foot-copy { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.22em; color:rgba(234,236,242,.22); }
-.foot-right { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.16em; color:rgba(234,236,242,.16); }
+/* ── Footer (warm, matches light sections) ─── */
+footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid var(--l-border); background:var(--l-bg3); display:flex; justify-content:space-between; align-items:center; }
+.foot-copy { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.22em; color:var(--l-text2); }
+.foot-right { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.16em; color:var(--l-text2); opacity:.6; }
 
 /* ── Reveal ────────────────────────────────── */
 .reveal { opacity:0; transform:translateY(18px); transition:opacity .65s,transform .65s; }
