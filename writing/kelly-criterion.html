@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why Kelly Criterion Is a Life Philosophy, Not Just a Betting System | Anthony W. Licausi</title>
+<meta name="description" content="Anthony Licausi explores why the Kelly Criterion is more than a position-sizing formula — it's a philosophy for making optimal decisions under uncertainty in business, investing, and life.">
+<meta name="author" content="Anthony W. Licausi">
+<meta property="og:title" content="Why Kelly Criterion Is a Life Philosophy, Not Just a Betting System | Anthony W. Licausi">
+<meta property="og:description" content="Anthony Licausi explores why the Kelly Criterion is more than a position-sizing formula — it's a philosophy for making optimal decisions under uncertainty in business, investing, and life.">
+<meta property="og:url" content="https://anthonywlicausi.com/writing/kelly-criterion.html">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@anthonywlicausi">
+<meta name="twitter:title" content="Why Kelly Criterion Is a Life Philosophy, Not Just a Betting System | Anthony W. Licausi">
+<meta name="twitter:description" content="Anthony Licausi explores why the Kelly Criterion is more than a position-sizing formula — it's a philosophy for making optimal decisions under uncertainty in business, investing, and life.">
+<link rel="canonical" href="https://anthonywlicausi.com/writing/kelly-criterion.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Why Kelly Criterion Is a Life Philosophy, Not Just a Betting System",
+  "author": {"@type": "Person", "name": "Anthony W. Licausi", "url": "https://anthonywlicausi.com"},
+  "publisher": {"@type": "Person", "name": "Anthony W. Licausi"},
+  "datePublished": "2026-05-01",
+  "description": "Anthony Licausi explores why the Kelly Criterion is more than a position-sizing formula — it's a philosophy for making optimal decisions under uncertainty in business, investing, and life.",
+  "url": "https://anthonywlicausi.com/writing/kelly-criterion.html",
+  "keywords": "Kelly Criterion, position sizing, decision making, Anthony Licausi, investing philosophy, Obsidian Quant"
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Syne:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --d-bg: #020407; --d-bg2: #060a10; --d-border: rgba(255,255,255,0.055);
+  --d-text: rgba(234,236,242,0.78); --d-dim: rgba(234,236,242,0.40); --d-white: #eaecf2;
+  --l-bg: #f7f4ef; --l-bg2: #ffffff; --l-bg3: #ede9e2;
+  --l-text: #1a1410; --l-text2: rgba(26,20,16,0.62); --l-border: rgba(26,20,16,0.09);
+  --accent: #1155FF; --l-accent: #0038CC;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { background: var(--d-bg); font-family: 'Syne', sans-serif; font-weight: 400; cursor: none; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+a { text-decoration: none; color: inherit; }
+#cur { position:fixed; width:8px; height:8px; background:var(--accent); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); box-shadow:0 0 12px var(--accent); }
+#cur-ring { position:fixed; width:28px; height:28px; border:1px solid rgba(17,85,255,.4); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:width .22s,height .22s; }
+body.hov #cur-ring { width:46px; height:46px; }
+.noise { position:fixed; inset:0; pointer-events:none; z-index:9000; opacity:.022; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size:180px 180px; }
+nav { position:fixed; top:0; left:0; right:0; z-index:200; padding:20px 64px; display:flex; align-items:center; gap:16px; background:linear-gradient(to bottom, rgba(2,4,7,.97) 60%, transparent); border-bottom:1px solid rgba(255,255,255,.03); }
+.nav-logo { font-family:'Bebas Neue',sans-serif; font-size:21px; letter-spacing:.12em; color:var(--d-white); }
+.nav-logo em { color:var(--accent); font-style:normal; }
+.nav-official { font-family:'Playfair Display',serif; font-style:italic; font-size:13px; color:var(--d-dim); }
+
+.article-header { position:relative; z-index:2; background:var(--d-bg); padding:120px 64px 72px; border-bottom:4px solid var(--accent); }
+.article-back { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.26em; color:var(--d-dim); text-transform:uppercase; display:inline-flex; align-items:center; gap:8px; margin-bottom:40px; transition:color .2s; }
+.article-back:hover { color:var(--accent); }
+.article-domain { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.2em; padding:3px 12px; border:1px solid rgba(17,85,255,.35); color:rgba(17,85,255,.9); text-transform:uppercase; display:inline-block; margin-bottom:24px; }
+.article-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(48px,7vw,88px); line-height:.92; letter-spacing:-.01em; color:var(--d-white); max-width:900px; margin-bottom:32px; }
+.article-meta { display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
+.article-author { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.2em; color:var(--accent); text-transform:uppercase; }
+.article-date { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.16em; color:var(--d-dim); }
+.article-read { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.16em; color:var(--d-dim); }
+
+.article-body { background:var(--l-bg); padding:80px 64px 120px; }
+.article-content { max-width:720px; margin:0 auto; }
+.article-content p { font-family:'Playfair Display',serif; font-size:20px; line-height:1.9; color:var(--l-text2); margin-bottom:32px; }
+.article-content p strong { color:var(--l-text); font-weight:700; font-family:'Syne',sans-serif; }
+.article-content h2 { font-family:'Share Tech Mono',monospace; font-size:11px; letter-spacing:.36em; color:var(--l-accent); text-transform:uppercase; margin:56px 0 20px; display:flex; align-items:center; gap:12px; }
+.article-content h2::after { content:''; height:1px; flex:1; background:rgba(0,56,204,.18); }
+.article-content blockquote { border-left:3px solid var(--l-accent); padding:8px 0 8px 28px; margin:40px 0; }
+.article-content blockquote p { font-size:24px; font-style:italic; color:var(--l-text); margin-bottom:0; line-height:1.65; }
+.article-content .equation { font-family:'Share Tech Mono',monospace; font-size:15px; background:var(--l-bg3); border:1px solid var(--l-border); padding:24px 28px; margin:40px 0; color:var(--l-text); line-height:2; }
+.article-content .equation .eq-comment { color:rgba(26,20,16,.45); font-size:12px; }
+.article-content .equation .eq-key { color:var(--l-accent); }
+
+footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid var(--l-border); background:var(--l-bg3); display:flex; justify-content:space-between; align-items:center; }
+.foot-copy { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.22em; color:var(--l-text2); }
+.foot-right { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.16em; color:var(--l-text2); opacity:.6; }
+
+@media (max-width:768px) {
+  nav, .article-header, .article-body, footer { padding-left:24px; padding-right:24px; }
+  .article-header { padding-top:100px; padding-bottom:48px; }
+  .article-body { padding-top:48px; padding-bottom:72px; }
+}
+</style>
+</head>
+<body>
+<div class="noise"></div>
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<nav>
+  <a href="../index.html" class="nav-logo">ANTHONY W<em>.</em> LICAUSI</a>
+  <span class="nav-official">Official Site</span>
+</nav>
+
+<header class="article-header">
+  <a href="../index.html#thinking" class="article-back">← Back to Writing</a>
+  <div class="article-domain">Mathematics × Finance</div>
+  <h1 class="article-title">Why Kelly Criterion Is a Life Philosophy, Not Just a Betting System</h1>
+  <div class="article-meta">
+    <span class="article-author">Anthony W. Licausi</span>
+    <span class="article-date">May 2026</span>
+    <span class="article-read">8 min read</span>
+  </div>
+</header>
+
+<main class="article-body">
+  <div class="article-content">
+
+    <p>Most people learn the Kelly formula and immediately start calculating position sizes. They're missing the deeper point entirely.</p>
+
+    <p>The formula: <strong>f* = (bp - q) / b</strong>. Where b = net odds received on a win, p = probability of winning, q = 1 - p. Simple enough. But what Kelly is actually expressing is the fraction of capital to allocate to any opportunity in order to maximize long-run geometric growth rate. Not expected value. Geometric growth rate. That distinction matters more than most people realize.</p>
+
+    <div class="equation">
+      <div><span class="eq-comment">// Kelly Criterion</span></div>
+      <div><span class="eq-key">f*</span> = (bp - q) / b</div>
+      <div>&nbsp;</div>
+      <div><span class="eq-comment">// where:</span></div>
+      <div><span class="eq-key">b</span> = net odds received on a win</div>
+      <div><span class="eq-key">p</span> = probability of winning</div>
+      <div><span class="eq-key">q</span> = 1 - p  <span class="eq-comment">// probability of losing</span></div>
+      <div>&nbsp;</div>
+      <div><span class="eq-comment">// result: fraction of capital to allocate</span></div>
+      <div><span class="eq-comment">// objective: maximize long-run geometric growth rate</span></div>
+    </div>
+
+    <h2>The Formula Most People Learn</h2>
+
+    <p>Most introductions to Kelly focus on gambling or trading: if you have a 60% edge on a coin flip that pays 1:1, Kelly says bet 20% of your bankroll. Bet more, and variance kills you before the edge pays out. Bet less, and you're leaving compounding on the table. The math is clean. The application is usually wrong.</p>
+
+    <p>The common mistake is treating Kelly as a precision tool in an imprecise world. You never actually know your edge with certainty. You never know your probability of winning exactly. The formula requires inputs you don't have. So practitioners use half-Kelly, quarter-Kelly — deliberately undershooting the theoretical optimum to protect against the overconfidence baked into their own estimates.</p>
+
+    <p>That's the right lesson for trading. But it's still thinking too small.</p>
+
+    <h2>What Kelly Is Really Saying</h2>
+
+    <p>Kelly is a statement about the relationship between edge, variance, and time. Apply it to any repeated decision under uncertainty and it gives you the same answer: the optimal commitment fraction is proportional to your edge divided by your variance. High edge, low variance — commit heavily. Low edge, high variance — stay small or stay out entirely.</p>
+
+    <p>Negative Kelly (when the formula returns a negative number) isn't just a technical result. It's the math telling you: do not play this game. At zero Kelly, you're in a fair game — no edge, no reason to bet. Positive Kelly means you have edge and should commit proportionally. The formula is a decision filter as much as a sizing tool.</p>
+
+    <blockquote>
+      <p>"Kelly isn't telling you how much to bet. It's telling you whether you should be playing at all — and how seriously to take your own edge estimate."</p>
+    </blockquote>
+
+    <h2>Applied Beyond Markets</h2>
+
+    <p>Here's where it gets interesting. The same logic applies to every repeated decision where you have an edge and face variance over time.</p>
+
+    <p><strong>Starting a company:</strong> What's your edge in this market? What's the variance — how wide is the distribution of outcomes? How much of your time, capital, and energy should you allocate? Kelly gives you a framework for answering all three. High edge (massive market inefficiency, no AI-native solution, domain expertise), manageable variance (bootstrapped, max loss defined) — Kelly says bet significantly.</p>
+
+    <p><strong>Holding a belief:</strong> How much should you update your worldview based on new information? Kelly translates: what's the evidence-to-noise ratio? How much should you shift your credence? Overconfident priors are the epistemic equivalent of overbetting. Permanent skepticism leaves compounding on the table.</p>
+
+    <p><strong>Building a team:</strong> How much should you invest in a relationship or partnership? Edge (track record, alignment, complementary skills) divided by variance (reliability, conflict potential, opportunity cost). Kelly still works.</p>
+
+    <h2>The Obsidian Quant Connection</h2>
+
+    <p>I didn't build Obsidian Quant as a prediction engine. I built it as an edge-and-variance accounting engine. The algorithm isn't trying to forecast what happens next — it's trying to allocate capital optimally given estimated edge and variance at each moment. That's a fundamentally different frame.</p>
+
+    <p>Most retail traders lose money because they bet based on conviction, not edge. They feel certain something will go up, so they bet large. Kelly would ask: what's your actual win rate at this setup? What's the average win vs. average loss? Run the numbers and most high-conviction bets are actually negative Kelly — the confidence isn't backed by edge.</p>
+
+    <p>The algorithm removes that bias. It sizes positions based on measured historical edge, not felt conviction. The felt conviction is still there — I still have views. But Kelly keeps the sizing honest.</p>
+
+    <h2>The Life Philosophy</h2>
+
+    <p>The most important insight Kelly gives you isn't about sizing. It's about sustainability. The formula maximizes long-run geometric growth. Not short-run returns. Not the single best outcome. The trajectory over many iterations.</p>
+
+    <p>This means accepting that Kelly-optimal play will underperform a reckless bet in any single trial. A gambler who bets everything wins big or loses everything — Kelly never recommends that. What Kelly recommends is the path that is still going strong after 1,000 iterations. The path that compounds.</p>
+
+    <p>Once you see decisions through that lens, you can't unsee it. Every allocation of capital, time, or energy becomes a question: what's my edge, what's my variance, and how does this compound over time? The formula is a lens. Applied consistently, it quietly separates the decisions that compound from the ones that blow you up.</p>
+
+    <p>That's not a trading philosophy. That's a philosophy of action.</p>
+
+  </div>
+</main>
+
+<footer>
+  <span class="foot-copy">© 2026 ANTHONY W. LICAUSI · NEW YORK</span>
+  <span class="foot-right">ALWAYS BUILDING</span>
+</footer>
+
+<script>
+const cur = document.getElementById('cur');
+const ring = document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
+document.querySelectorAll('a').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
+});
+(function loop(){ rx+=(mx-rx)*0.1; ry+=(my-ry)*0.1; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(loop); })();
+</script>
+</body>
+</html>
