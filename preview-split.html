@@ -142,13 +142,8 @@ h1.hero-headline .outline-text { -webkit-text-stroke:1px rgba(234,236,242,.2); c
 .prow-desc p strong { color:var(--l-text); font-weight:700; }
 .prow-right { display:flex; flex-direction:column; justify-content:space-between; padding:28px 32px; min-width:200px; }
 .prow-status { font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:.2em; padding:3px 10px; border:1px solid; text-transform:uppercase; align-self:flex-start; }
-.prow-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:12px; }
-.ptag { font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:.14em; padding:2px 8px; border:1px solid var(--l-border); color:var(--l-text2); text-transform:uppercase; }
-.prow-arrow { font-size:18px; align-self:flex-end; color:rgba(26,20,16,.22); transition:all .28s; }
-.prow:hover .prow-arrow { transform:rotate(45deg); }
-.prow:hover.prow-amber .prow-arrow { color:var(--l-amber); }
-.prow:hover.prow-blue  .prow-arrow { color:var(--l-blue);  }
-.prow:hover.prow-green .prow-arrow { color:var(--l-green); }
+.prow-learn { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--l-amber); background:transparent; border:none; padding:0; align-self:flex-end; transition:opacity .22s; cursor:none; }
+.prow:hover .prow-learn { opacity:.7; }
 
 /* ════════════════════════════════════════════
    SPLIT BAND — dark to warm
@@ -430,12 +425,7 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
       </div>
       <div class="prow-right">
         <span class="prow-status" style="color:var(--amber);border-color:rgba(17,85,255,.3)">LIVE · Seed Open</span>
-        <div>
-          <div class="prow-tags">
-            <span class="ptag">Deal Intelligence</span><span class="ptag">Capital Network</span><span class="ptag">IR Platform</span><span class="ptag">SPV</span><span class="ptag">Reg D</span><span class="ptag">Alphalithic AI</span>
-          </div>
-          <div class="prow-arrow">↗</div>
-        </div>
+        <span class="prow-learn">Learn More →</span>
       </div>
     </a>
 
@@ -450,12 +440,7 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
       </div>
       <div class="prow-right">
         <span class="prow-status" style="color:var(--blue);border-color:rgba(91,127,255,.3)">LIVE</span>
-        <div>
-          <div class="prow-tags">
-            <span class="ptag">AI Calling</span><span class="ptag">Sequences</span><span class="ptag">Lead Gen</span><span class="ptag">Enrichment</span>
-          </div>
-          <div class="prow-arrow">↗</div>
-        </div>
+        <span class="prow-learn">Learn More →</span>
       </div>
     </a>
 
@@ -470,12 +455,7 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
       </div>
       <div class="prow-right">
         <span class="prow-status" style="color:var(--amber);border-color:rgba(17,85,255,.3)">LIVE</span>
-        <div>
-          <div class="prow-tags">
-            <span class="ptag">Quant</span><span class="ptag">Algorithmic</span><span class="ptag">AI Engine</span>
-          </div>
-          <div class="prow-arrow">↗</div>
-        </div>
+        <span class="prow-learn">Learn More →</span>
       </div>
     </a>
   </div>
