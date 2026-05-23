@@ -59,17 +59,13 @@ body.hov #cur-ring { width:46px; height:46px; }
 nav {
   position:fixed; top:0; left:0; right:0; z-index:200;
   padding:20px 64px;
-  display:flex; justify-content:space-between; align-items:center;
+  display:flex; align-items:center; gap:16px;
   background:linear-gradient(to bottom, rgba(2,4,7,.97) 60%, transparent);
   border-bottom:1px solid rgba(255,255,255,.03);
 }
-.nav-logo { font-family:'Bebas Neue',sans-serif; font-size:21px; letter-spacing:.12em; color:var(--d-white); }
+.nav-logo { font-family:'Bebas Neue',sans-serif; font-size:21px; letter-spacing:.12em; color:var(--d-white); text-decoration:none; }
 .nav-logo em { color:var(--amber); font-style:normal; }
-.nav-center { display:flex; gap:36px; list-style:none; }
-.nav-center a { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.26em; color:var(--d-dim); text-transform:uppercase; transition:color .2s; }
-.nav-center a:hover { color:var(--d-white); }
-.nav-cta { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.22em; padding:8px 18px; border:1px solid rgba(17,85,255,.3); color:var(--amber); text-transform:uppercase; transition:all .22s; }
-.nav-cta:hover { background:rgba(17,85,255,.08); border-color:rgba(17,85,255,.55); }
+.nav-official { font-family:'Playfair Display',serif; font-style:italic; font-size:13px; color:var(--d-dim); }
 
 /* ── Ticker ────────────────────────────────── */
 .ticker-wrap { position:relative; z-index:2; padding-top:62px; border-bottom:1px solid var(--d-border); overflow:hidden; }
@@ -309,14 +305,8 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 
 <!-- NAV (always dark) -->
 <nav>
-  <a href="#" class="nav-logo">AL<em>.</em></a>
-  <ul class="nav-center">
-    <li><a href="#work">Work</a></li>
-    <li><a href="#thinking">Thinking</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <a href="https://crm.dealithic.co/book/intro" target="_blank" class="nav-cta">Book a call →</a>
+  <a href="#" class="nav-logo">ANTHONY W<em>.</em> LICAUSI</a>
+  <span class="nav-official">Official Site</span>
 </nav>
 
 <!-- TICKER (dark) -->
@@ -606,11 +596,11 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
       </div>
       <div class="manifesto-block">
         <div class="m-label">02 · The Intellectual Obsessions</div>
-        <p>My thinking doesn't stay in one lane. <strong>Mathematics gives me the framework. Finance gives me the feedback loop. Philosophy gives me the why. Psychology gives me the edge over everyone who's only reading the balance sheet.</strong> The writing is where I work these ideas out loud.</p>
+        <p>My thinking doesn't stay in one lane. Mathematics gives me the framework. Finance gives me the feedback loop. Philosophy gives me the why. <strong>Psychology gives me the edge</strong> over everyone who's only reading the balance sheet. The writing is where I work these ideas out loud.</p>
       </div>
       <div class="manifesto-block">
         <div class="m-label">03 · The Compounding Thesis</div>
-        <p>The intersection of code, markets, and AI is where the next generation of wealth is built. <strong>I didn't arrive at that thesis from a whiteboard — I arrived at it from building, trading, and watching how capital actually moves.</strong> The products are the proof. The writing is the process.</p>
+        <p>The intersection of code, markets, and AI is where the next generation of wealth is built. I didn't arrive at that thesis from a whiteboard — <strong>I arrived at it from building, trading, and watching</strong> how capital actually moves. The products are the proof. The writing is the process.</p>
       </div>
     </div>
   </div>
