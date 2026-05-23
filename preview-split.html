@@ -86,8 +86,8 @@ nav {
   overflow:hidden;
 }
 .hero-left { padding:60px 0; }
-.hero-kicker { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.4em; color:var(--amber); margin-bottom:28px; display:flex; align-items:center; gap:12px; opacity:0; animation:fadeUp .6s .2s forwards; }
-.hero-kicker::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--amber); box-shadow:0 0 8px var(--amber); animation:blink 1.4s infinite; flex-shrink:0; }
+.hero-kicker { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.4em; color:#62DAFF; margin-bottom:28px; display:flex; align-items:center; gap:12px; opacity:0; animation:fadeUp .6s .2s forwards; }
+.hero-kicker::before { content:''; width:5px; height:5px; border-radius:50%; background:#62DAFF; box-shadow:0 0 8px #62DAFF; animation:blink 1.4s infinite; flex-shrink:0; }
 h1.hero-headline { font-family:'Bebas Neue',sans-serif; font-size:clamp(78px,11vw,152px); line-height:.875; letter-spacing:-.01em; color:var(--d-white); opacity:0; animation:fadeUp .9s .35s cubic-bezier(.16,1,.3,1) forwards; }
 h1.hero-headline .hl { color:var(--amber); }
 h1.hero-headline .outline-text { -webkit-text-stroke:1px rgba(234,236,242,.2); color:transparent; }
@@ -97,8 +97,8 @@ h1.hero-headline .outline-text { -webkit-text-stroke:1px rgba(234,236,242,.2); c
 .dtag { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.2em; padding:4px 12px; border:1px solid rgba(17,85,255,.3); text-transform:uppercase; color:rgba(234,236,242,.6); background:rgba(17,85,255,.05); }
 .dtag-finance, .dtag-tech, .dtag-philosophy, .dtag-psychology, .dtag-mathematics { color:rgba(234,236,242,.6); border-color:rgba(17,85,255,.28); }
 .hero-actions { display:flex; gap:16px; margin-top:44px; flex-wrap:wrap; opacity:0; animation:fadeUp .8s 1.1s forwards; }
-.btn-primary { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.26em; padding:13px 28px; background:var(--amber); color:#020407; text-transform:uppercase; transition:all .22s; display:inline-flex; align-items:center; gap:10px; }
-.btn-primary:hover { background:#3366FF; }
+.btn-primary { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.26em; padding:13px 28px; background:#ffffff; color:var(--amber); text-transform:uppercase; transition:all .22s; display:inline-flex; align-items:center; gap:10px; }
+.btn-primary:hover { background:var(--amber); color:#ffffff; }
 .btn-outline-dark { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.26em; padding:13px 28px; border:1px solid rgba(255,255,255,.12); color:var(--d-dim); text-transform:uppercase; transition:all .22s; }
 .btn-outline-dark:hover { border-color:rgba(255,255,255,.28); color:var(--d-white); }
 .scroll-cue { position:absolute; bottom:36px; left:64px; display:flex; align-items:center; gap:14px; font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.36em; color:rgba(234,236,242,.22); opacity:0; animation:fadeUp 1s 2s forwards; }
@@ -140,7 +140,7 @@ h1.hero-headline .outline-text { -webkit-text-stroke:1px rgba(234,236,242,.2); c
 .prow-num-text { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.2em; color:rgba(26,20,16,.2); writing-mode:vertical-rl; }
 .prow-brand { display:flex; flex-direction:column; justify-content:center; padding:28px 36px; border-right:1px solid var(--l-border); min-width:200px; }
 .prow-wordmark { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:.1em; margin-bottom:6px; }
-.prow-sub { font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:.18em; color:var(--l-text2); text-transform:uppercase; }
+.prow-sub { font-family:'Share Tech Mono',monospace; font-size:13px; letter-spacing:.15em; color:var(--l-text2); text-transform:uppercase; }
 .prow-desc { display:flex; align-items:center; padding:28px 36px; border-right:1px solid var(--l-border); }
 .prow-desc p { font-family:'Syne',sans-serif; font-size:17px; line-height:1.8; color:var(--l-text2); }
 .prow-desc p strong { color:var(--l-text); font-weight:700; }
@@ -207,8 +207,7 @@ h1.hero-headline .outline-text { -webkit-text-stroke:1px rgba(234,236,242,.2); c
 .essay-side { display:flex; flex-direction:column; gap:2px; }
 .essay-card.sm { min-height:200px; }
 .essay-card.sm::after { background:var(--l-blue); }
-.essay-card.sm:nth-child(2)::after { background:var(--l-violet); }
-.essay-card.sm .essay-title-serif { font-size:clamp(16px,1.5vw,21px); }
+.essay-card.sm:nth-child(2)::after { background:var(--l-amber); }
 .essay-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:2px; }
 .essay-card.grid-card { min-height:280px; }
 .essay-card.grid-card:nth-child(1)::after { background:var(--l-rose); }
@@ -398,8 +397,8 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
       </a>
       <a href="https://quant.barenbergcapital.com/trade" target="_blank" rel="noopener" class="lp-product">
         <div class="lp-product-top">
-          <span class="lp-name" style="color:var(--green)">OBSIDIAN QUANT</span>
-          <span class="lp-badge" style="color:var(--green);border-color:rgba(46,207,144,.3)">LIVE</span>
+          <span class="lp-name" style="color:var(--amber)">OBSIDIAN QUANT</span>
+          <span class="lp-badge" style="color:var(--amber);border-color:rgba(17,85,255,.3)">LIVE</span>
         </div>
         <span class="lp-desc">Algorithmic capital management. The edge belongs to whoever wrote the better algorithm.</span>
         <span class="lp-url">quant.barenbergcapital.com ↗</span>
@@ -481,17 +480,17 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
       </div>
     </a>
 
-    <a href="https://quant.barenbergcapital.com/trade" target="_blank" rel="noopener" class="prow prow-green reveal">
+    <a href="https://quant.barenbergcapital.com/trade" target="_blank" rel="noopener" class="prow prow-amber reveal">
       <div class="prow-num"><span class="prow-num-text">03 / 03</span></div>
       <div class="prow-brand">
-        <div class="prow-wordmark" style="color:var(--green)">OBSIDIAN QUANT</div>
+        <div class="prow-wordmark" style="color:var(--amber)">OBSIDIAN QUANT</div>
         <div class="prow-sub">Algorithmic Capital</div>
       </div>
       <div class="prow-desc">
         <p><strong>The edge doesn't belong to the biggest fund anymore — it belongs to whoever wrote the better algorithm.</strong> I've been obsessed with the intersection of code, markets, and AI since before it was a thesis. Obsidian is the answer to a question I couldn't let go.</p>
       </div>
       <div class="prow-right">
-        <span class="prow-status" style="color:var(--green);border-color:rgba(46,207,144,.3)">LIVE</span>
+        <span class="prow-status" style="color:var(--amber);border-color:rgba(17,85,255,.3)">LIVE</span>
         <div>
           <div class="prow-tags">
             <span class="ptag">Quant</span><span class="ptag">Algorithmic</span><span class="ptag">AI Engine</span>
