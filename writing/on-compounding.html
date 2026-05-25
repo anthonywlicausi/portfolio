@@ -4,16 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>On Compounding: The Most Underrated Idea in Western Thought | Anthony W. Licausi</title>
-<meta name="description" content="Anthony Licausi on compounding as a universal principle — why the same mathematics that grows capital also grows knowledge, reputation, skill, and relationships, and why almost everyone underestimates it.">
+<meta name="description" content="Compounding isn't a finance metaphor — it's a mechanism. The same math that grows capital grows knowledge, reputation, skill, and relationships over time.">
 <meta name="author" content="Anthony W. Licausi">
 <meta property="og:title" content="On Compounding: The Most Underrated Idea in Western Thought | Anthony W. Licausi">
-<meta property="og:description" content="Anthony Licausi on compounding as a universal principle — why the same mathematics that grows capital also grows knowledge, reputation, skill, and relationships, and why almost everyone underestimates it.">
+<meta property="og:description" content="Compounding isn't a finance metaphor — it's a mechanism. The same math that grows capital grows knowledge, reputation, skill, and relationships over time.">
 <meta property="og:url" content="https://anthonywlicausi.com/writing/on-compounding.html">
 <meta property="og:type" content="article">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@anthonywlicausi">
 <meta name="twitter:title" content="On Compounding: The Most Underrated Idea in Western Thought | Anthony W. Licausi">
-<meta name="twitter:description" content="Anthony Licausi on compounding as a universal principle — why the same mathematics that grows capital also grows knowledge, reputation, skill, and relationships, and why almost everyone underestimates it.">
+<meta name="twitter:description" content="Compounding isn't a finance metaphor — it's a mechanism. The same math that grows capital grows knowledge, reputation, skill, and relationships over time.">
 <link rel="canonical" href="https://anthonywlicausi.com/writing/on-compounding.html">
 <script type="application/ld+json">
 {
@@ -23,9 +23,18 @@
   "author": {"@type": "Person", "name": "Anthony W. Licausi", "url": "https://anthonywlicausi.com"},
   "publisher": {"@type": "Person", "name": "Anthony W. Licausi"},
   "datePublished": "2025-12-01",
-  "description": "Anthony Licausi on compounding as a universal principle — why the same mathematics that grows capital also grows knowledge, reputation, skill, and relationships, and why almost everyone underestimates it.",
+  "description": "Compounding isn't a finance metaphor — it's a mechanism. The same math that grows capital grows knowledge, reputation, skill, and relationships over time.",
   "url": "https://anthonywlicausi.com/writing/on-compounding.html",
-  "keywords": "compounding, compound interest, long-term thinking, Anthony Licausi, wealth building, philosophy"
+  "keywords": "compounding, compound interest, long-term thinking, Anthony Licausi, wealth building, knowledge compounding, reputation, skill development",
+  "about": [
+    {"@type": "Thing", "name": "Compound Interest"},
+    {"@type": "Thing", "name": "Long-term Thinking"},
+    {"@type": "Thing", "name": "Philosophy"}
+  ],
+  "mentions": [
+    {"@type": "Organization", "name": "DEALITHIC", "url": "https://dealithic.co"},
+    {"@type": "Person", "name": "Anthony W. Licausi", "url": "https://anthonywlicausi.com"}
+  ]
 }
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Syne:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
@@ -50,7 +59,6 @@ nav { position:fixed; top:0; left:0; right:0; z-index:200; padding:20px 64px; di
 .nav-logo em { color:var(--accent); font-style:normal; }
 .nav-official { font-family:'Playfair Display',serif; font-style:italic; font-size:13px; color:var(--d-dim); }
 
-/* Article header (dark) */
 .article-header { position:relative; z-index:2; background:var(--d-bg); padding:120px 64px 72px; border-bottom:4px solid var(--accent); }
 .article-back { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.26em; color:var(--d-dim); text-transform:uppercase; display:inline-flex; align-items:center; gap:8px; margin-bottom:40px; transition:color .2s; }
 .article-back:hover { color:var(--accent); }
@@ -61,7 +69,6 @@ nav { position:fixed; top:0; left:0; right:0; z-index:200; padding:20px 64px; di
 .article-date { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.16em; color:var(--d-dim); }
 .article-read { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.16em; color:var(--d-dim); }
 
-/* Article body (warm cream) */
 .article-body { background:var(--l-bg); padding:80px 64px 120px; }
 .article-content { max-width:720px; margin:0 auto; }
 .article-content p { font-family:'Playfair Display',serif; font-size:20px; line-height:1.9; color:var(--l-text2); margin-bottom:32px; }
@@ -73,8 +80,15 @@ nav { position:fixed; top:0; left:0; right:0; z-index:200; padding:20px 64px; di
 .article-content .equation { font-family:'Share Tech Mono',monospace; font-size:15px; background:var(--l-bg3); border:1px solid var(--l-border); padding:24px 28px; margin:40px 0; color:var(--l-text); line-height:2; }
 .article-content .equation .eq-comment { color:rgba(26,20,16,.45); font-size:12px; }
 .article-content .equation .eq-key { color:var(--l-accent); }
+.related-reading { margin-top:72px; padding-top:40px; border-top:1px solid var(--l-border); }
+.rr-label { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.38em; color:var(--l-accent); text-transform:uppercase; margin-bottom:20px; }
+.rr-links { display:flex; flex-direction:column; gap:10px; }
+.rr-link { display:flex; align-items:center; gap:20px; padding:16px 20px; border:1px solid var(--l-border); background:var(--l-bg2); transition:border-color .2s,background .2s; cursor:none; }
+.rr-link:hover { border-color:var(--l-accent); background:var(--l-bg); }
+.rr-domain { font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:.18em; color:var(--l-text2); text-transform:uppercase; white-space:nowrap; min-width:160px; flex-shrink:0; }
+.rr-title { font-family:'Playfair Display',serif; font-size:17px; color:var(--l-text); line-height:1.35; transition:color .2s; }
+.rr-link:hover .rr-title { color:var(--l-accent); }
 
-/* Footer */
 footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid var(--l-border); background:var(--l-bg3); display:flex; justify-content:space-between; align-items:center; }
 .foot-copy { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.22em; color:var(--l-text2); }
 .foot-right { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.16em; color:var(--l-text2); opacity:.6; }
@@ -129,7 +143,7 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
     <h2>Where It Works Beyond Capital</h2>
 
     <blockquote>
-      <p>"The same mathematics that grows capital grows knowledge, reputation, skill, and relationships. Almost everyone knows this in finance. Almost nobody acts on it everywhere else."</p>
+      <p>“The same mathematics that grows capital grows knowledge, reputation, skill, and relationships. Almost everyone knows this in finance. Almost nobody acts on it everywhere else.”</p>
     </blockquote>
 
     <p><strong>Knowledge compounds.</strong> Every concept you understand connects to concepts you already know. The more you know, the more each new thing finds purchase — it hooks into the existing network of understanding and reinforces it. This is why the most knowledgeable people don't just know more: they synthesize faster. The density of their existing knowledge makes each new addition more valuable.</p>
@@ -146,9 +160,9 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 
     <p>This is the wrong frame. The question isn't what each unit of investment returns in isolation. It's what the accumulated position is worth in ten years.</p>
 
-    <p>A founder who asks "what does this relationship give me right now?" will underinvest consistently. A founder who asks "what does this relationship compound into over a decade of mutual value creation?" will invest at the correct level — which usually looks like overinvestment in the short term and turns out to be the most productive capital allocation of the whole decade.</p>
+    <p>A founder who asks “what does this relationship give me right now?” will underinvest consistently. A founder who asks “what does this relationship compound into over a decade of mutual value creation?” will invest at the correct level — which usually looks like overinvestment in the short term and turns out to be the most productive capital allocation of the whole decade.</p>
 
-    <p>The same applies to knowledge. "What do I need to know for this deal right now?" is the wrong question. "What do I want to know deeply by the time I've done 100 deals?" is the right one. Deep knowledge in complementary domains — finance and mathematics and psychology and philosophy — compounds in ways that domain-specific knowledge doesn't. The intersections are where the compounding accelerates.</p>
+    <p>The same applies to knowledge. “What do I need to know for this deal right now?” is the wrong question. “What do I want to know deeply by the time I've done 100 deals?” is the right one. Deep knowledge in complementary domains — finance and mathematics and psychology and philosophy — compounds in ways that domain-specific knowledge doesn't. The intersections are where the compounding accelerates.</p>
 
     <h2>The Dark Side</h2>
 
@@ -162,13 +176,27 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 
     <h2>The Founder Lens</h2>
 
-    <p>Every significant decision I've made has been evaluated through a compounding lens. Not "what is the return on this decision?" but "what is the compound growth rate of this path, and how long am I willing to hold it?"</p>
+    <p>Every significant decision I've made has been evaluated through a compounding lens. Not “what is the return on this decision?” but “what is the compound growth rate of this path, and how long am I willing to hold it?”</p>
 
     <p>The choice to build DEALITHIC rather than take a more lucrative short-term path was a compounding decision. Each feature adds to a platform that compounds in value. Each customer adds to a network that compounds in utility. Each deal processed adds to a dataset that compounds in intelligence. The platform is not three years of work. It's three years of compounding.</p>
 
     <p>The choice to run Obsidian Quant is a compounding decision. Each market cycle adds to a body of pattern recognition that makes the next cycle more navigable. The algorithm improves with data. The data compounds with time.</p>
 
-    <p>The most important question you can ask about any allocation of time, capital, or energy is not "what's the return?" It's "what's the compound growth rate, and how long am I willing to let it run?" Answer those two questions correctly and consistently, and most of the rest — the tactics, the specific decisions, the day-to-day execution — follows naturally. Compounding isn't a finance concept that also works elsewhere. It's the fundamental principle of how value accumulates in the universe. Everything else is a special case.</p>
+    <p>The most important question you can ask about any allocation of time, capital, or energy is not “what's the return?” It's “what's the compound growth rate, and how long am I willing to let it run?” Answer those two questions correctly and consistently, and most of the rest — the tactics, the specific decisions, the day-to-day execution — follows naturally. Compounding isn't a finance concept that also works elsewhere. It's the fundamental principle of how value accumulates in the universe. Everything else is a special case.</p>
+
+    <div class="related-reading">
+      <div class="rr-label">Related Reading</div>
+      <div class="rr-links">
+        <a href="kelly-criterion.html" class="rr-link">
+          <span class="rr-domain">Mathematics × Finance</span>
+          <span class="rr-title">Why Kelly Criterion Is a Life Philosophy, Not Just a Betting System</span>
+        </a>
+        <a href="ai-cost-trap.html" class="rr-link">
+          <span class="rr-domain">AI × Finance</span>
+          <span class="rr-title">The AI Cost Trap: Why Enterprise AI Isn't Saving Money</span>
+        </a>
+      </div>
+    </div>
 
   </div>
 </main>
