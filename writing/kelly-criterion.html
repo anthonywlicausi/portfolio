@@ -4,16 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Why Kelly Criterion Is a Life Philosophy, Not Just a Betting System | Anthony W. Licausi</title>
-<meta name="description" content="Anthony Licausi explores why the Kelly Criterion is more than a position-sizing formula — it's a philosophy for making optimal decisions under uncertainty in business, investing, and life.">
+<meta name="description" content="Kelly Criterion isn't just a position-sizing formula — it's a decision filter for life. Edge divided by variance, applied to bets, companies, and beliefs.">
 <meta name="author" content="Anthony W. Licausi">
 <meta property="og:title" content="Why Kelly Criterion Is a Life Philosophy, Not Just a Betting System | Anthony W. Licausi">
-<meta property="og:description" content="Anthony Licausi explores why the Kelly Criterion is more than a position-sizing formula — it's a philosophy for making optimal decisions under uncertainty in business, investing, and life.">
+<meta property="og:description" content="Kelly Criterion isn't just a position-sizing formula — it's a decision filter for life. Edge divided by variance, applied to bets, companies, and beliefs.">
 <meta property="og:url" content="https://anthonywlicausi.com/writing/kelly-criterion.html">
 <meta property="og:type" content="article">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@anthonywlicausi">
 <meta name="twitter:title" content="Why Kelly Criterion Is a Life Philosophy, Not Just a Betting System | Anthony W. Licausi">
-<meta name="twitter:description" content="Anthony Licausi explores why the Kelly Criterion is more than a position-sizing formula — it's a philosophy for making optimal decisions under uncertainty in business, investing, and life.">
+<meta name="twitter:description" content="Kelly Criterion isn't just a position-sizing formula — it's a decision filter for life. Edge divided by variance, applied to bets, companies, and beliefs.">
 <link rel="canonical" href="https://anthonywlicausi.com/writing/kelly-criterion.html">
 <script type="application/ld+json">
 {
@@ -23,9 +23,17 @@
   "author": {"@type": "Person", "name": "Anthony W. Licausi", "url": "https://anthonywlicausi.com"},
   "publisher": {"@type": "Person", "name": "Anthony W. Licausi"},
   "datePublished": "2026-05-01",
-  "description": "Anthony Licausi explores why the Kelly Criterion is more than a position-sizing formula — it's a philosophy for making optimal decisions under uncertainty in business, investing, and life.",
+  "description": "Kelly Criterion isn't just a position-sizing formula — it's a decision filter for life. Edge divided by variance, applied to bets, companies, and beliefs.",
   "url": "https://anthonywlicausi.com/writing/kelly-criterion.html",
-  "keywords": "Kelly Criterion, position sizing, decision making, Anthony Licausi, investing philosophy, Obsidian Quant"
+  "keywords": "Kelly Criterion, position sizing, decision making, Anthony Licausi, investing philosophy, Obsidian Quant, geometric growth, expected value",
+  "about": [
+    {"@type": "Thing", "name": "Kelly Criterion"},
+    {"@type": "Thing", "name": "Investment Strategy"},
+    {"@type": "Thing", "name": "Decision Theory"}
+  ],
+  "mentions": [
+    {"@type": "Person", "name": "Anthony W. Licausi", "url": "https://anthonywlicausi.com"}
+  ]
 }
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Syne:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
@@ -71,6 +79,14 @@ nav { position:fixed; top:0; left:0; right:0; z-index:200; padding:20px 64px; di
 .article-content .equation { font-family:'Share Tech Mono',monospace; font-size:15px; background:var(--l-bg3); border:1px solid var(--l-border); padding:24px 28px; margin:40px 0; color:var(--l-text); line-height:2; }
 .article-content .equation .eq-comment { color:rgba(26,20,16,.45); font-size:12px; }
 .article-content .equation .eq-key { color:var(--l-accent); }
+.related-reading { margin-top:72px; padding-top:40px; border-top:1px solid var(--l-border); }
+.rr-label { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.38em; color:var(--l-accent); text-transform:uppercase; margin-bottom:20px; }
+.rr-links { display:flex; flex-direction:column; gap:10px; }
+.rr-link { display:flex; align-items:center; gap:20px; padding:16px 20px; border:1px solid var(--l-border); background:var(--l-bg2); transition:border-color .2s,background .2s; cursor:none; }
+.rr-link:hover { border-color:var(--l-accent); background:var(--l-bg); }
+.rr-domain { font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:.18em; color:var(--l-text2); text-transform:uppercase; white-space:nowrap; min-width:160px; flex-shrink:0; }
+.rr-title { font-family:'Playfair Display',serif; font-size:17px; color:var(--l-text); line-height:1.35; transition:color .2s; }
+.rr-link:hover .rr-title { color:var(--l-accent); }
 
 footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid var(--l-border); background:var(--l-bg3); display:flex; justify-content:space-between; align-items:center; }
 .foot-copy { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.22em; color:var(--l-text2); }
@@ -139,7 +155,7 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
     <p>Negative Kelly (when the formula returns a negative number) isn't just a technical result. It's the math telling you: do not play this game. At zero Kelly, you're in a fair game — no edge, no reason to bet. Positive Kelly means you have edge and should commit proportionally. The formula is a decision filter as much as a sizing tool.</p>
 
     <blockquote>
-      <p>"Kelly isn't telling you how much to bet. It's telling you whether you should be playing at all — and how seriously to take your own edge estimate."</p>
+      <p>“Kelly isn't telling you how much to bet. It's telling you whether you should be playing at all — and how seriously to take your own edge estimate.”</p>
     </blockquote>
 
     <h2>Applied Beyond Markets</h2>
@@ -169,6 +185,20 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
     <p>Once you see decisions through that lens, you can't unsee it. Every allocation of capital, time, or energy becomes a question: what's my edge, what's my variance, and how does this compound over time? The formula is a lens. Applied consistently, it quietly separates the decisions that compound from the ones that blow you up.</p>
 
     <p>That's not a trading philosophy. That's a philosophy of action.</p>
+
+    <div class="related-reading">
+      <div class="rr-label">Related Reading</div>
+      <div class="rr-links">
+        <a href="on-compounding.html" class="rr-link">
+          <span class="rr-domain">Finance × Philosophy</span>
+          <span class="rr-title">On Compounding: The Most Underrated Idea in Western Thought</span>
+        </a>
+        <a href="bayesian-investor.html" class="rr-link">
+          <span class="rr-domain">Mathematics × Psychology</span>
+          <span class="rr-title">The Bayesian Investor: How Updating Beliefs Changes Everything</span>
+        </a>
+      </div>
+    </div>
 
   </div>
 </main>
