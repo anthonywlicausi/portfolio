@@ -129,25 +129,11 @@ h1.hero-headline .outline-text { -webkit-text-stroke:1px rgba(234,236,242,.2); c
 .scroll-line { width:52px; height:1px; background:rgba(234,236,242,.1); position:relative; overflow:hidden; }
 .scroll-line::after { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:var(--cyan); animation:scan 2.4s 2.6s infinite; }
 
-/* Hero right — live panel */
+/* Hero right — stat block */
 .hero-right { position:relative; display:flex; flex-direction:column; justify-content:center; padding:100px 0 80px 48px; border-left:1px solid var(--d-border); opacity:0; animation:fadeUp .9s 1.3s forwards; }
-.live-panel { background:rgba(6,10,16,.8); border:1px solid var(--d-border); backdrop-filter:blur(12px); }
-.lp-header { padding:18px 24px; border-bottom:1px solid var(--d-border); display:flex; align-items:center; justify-content:space-between; }
-.lp-title { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.3em; color:var(--d-dim); text-transform:uppercase; }
-.lp-live { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.22em; color:var(--green); display:flex; align-items:center; gap:6px; }
-.lp-live::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--green); box-shadow:0 0 8px var(--green); animation:blink 1.4s infinite; }
-.lp-product { padding:22px 24px; border-bottom:1px solid var(--d-border); display:flex; flex-direction:column; gap:8px; transition:background .2s; }
-.lp-product:last-of-type { border-bottom:none; }
-.lp-product:hover { background:rgba(255,255,255,.02); }
-.lp-product-top { display:flex; align-items:center; justify-content:space-between; }
-.lp-name { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:.1em; }
-.lp-badge { font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:.18em; padding:2px 8px; border:1px solid; text-transform:uppercase; }
-.lp-desc { font-family:'Syne',sans-serif; font-size:13px; line-height:1.6; color:var(--d-dim); }
-.lp-url { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.14em; color:rgba(234,236,242,.24); }
-.hero-stats-row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1px; margin-top:12px; border:1px solid var(--d-border); background:var(--d-border); }
-.hs-item { background:var(--d-bg2); padding:18px 20px; }
-.hs-num { font-family:'Bebas Neue',sans-serif; font-size:34px; color:var(--cyan); line-height:1; }
-.hs-label { font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:.22em; color:var(--d-dim); text-transform:uppercase; margin-top:5px; }
+.hero-stat-block { background:rgba(6,10,16,.8); border:1px solid var(--d-border); backdrop-filter:blur(12px); padding:36px; }
+.hero-stat-quote { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(19px,1.7vw,23px); line-height:1.75; color:var(--d-white); }
+.hero-stat-quote .cyan-hl { font-family:'Syne',sans-serif; font-style:normal; font-weight:700; color:var(--cyan); }
 
 /* ── Products (light) ──────────────────────── */
 #work { position:relative; z-index:2; padding:100px 64px; background:var(--l-bg3); border-top:1px solid var(--l-border); }
@@ -371,49 +357,8 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
   </div>
 
   <div class="hero-right">
-    <div class="live-panel">
-      <div class="lp-header">
-        <span class="lp-title">Live Products</span>
-        <span class="lp-live">3 ACTIVE</span>
-      </div>
-      <a href="https://dealithic.co" target="_blank" rel="noopener" class="lp-product">
-        <div class="lp-product-top">
-          <span class="lp-name" style="color:var(--cyan)">DEALITHIC</span>
-          <span class="lp-badge" style="color:var(--cyan);border-color:rgba(1,201,254,.3)">LIVE</span>
-        </div>
-        <span class="lp-desc">AI-native intelligence &amp; transaction platform &mdash; deal intelligence, capital network, IR, trading tech, SPV &amp; Reg D services.</span>
-        <span class="lp-url">dealithic.co &nearr;</span>
-      </a>
-      <a href="https://crm.dealithic.co" target="_blank" rel="noopener" class="lp-product">
-        <div class="lp-product-top">
-          <span class="lp-name" style="color:var(--blue)">D:CRM</span>
-          <span class="lp-badge" style="color:var(--blue);border-color:rgba(91,127,255,.3)">LIVE</span>
-        </div>
-        <span class="lp-desc">AI outreach OS for founders &amp; deal originators. Built for myself first.</span>
-        <span class="lp-url">crm.dealithic.co &nearr;</span>
-      </a>
-      <a href="https://quant.barenbergcapital.com/trade" target="_blank" rel="noopener" class="lp-product">
-        <div class="lp-product-top">
-          <span class="lp-name" style="color:var(--cyan)">OBSIDIAN QUANT</span>
-          <span class="lp-badge" style="color:var(--cyan);border-color:rgba(1,201,254,.3)">LIVE</span>
-        </div>
-        <span class="lp-desc">Algorithmic capital management. The edge belongs to whoever wrote the better algorithm.</span>
-        <span class="lp-url">quant.barenbergcapital.com &nearr;</span>
-      </a>
-    </div>
-    <div class="hero-stats-row">
-      <div class="hs-item">
-        <div class="hs-num">3</div>
-        <div class="hs-label">Products Live</div>
-      </div>
-      <div class="hs-item">
-        <div class="hs-num">$1M</div>
-        <div class="hs-label">Seed Open</div>
-      </div>
-      <div class="hs-item">
-        <div class="hs-num">25K+</div>
-        <div class="hs-label">Investors</div>
-      </div>
+    <div class="hero-stat-block">
+      <p class="hero-stat-quote"><span class="cyan-hl">4,100+ commits</span> shipped across active ventures in the trailing 12 months &mdash; top 1&ndash;2% of Claude users, <span class="cyan-hl">top 0.1&ndash;2.5% of AI users globally</span>, output every other team in this comparison set produces with a multi-person engineering org. <span class="cyan-hl">He&rsquo;s just one guy with a laptop.</span></p>
     </div>
   </div>
 
