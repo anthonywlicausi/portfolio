@@ -66,6 +66,7 @@
   --l-amber:    #0038CC;
   --l-blue:     #1e3fcc;
   --l-green:    #146b45;
+  --l-cyan:     #007A98; /* Node Cyan, darkened for contrast on light backgrounds */
 }
 
 /* ── Reset ─────────────────────────────────── */
@@ -147,17 +148,18 @@ h1.hero-headline .outline-text { -webkit-text-stroke:1px rgba(234,236,242,.2); c
 .prow:hover.prow-amber::after { background:var(--l-amber); }
 .prow:hover.prow-blue::after  { background:var(--l-blue);  }
 .prow:hover.prow-green::after { background:var(--l-green); }
+.prow:hover.prow-cyan::after  { background:var(--l-cyan);  }
 .prow-num { display:flex; align-items:center; justify-content:center; padding:28px 0; border-right:1px solid var(--l-border); }
 .prow-num-text { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.2em; color:rgba(26,20,16,.2); writing-mode:vertical-rl; }
 .prow-brand { display:flex; flex-direction:column; justify-content:center; padding:28px 36px; border-right:1px solid var(--l-border); min-width:200px; }
 .prow-wordmark { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:.1em; margin-bottom:6px; }
-.prow-sub { font-family:'Share Tech Mono',monospace; font-size:13px; letter-spacing:.15em; color:var(--l-text2); text-transform:uppercase; }
+.prow-sub { font-family:'Share Tech Mono',monospace; font-size:16px; letter-spacing:.1em; color:var(--l-text2); text-transform:uppercase; line-height:1.4; }
 .prow-desc { display:flex; align-items:center; padding:28px 36px; border-right:1px solid var(--l-border); }
 .prow-desc p { font-family:'Syne',sans-serif; font-size:17px; line-height:1.8; color:var(--l-text2); }
 .prow-desc p strong { color:var(--l-text); font-weight:700; }
 .prow-right { display:flex; flex-direction:column; justify-content:space-between; padding:28px 32px; min-width:200px; }
 .prow-status { font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:.2em; padding:3px 10px; border:1px solid; text-transform:uppercase; align-self:flex-start; }
-.prow-learn { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--l-amber); background:transparent; border:none; padding:0; align-self:flex-end; transition:opacity .22s; cursor:none; }
+.prow-learn { font-family:'Share Tech Mono',monospace; font-size:16px; letter-spacing:.12em; text-transform:uppercase; color:var(--l-amber); background:transparent; border:none; padding:0; align-self:flex-end; transition:opacity .22s; cursor:none; }
 .prow:hover .prow-learn { opacity:.7; }
 
 /* ── Split Band ────────────────────────────── */
@@ -384,27 +386,111 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 
   <div class="products-stack">
     <a href="https://dealithic.co" target="_blank" rel="noopener" class="prow prow-amber reveal">
-      <div class="prow-num"><span class="prow-num-text">01 / 03</span></div>
+      <div class="prow-num"><span class="prow-num-text">01 / 11</span></div>
       <div class="prow-brand">
         <div class="prow-wordmark" style="color:var(--amber)">DEALITHIC</div>
         <div class="prow-sub">Private Markets Platform</div>
       </div>
       <div class="prow-desc">
-        <p><strong>What started as a deal underwriting engine is now a full operational stack for private markets.</strong> Four products &mdash; AI deal intelligence, a 25,000+ investor capital network, full-stack IR for public companies, and trading technology &mdash; backed by a services layer: Reg D capital structure, SPV infrastructure, and Alphalithic AI institutional analysis. One platform. Every layer of the transaction.</p>
+        <p><strong>The operating system for a private-markets transaction, start to finish.</strong> Deal intelligence, a 93,000+ investor network, full-stack IR, trading technology, and enterprise deployments &mdash; one platform instead of a different vendor at every stage.</p>
       </div>
       <div class="prow-right">
         <span class="prow-learn">Learn More &rarr;</span>
       </div>
     </a>
 
-    <a href="https://crm.dealithic.co" target="_blank" rel="noopener" class="prow prow-blue reveal">
-      <div class="prow-num"><span class="prow-num-text">02 / 03</span></div>
+    <a href="https://dealithic.co/products/deal-engine" target="_blank" rel="noopener" class="prow prow-blue reveal">
+      <div class="prow-num"><span class="prow-num-text">02 / 11</span></div>
       <div class="prow-brand">
-        <div class="prow-wordmark" style="color:var(--blue)">D:CRM</div>
-        <div class="prow-sub">AI Outreach OS</div>
+        <div class="prow-wordmark" style="color:var(--blue)">DEAL ENGINE</div>
+        <div class="prow-sub">Autonomous Deal Team</div>
       </div>
       <div class="prow-desc">
-        <p><strong>Built it because nothing else fit how founders actually work.</strong> I was managing investor relationships across five disconnected tools &mdash; AI calling, sequences, enrichment, lead gen. So I consolidated everything and then realized every founder had the exact same problem.</p>
+        <p><strong>Deploy an autonomous deal team on any opportunity.</strong> Underwrite a deal in minutes &mdash; the same engine that scores and routes every deal on the platform, available as its own tool.</p>
+      </div>
+      <div class="prow-right">
+        <span class="prow-learn">Learn More &rarr;</span>
+      </div>
+    </a>
+
+    <a href="https://dealithic.co/demo" target="_blank" rel="noopener" class="prow prow-green reveal">
+      <div class="prow-num"><span class="prow-num-text">03 / 11</span></div>
+      <div class="prow-brand">
+        <div class="prow-wordmark" style="color:var(--l-green)">RYRA</div>
+        <div class="prow-sub">Raise Your Round on Autopilot</div>
+      </div>
+      <div class="prow-desc">
+        <p><strong>A private dashboard built around your raise.</strong> RYRA runs the mechanics of a capital raise &mdash; tracking, follow-ups, data room &mdash; so the founder can stay focused on the business, not the process.</p>
+      </div>
+      <div class="prow-right">
+        <span class="prow-learn">Learn More &rarr;</span>
+      </div>
+    </a>
+
+    <a href="https://dealithic.co/network" target="_blank" rel="noopener" class="prow prow-cyan reveal">
+      <div class="prow-num"><span class="prow-num-text">04 / 11</span></div>
+      <div class="prow-brand">
+        <div class="prow-wordmark" style="color:var(--l-cyan)">INVESTOR NETWORK</div>
+        <div class="prow-sub">93,000+ Funds, Angels &amp; Family Offices</div>
+      </div>
+      <div class="prow-desc">
+        <p><strong>The third-largest investor network in the world, behind only PitchBook and Crunchbase.</strong> 93,000+ funds, family offices and angels &mdash; matched to a deal by criteria, size, sector and geography, with the reason attached.</p>
+      </div>
+      <div class="prow-right">
+        <span class="prow-learn">Learn More &rarr;</span>
+      </div>
+    </a>
+
+    <a href="https://dealithic.co/for/public-companies" target="_blank" rel="noopener" class="prow prow-amber reveal">
+      <div class="prow-num"><span class="prow-num-text">05 / 11</span></div>
+      <div class="prow-brand">
+        <div class="prow-wordmark" style="color:var(--amber)">DEALITHIC IR</div>
+        <div class="prow-sub">Investor Relations, Full Stack</div>
+      </div>
+      <div class="prow-desc">
+        <p><strong>Full-stack investor relations for small-cap public companies.</strong> Keeps institutional attention on a stock after it's public, not just while it's raising.</p>
+      </div>
+      <div class="prow-right">
+        <span class="prow-learn">Learn More &rarr;</span>
+      </div>
+    </a>
+
+    <a href="https://dealithic.co/enterprise" target="_blank" rel="noopener" class="prow prow-blue reveal">
+      <div class="prow-num"><span class="prow-num-text">06 / 11</span></div>
+      <div class="prow-brand">
+        <div class="prow-wordmark" style="color:var(--blue)">DEALITHIC ENTERPRISE</div>
+        <div class="prow-sub">Private Deployments</div>
+      </div>
+      <div class="prow-desc">
+        <p><strong>Private deployments of DEALITHIC's transaction-intelligence technology.</strong> Self-hosted in your own cloud, or custom-built &mdash; for banks, broker-dealers and funds who want the engine, not the marketplace.</p>
+      </div>
+      <div class="prow-right">
+        <span class="prow-learn">Learn More &rarr;</span>
+      </div>
+    </a>
+
+    <a href="https://dealithic.co/agents" target="_blank" rel="noopener" class="prow prow-green reveal">
+      <div class="prow-num"><span class="prow-num-text">07 / 11</span></div>
+      <div class="prow-brand">
+        <div class="prow-wordmark" style="color:var(--l-green)">AGENTS API</div>
+        <div class="prow-sub">Hosted MCP Servers</div>
+      </div>
+      <div class="prow-desc">
+        <p><strong>Deal intelligence your AI agent can call.</strong> Hosted MCP servers that put DEALITHIC's underwriting and matching engine directly inside another agent's tool belt.</p>
+      </div>
+      <div class="prow-right">
+        <span class="prow-learn">Learn More &rarr;</span>
+      </div>
+    </a>
+
+    <a href="https://crm.dealithic.co" target="_blank" rel="noopener" class="prow prow-cyan reveal">
+      <div class="prow-num"><span class="prow-num-text">08 / 11</span></div>
+      <div class="prow-brand">
+        <div class="prow-wordmark" style="color:var(--l-cyan)">QUARRY</div>
+        <div class="prow-sub">CRM for Bankers &amp; Dealmakers</div>
+      </div>
+      <div class="prow-desc">
+        <p><strong>One CRM for the entire deal lifecycle, sourcing to close.</strong> Built for investment bankers and dealmakers managing relationships across sequences, AI calling, enrichment and lead gen &mdash; in one place instead of five disconnected tools.</p>
       </div>
       <div class="prow-right">
         <span class="prow-learn">Learn More &rarr;</span>
@@ -412,7 +498,7 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
     </a>
 
     <a href="https://quant.barenbergcapital.com/trade" target="_blank" rel="noopener" class="prow prow-amber reveal">
-      <div class="prow-num"><span class="prow-num-text">03 / 03</span></div>
+      <div class="prow-num"><span class="prow-num-text">09 / 11</span></div>
       <div class="prow-brand">
         <div class="prow-wordmark" style="color:var(--amber)">OBSIDIAN QUANT</div>
         <div class="prow-sub">Algorithmic Capital</div>
@@ -422,6 +508,34 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
       </div>
       <div class="prow-right">
         <span class="prow-status" style="color:var(--amber);border-color:rgba(17,85,255,.3)">LIVE</span>
+        <span class="prow-learn">Learn More &rarr;</span>
+      </div>
+    </a>
+
+    <a href="https://dealithic.co/steadspark" target="_blank" rel="noopener" class="prow prow-blue reveal">
+      <div class="prow-num"><span class="prow-num-text">10 / 11</span></div>
+      <div class="prow-brand">
+        <div class="prow-wordmark" style="color:var(--blue)">STEADSPARK</div>
+        <div class="prow-sub">For First-Time Founders</div>
+      </div>
+      <div class="prow-desc">
+        <p><strong>From &ldquo;what if&rdquo; to &ldquo;what's next.&rdquo;</strong> Free AI validation for a business idea before a first-time founder quits their job to chase it &mdash; the spark that becomes steady income.</p>
+      </div>
+      <div class="prow-right">
+        <span class="prow-learn">Learn More &rarr;</span>
+      </div>
+    </a>
+
+    <a href="https://dealithic.co/tradecoach" target="_blank" rel="noopener" class="prow prow-green reveal">
+      <div class="prow-num"><span class="prow-num-text">11 / 11</span></div>
+      <div class="prow-brand">
+        <div class="prow-wordmark" style="color:var(--l-green)">TRADECOACH</div>
+        <div class="prow-sub">Behavioral Finance Meets the Trade Blotter</div>
+      </div>
+      <div class="prow-desc">
+        <p><strong>A decision journal for traders and portfolio managers.</strong> Where behavioral finance meets the P&amp;L &mdash; built to catch the psychological leaks that show up in a trading record long before they show up in year-end performance.</p>
+      </div>
+      <div class="prow-right">
         <span class="prow-learn">Learn More &rarr;</span>
       </div>
     </a>
