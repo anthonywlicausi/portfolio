@@ -27,6 +27,14 @@ rules, color system). This file is the backlog.
 
 ## ✅ Shipped (newest first)
 
+- **2026-09-27 — Hero polish pass.** Fixed `.hero-right { display:none; }` under 1024px, which was
+  hiding the entire stat panel on every tablet/phone (leftover from the old Live Products panel,
+  never revisited after that panel was replaced) — now stacks below the headline with a top
+  border instead. Fixed "He's just one guy with a laptop" to "I'm" for first-person consistency
+  with "I BUILD FASTER THAN YOU CAN THINK." Dimmed the stat-quote's italic body text from
+  `--d-white` to `--d-text` (same gray as the hero tagline) — bright white read harder in italics
+  than the softer gray. Changed the Products intro from "shipped in days" to "shipped in weeks"
+  (Anthony's call — more accurate, less superhero).
 - **2026-09-26 — 4 new essays added, one per month June–September, each backlinking a product.**
   RYRA ("The Founder Attention Tax"), TradeCoach ("The Trade You Don't Remember"), STEADSPARK
   ("The Myth of the Leap"), Obsidian Quant ("The Discipline of the Pre-Registered Bet"). Picked
