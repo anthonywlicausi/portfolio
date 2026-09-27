@@ -212,10 +212,9 @@ h1.hero-headline .outline-text { -webkit-text-stroke:1px rgba(234,236,242,.2); c
 .essay-card.sm:nth-child(2)::after { background:var(--l-amber); }
 .essay-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:2px; margin-top:2px; }
 .essay-card.grid-card { min-height:260px; }
-.essay-card.grid-card:nth-child(1)::after { background:var(--l-amber); }
-.essay-card.grid-card:nth-child(2)::after { background:var(--l-blue); }
-.essay-card.grid-card:nth-child(3)::after { background:var(--l-green); }
-.essay-card.grid-card:nth-child(4)::after { background:var(--l-amber); }
+.essay-card.grid-card:nth-child(3n+1)::after { background:var(--l-amber); }
+.essay-card.grid-card:nth-child(3n+2)::after { background:var(--l-blue); }
+.essay-card.grid-card:nth-child(3n)::after { background:var(--l-green); }
 .all-essays-row { margin-top:48px; display:flex; align-items:center; justify-content:space-between; }
 .all-essays-count { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.28em; color:var(--l-text2); }
 .btn-outline-light { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.26em; padding:13px 28px; background:var(--l-amber); color:#ffffff; text-transform:uppercase; transition:all .22s; display:inline-block; border:none; }
@@ -555,18 +554,18 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
   </div>
 
   <div class="essay-featured reveal">
-    <a href="writing/ai-cost-trap.html" class="essay-card feat">
+    <a href="writing/preregistered-bet.html" class="essay-card feat">
       <div>
         <div class="essay-meta">
-          <span class="domain-pill dp-ai">AI &times; Finance</span>
-          <span class="essay-date">May 2026</span>
-          <span class="essay-read">9 min read</span>
+          <span class="domain-pill dp-mathematics">Research &times; Markets</span>
+          <span class="essay-date">Sep 2026</span>
+          <span class="essay-read">8 min read</span>
         </div>
         <div class="essay-title-serif">
-          The AI Cost Trap: Why the Market's Efficiency Thesis Is Breaking Down
+          The Discipline of the Pre-Registered Bet
         </div>
         <p class="essay-excerpt">
-          The market priced AI as a cost narrative. Enterprise P&amp;Ls are now showing the math doesn't work &mdash; 73% of projects fail ROI, token prices fell 1,000&times; while enterprise spend rose 320%, and the Prisoner's Dilemma means incumbents can't exit the trap. This is what Munger's Lollapalooza Effect looks like in markets, who wins unconditionally, and the only distinction that matters for the next decade of investing.
+          Psychology fixed its replication crisis with one discipline: commit to the failure condition in writing before you see the result. Markets never adopted it. On why a rejected idea is worth more than a promoted one, and what a research ledger actually has to record to be trusted.
         </p>
       </div>
       <div class="essay-footer">
@@ -575,28 +574,68 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
       </div>
     </a>
     <div class="essay-side">
-      <a href="writing/kelly-criterion.html" class="essay-card sm">
+      <a href="writing/myth-of-the-leap.html" class="essay-card sm">
         <div class="essay-meta">
-          <span class="domain-pill dp-mathematics">Mathematics &times; Finance</span>
-          <span class="essay-date">May 2026</span>
+          <span class="domain-pill dp-philosophy">Entrepreneurship</span>
+          <span class="essay-date">Aug 2026</span>
         </div>
-        <div class="essay-title-serif">Why Kelly Criterion Is a Life Philosophy, Not Just a Betting System</div>
-        <p class="essay-excerpt" style="font-size:15px;margin-bottom:0;flex:1">The formula f* = (bp &minus; q) / b tells you how much to bet. The philosophy tells you whether you should be playing at all &mdash; and it applies to everything you commit to.</p>
+        <div class="essay-title-serif">The Myth of the Leap: Why "Quit Your Job and Go All In" Is Bad Advice</div>
+        <p class="essay-excerpt" style="font-size:15px;margin-bottom:0;flex:1">Startup culture romanticizes the leap of faith. Real conviction is a position-sizing problem &mdash; bet in proportion to what you know, not to how badly you want it to be true.</p>
         <div class="essay-footer" style="margin-top:20px"><span class="essay-read-link">Read &rarr;</span></div>
       </a>
-      <a href="writing/psychology-of-conviction.html" class="essay-card sm">
+      <a href="writing/trade-you-dont-remember.html" class="essay-card sm">
         <div class="essay-meta">
-          <span class="domain-pill dp-psychology">Psychology &times; Finance</span>
-          <span class="essay-date">Apr 2026</span>
+          <span class="domain-pill dp-psychology">Behavioral Finance</span>
+          <span class="essay-date">Jul 2026</span>
         </div>
-        <div class="essay-title-serif">The Psychology of Conviction: Why Smart People Fold Too Early</div>
-        <p class="essay-excerpt" style="font-size:15px;margin-bottom:0;flex:1">High-IQ people exit positions at exactly the wrong moment. It's not a math problem &mdash; it's a self-concept problem disguised as risk management.</p>
+        <div class="essay-title-serif">The Trade You Don't Remember</div>
+        <p class="essay-excerpt" style="font-size:15px;margin-bottom:0;flex:1">The loss you can recount in perfect detail years later is almost never the one that mattered. On availability bias and why a written record beats memory every time.</p>
         <div class="essay-footer" style="margin-top:20px"><span class="essay-read-link">Read &rarr;</span></div>
       </a>
     </div>
   </div>
 
   <div class="essay-grid reveal">
+    <a href="writing/founder-attention-tax.html" class="essay-card grid-card">
+      <div class="essay-meta">
+        <span class="domain-pill dp-philosophy">Founder Psychology</span>
+        <span class="essay-date">Jun 2026</span>
+        <span class="essay-read">7 min</span>
+      </div>
+      <div class="essay-title-serif">The Founder Attention Tax: Why I Automated My Own Fundraise</div>
+      <p class="essay-excerpt" style="font-size:15px;margin-top:12px;margin-bottom:auto">A raise is uniquely bad among founder tasks &mdash; high-stakes and repetitive at once. On the difference between coordination and judgment.</p>
+      <div class="essay-footer" style="margin-top:24px"><span class="essay-read-link">Read &rarr;</span></div>
+    </a>
+    <a href="writing/ai-cost-trap.html" class="essay-card grid-card">
+      <div class="essay-meta">
+        <span class="domain-pill dp-ai">AI &times; Finance</span>
+        <span class="essay-date">May 2026</span>
+        <span class="essay-read">9 min</span>
+      </div>
+      <div class="essay-title-serif">The AI Cost Trap: Why the Market's Efficiency Thesis Is Breaking Down</div>
+      <p class="essay-excerpt" style="font-size:15px;margin-top:12px;margin-bottom:auto">The market priced AI as a cost narrative. Enterprise P&amp;Ls are showing the math doesn't work.</p>
+      <div class="essay-footer" style="margin-top:24px"><span class="essay-read-link">Read &rarr;</span></div>
+    </a>
+    <a href="writing/kelly-criterion.html" class="essay-card grid-card">
+      <div class="essay-meta">
+        <span class="domain-pill dp-mathematics">Mathematics &times; Finance</span>
+        <span class="essay-date">May 2026</span>
+        <span class="essay-read">7 min</span>
+      </div>
+      <div class="essay-title-serif">Why Kelly Criterion Is a Life Philosophy, Not Just a Betting System</div>
+      <p class="essay-excerpt" style="font-size:15px;margin-top:12px;margin-bottom:auto">The formula f* = (bp &minus; q) / b tells you how much to bet. The philosophy tells you whether you should be playing at all.</p>
+      <div class="essay-footer" style="margin-top:24px"><span class="essay-read-link">Read &rarr;</span></div>
+    </a>
+    <a href="writing/psychology-of-conviction.html" class="essay-card grid-card">
+      <div class="essay-meta">
+        <span class="domain-pill dp-psychology">Psychology &times; Finance</span>
+        <span class="essay-date">Apr 2026</span>
+        <span class="essay-read">7 min</span>
+      </div>
+      <div class="essay-title-serif">The Psychology of Conviction: Why Smart People Fold Too Early</div>
+      <p class="essay-excerpt" style="font-size:15px;margin-top:12px;margin-bottom:auto">High-IQ people exit positions at exactly the wrong moment. It's a self-concept problem disguised as risk management.</p>
+      <div class="essay-footer" style="margin-top:24px"><span class="essay-read-link">Read &rarr;</span></div>
+    </a>
     <a href="writing/speed-as-competitive-moat.html" class="essay-card grid-card">
       <div class="essay-meta">
         <span class="domain-pill dp-philosophy">Philosophy &times; Tech</span>
@@ -640,7 +679,7 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
   </div>
 
   <div class="all-essays-row reveal">
-    <span class="all-essays-count">07 &middot; ESSAYS PUBLISHED</span>
+    <span class="all-essays-count">11 &middot; ESSAYS PUBLISHED</span>
     <a href="#" class="btn-outline-light">View all writing &rarr;</a>
   </div>
 </section>

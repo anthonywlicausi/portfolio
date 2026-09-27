@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Discipline of the Pre-Registered Bet | Anthony W. Licausi</title>
+<meta name="description" content="The difference between a real edge and a story you told yourself afterward is whether you committed to the failure condition before you saw the result. On research ledgers, the replication crisis, and why a rejected idea is worth more than a promoted one.">
+<meta name="author" content="Anthony W. Licausi">
+<meta property="og:title" content="The Discipline of the Pre-Registered Bet | Anthony W. Licausi">
+<meta property="og:description" content="The difference between a real edge and a story you told yourself afterward is whether you committed to the failure condition before you saw the result. On research ledgers, the replication crisis, and why a rejected idea is worth more than a promoted one.">
+<meta property="og:url" content="https://anthonywlicausi.com/writing/preregistered-bet.html">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@anthonywlicausi">
+<meta name="twitter:title" content="The Discipline of the Pre-Registered Bet | Anthony W. Licausi">
+<meta name="twitter:description" content="The difference between a real edge and a story you told yourself afterward is whether you committed to the failure condition before you saw the result. On research ledgers, the replication crisis, and why a rejected idea is worth more than a promoted one.">
+<link rel="canonical" href="https://anthonywlicausi.com/writing/preregistered-bet.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "The Discipline of the Pre-Registered Bet",
+  "author": {"@type": "Person", "name": "Anthony W. Licausi", "url": "https://anthonywlicausi.com"},
+  "publisher": {"@type": "Person", "name": "Anthony W. Licausi"},
+  "datePublished": "2026-09-21",
+  "description": "The difference between a real edge and a story you told yourself afterward is whether you committed to the failure condition before you saw the result. On research ledgers, the replication crisis, and why a rejected idea is worth more than a promoted one.",
+  "url": "https://anthonywlicausi.com/writing/preregistered-bet.html",
+  "keywords": "pre-registration, replication crisis, research ledger, trading research, epistemics, Obsidian Quant, Anthony Licausi",
+  "about": [
+    {"@type": "Thing", "name": "Research Methodology"},
+    {"@type": "Thing", "name": "Quantitative Trading"},
+    {"@type": "Thing", "name": "Epistemics"}
+  ],
+  "mentions": [
+    {"@type": "Organization", "name": "Obsidian Quant", "url": "https://quant.barenbergcapital.com/trade"}
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Syne:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --d-bg: #020407; --d-bg2: #060a10; --d-border: rgba(255,255,255,0.055);
+  --d-text: rgba(234,236,242,0.78); --d-dim: rgba(234,236,242,0.40); --d-white: #eaecf2;
+  --l-bg: #f7f4ef; --l-bg2: #ffffff; --l-bg3: #ede9e2;
+  --l-text: #1a1410; --l-text2: rgba(26,20,16,0.62); --l-border: rgba(26,20,16,0.09);
+  --accent: #01C9FE; --l-accent: #0038CC;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { background: var(--d-bg); font-family: 'Syne', sans-serif; font-weight: 400; cursor: none; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+a { text-decoration: none; color: inherit; }
+#cur { position:fixed; width:8px; height:8px; background:var(--accent); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); box-shadow:0 0 12px var(--accent); }
+#cur-ring { position:fixed; width:28px; height:28px; border:1px solid rgba(1,201,254,.4); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:width .22s,height .22s; }
+body.hov #cur-ring { width:46px; height:46px; }
+.noise { position:fixed; inset:0; pointer-events:none; z-index:9000; opacity:.022; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size:180px 180px; }
+nav { position:fixed; top:0; left:0; right:0; z-index:200; padding:20px 64px; display:flex; align-items:center; gap:16px; background:linear-gradient(to bottom, rgba(2,4,7,.97) 60%, transparent); border-bottom:1px solid rgba(255,255,255,.03); }
+.nav-logo { font-family:'Bebas Neue',sans-serif; font-size:21px; letter-spacing:.12em; color:var(--d-white); }
+.nav-logo em { color:var(--accent); font-style:normal; }
+.nav-official { font-family:'Playfair Display',serif; font-style:italic; font-size:13px; color:var(--d-dim); }
+.article-header { position:relative; z-index:2; background:var(--d-bg); padding:120px 64px 72px; border-bottom:4px solid var(--accent); }
+.article-back { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.26em; color:var(--d-dim); text-transform:uppercase; display:inline-flex; align-items:center; gap:8px; margin-bottom:40px; transition:color .2s; }
+.article-back:hover { color:var(--accent); }
+.article-domain { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.2em; padding:3px 12px; border:1px solid rgba(1,201,254,.35); color:rgba(1,201,254,.95); text-transform:uppercase; display:inline-block; margin-bottom:24px; }
+.article-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(46px,6.8vw,86px); line-height:.94; letter-spacing:-.01em; color:var(--d-white); max-width:900px; margin-bottom:32px; }
+.article-meta { display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
+.article-author { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.2em; color:var(--accent); text-transform:uppercase; }
+.article-date { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.16em; color:var(--d-dim); }
+.article-read { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.16em; color:var(--d-dim); }
+.article-body { background:var(--l-bg); padding:80px 64px 120px; }
+.article-content { max-width:720px; margin:0 auto; }
+.article-content p { font-family:'Playfair Display',serif; font-size:20px; line-height:1.9; color:var(--l-text2); margin-bottom:32px; }
+.article-content p strong { color:var(--l-text); font-weight:700; font-family:'Syne',sans-serif; }
+.article-content h2 { font-family:'Share Tech Mono',monospace; font-size:11px; letter-spacing:.36em; color:var(--l-accent); text-transform:uppercase; margin:56px 0 20px; display:flex; align-items:center; gap:12px; }
+.article-content h2::after { content:''; height:1px; flex:1; background:rgba(0,56,204,.18); }
+.article-content blockquote { border-left:3px solid var(--l-accent); padding:8px 0 8px 28px; margin:40px 0; }
+.article-content blockquote p { font-size:24px; font-style:italic; color:var(--l-text); margin-bottom:0; line-height:1.65; }
+.stat-block { background:var(--l-bg2); border:1px solid var(--l-border); border-left:3px solid var(--l-accent); padding:28px 32px; margin:40px 0; }
+.stat-row { display:flex; align-items:baseline; gap:18px; padding:10px 0; border-bottom:1px solid var(--l-border); }
+.stat-row:last-child { border-bottom:none; padding-bottom:0; }
+.stat-num { font-family:'Bebas Neue',sans-serif; font-size:38px; color:var(--l-accent); line-height:1; flex-shrink:0; min-width:72px; }
+.stat-label { font-family:'Syne',sans-serif; font-size:14px; color:var(--l-text2); line-height:1.5; }
+.related-reading { margin-top:72px; padding-top:40px; border-top:1px solid var(--l-border); }
+.rr-label { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.38em; color:var(--l-accent); text-transform:uppercase; margin-bottom:20px; }
+.rr-links { display:flex; flex-direction:column; gap:10px; }
+.rr-link { display:flex; align-items:center; gap:20px; padding:16px 20px; border:1px solid var(--l-border); background:var(--l-bg2); transition:border-color .2s,background .2s; cursor:none; }
+.rr-link:hover { border-color:var(--l-accent); background:var(--l-bg); }
+.rr-domain { font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:.18em; color:var(--l-text2); text-transform:uppercase; white-space:nowrap; min-width:160px; flex-shrink:0; }
+.rr-title { font-family:'Playfair Display',serif; font-size:17px; color:var(--l-text); line-height:1.35; transition:color .2s; }
+.rr-link:hover .rr-title { color:var(--l-accent); }
+footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid var(--l-border); background:var(--l-bg3); display:flex; justify-content:space-between; align-items:center; }
+.foot-copy { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.22em; color:var(--l-text2); }
+.foot-right { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.16em; color:var(--l-text2); opacity:.6; }
+@media (max-width:768px) {
+  nav, .article-header, .article-body, footer { padding-left:24px; padding-right:24px; }
+  .article-header { padding-top:100px; padding-bottom:48px; }
+  .article-body { padding-top:48px; padding-bottom:72px; }
+  .rr-domain { display:none; }
+  .stat-num { font-size:28px; min-width:56px; }
+}
+</style>
+</head>
+<body>
+<div class="noise"></div>
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<nav>
+  <a href="../index.html" class="nav-logo">ANTHONY W<em>.</em> LICAUSI</a>
+  <span class="nav-official">Official Site</span>
+</nav>
+
+<header class="article-header">
+  <a href="../index.html#thinking" class="article-back">&larr; Back to Writing</a>
+  <div class="article-domain">Research Methodology &times; Markets</div>
+  <h1 class="article-title">The Discipline of the Pre-Registered Bet</h1>
+  <div class="article-meta">
+    <span class="article-author">Anthony W. Licausi</span>
+    <span class="article-date">September 2026</span>
+    <span class="article-read">8 min read</span>
+  </div>
+</header>
+
+<main class="article-body">
+  <div class="article-content">
+
+    <p>Psychology spent the better part of a decade discovering that a large share of its most cited findings didn't replicate. The studies were real, the statistics were real, the p-values cleared the bar &mdash; and a meaningful fraction of the results still evaporated the moment an independent lab tried to reproduce them. The field's response to that reckoning is the useful part of the story: pre-registration. Commit to your hypothesis, your method, and what would count as failure, in writing, before you collect a single data point. Then run the study. You don't get to discover the interesting pattern afterward and call it the thing you were testing for all along.</p>
+
+    <p>Markets have the identical problem, at a larger scale, with far less institutional pressure to fix it. Run enough variations of a trading idea against enough historical data, and something will look like an edge purely by chance &mdash; not because the market rewards it, but because with enough parameters and enough retries, noise eventually arranges itself into a pattern that resembles signal. The idea that gets published, or funded, or traded live isn't the one that was right. It's the one that happened to look right on the specific slice of history someone tested against, after however many attempts it took to find it.</p>
+
+    <h2>The Question That Changes Everything</h2>
+
+    <p>The honest question to ask about any trading idea isn't "did it work." It's "would I have believed in this before I saw the result." Almost every idea passes the first test, because the test is run after the fact, by someone who already knows which version worked. Almost no idea survives the second test, because the second test requires you to have written down, in advance, exactly what would make you reject it &mdash; and then to actually reject it when that happens, instead of quietly adjusting the definition of success until the result fits.</p>
+
+    <blockquote>
+      <p>"A result you found by trying is data. A result you predicted before you looked is evidence. The two are treated as identical by almost everyone, and they are not remotely the same thing."</p>
+    </blockquote>
+
+    <h2>Why the Rejection Matters More Than the Promotion</h2>
+
+    <p>The part of scientific pre-registration that markets skip entirely isn't the commitment to a hypothesis &mdash; plenty of research processes have a hypothesis. It's the commitment to publish the failure. A pre-registered study that fails still gets written up, because the negative result is itself information: this specific, well-specified idea did not hold. A trading idea that fails its pre-committed test almost never gets written up anywhere. It just gets quietly abandoned, and the next idea gets tried, and nobody keeps a record of how many were rejected before one was promoted. Without that record, you have no way to tell a genuine edge from the seventh idea that happened to clear a threshold after six others didn't.</p>
+
+    <div class="stat-block">
+      <div class="stat-row"><span class="stat-num">1</span><span class="stat-label">the number of pre-committed failure conditions an idea needs before it ever touches live capital &mdash; written down, specific, and fixed before the evidence is examined</span></div>
+      <div class="stat-row"><span class="stat-num">0</span><span class="stat-label">the number of times that condition gets quietly redefined afterward to fit whatever the data happened to show</span></div>
+    </div>
+
+    <h2>What a Research Ledger Actually Records</h2>
+
+    <p>This is the discipline underneath Obsidian's research process, and it's why the word for what we keep is a ledger, not a track record of what worked. Every idea enters with its hypothesis and its rejection criteria fixed in advance. Most of them get rejected &mdash; that's not a failure of the process, it's the process functioning exactly as intended, the same way a pre-registered study that comes back negative is a successful piece of science, not a wasted one. An idea gets promoted only after it survives a test it could have failed, specified before anyone knew whether it would.</p>
+
+    <p>The alternative &mdash; running an idea, liking what you see, and then constructing the story about why it should have worked &mdash; produces something that looks identical to research from the outside. It has charts. It has a thesis. It sounds rigorous when you say it out loud. The only thing missing is the one property that actually matters: it was never at risk of being wrong, because the definition of right was written after the answer was already known.</p>
+
+    <h2>The Uncomfortable Part</h2>
+
+    <p>A process built this way rejects far more ideas than it promotes, and that ratio doesn't improve much no matter how good the research gets &mdash; because the point of the discipline isn't to find more edges, it's to stop false ones from surviving on the strength of a good story. That's an uncomfortable trade for anyone measuring output by how many ideas make it through. It's the only trade that produces a ledger you can actually trust six months later, when the market conditions that flattered a lucky pattern have quietly moved on and only the ideas that survived a real pre-committed test are still standing.</p>
+
+    <p>That's the whole argument, reduced to one sentence: if you didn't write down how it could fail before you looked at whether it did, you don't have an edge. You have a story, and the market is exceptionally good at making stories feel true right up until the moment it isn't paying you for one anymore.</p>
+
+    <div class="related-reading">
+      <div class="rr-label">Related Reading</div>
+      <div class="rr-links">
+        <a href="bayesian-investor.html" class="rr-link">
+          <span class="rr-domain">Psychology &times; Finance</span>
+          <span class="rr-title">The Bayesian Investor: How Updating Beliefs Changes Everything &rarr;</span>
+        </a>
+        <a href="kelly-criterion.html" class="rr-link">
+          <span class="rr-domain">Mathematics &times; Finance</span>
+          <span class="rr-title">Why Kelly Criterion Is a Life Philosophy, Not Just a Betting System &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <span class="foot-copy">&copy; 2026 ANTHONY W. LICAUSI &middot; NEW YORK</span>
+  <span class="foot-right">ALWAYS BUILDING</span>
+</footer>
+
+<script>
+const cur = document.getElementById('cur');
+const ring = document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
+document.querySelectorAll('a').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
+});
+(function loop(){ rx+=(mx-rx)*0.1; ry+=(my-ry)*0.1; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(loop); })();
+</script>
+</body>
+</html>

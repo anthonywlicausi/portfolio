@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Trade You Don't Remember | Anthony W. Licausi</title>
+<meta name="description" content="The loss you can recount in perfect detail years later is almost never the one that mattered. On availability bias in a trading record, and why I built a decision journal instead of trusting memory.">
+<meta name="author" content="Anthony W. Licausi">
+<meta property="og:title" content="The Trade You Don't Remember | Anthony W. Licausi">
+<meta property="og:description" content="The loss you can recount in perfect detail years later is almost never the one that mattered. On availability bias in a trading record, and why I built a decision journal instead of trusting memory.">
+<meta property="og:url" content="https://anthonywlicausi.com/writing/trade-you-dont-remember.html">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@anthonywlicausi">
+<meta name="twitter:title" content="The Trade You Don't Remember | Anthony W. Licausi">
+<meta name="twitter:description" content="The loss you can recount in perfect detail years later is almost never the one that mattered. On availability bias in a trading record, and why I built a decision journal instead of trusting memory.">
+<link rel="canonical" href="https://anthonywlicausi.com/writing/trade-you-dont-remember.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "The Trade You Don't Remember",
+  "author": {"@type": "Person", "name": "Anthony W. Licausi", "url": "https://anthonywlicausi.com"},
+  "publisher": {"@type": "Person", "name": "Anthony W. Licausi"},
+  "datePublished": "2026-07-13",
+  "description": "The loss you can recount in perfect detail years later is almost never the one that mattered. On availability bias in a trading record, and why I built a decision journal instead of trusting memory.",
+  "url": "https://anthonywlicausi.com/writing/trade-you-dont-remember.html",
+  "keywords": "availability heuristic, trading psychology, decision journal, behavioral finance, TradeCoach, Dealithic, Anthony Licausi",
+  "about": [
+    {"@type": "Thing", "name": "Behavioral Finance"},
+    {"@type": "Thing", "name": "Trading Psychology"},
+    {"@type": "Thing", "name": "Cognitive Bias"}
+  ],
+  "mentions": [
+    {"@type": "Organization", "name": "DEALITHIC", "url": "https://dealithic.co"},
+    {"@type": "Product", "name": "TradeCoach", "url": "https://dealithic.co/tradecoach"}
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Syne:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --d-bg: #020407; --d-bg2: #060a10; --d-border: rgba(255,255,255,0.055);
+  --d-text: rgba(234,236,242,0.78); --d-dim: rgba(234,236,242,0.40); --d-white: #eaecf2;
+  --l-bg: #f7f4ef; --l-bg2: #ffffff; --l-bg3: #ede9e2;
+  --l-text: #1a1410; --l-text2: rgba(26,20,16,0.62); --l-border: rgba(26,20,16,0.09);
+  --accent: #01C9FE; --l-accent: #0038CC;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { background: var(--d-bg); font-family: 'Syne', sans-serif; font-weight: 400; cursor: none; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+a { text-decoration: none; color: inherit; }
+#cur { position:fixed; width:8px; height:8px; background:var(--accent); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); box-shadow:0 0 12px var(--accent); }
+#cur-ring { position:fixed; width:28px; height:28px; border:1px solid rgba(1,201,254,.4); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:width .22s,height .22s; }
+body.hov #cur-ring { width:46px; height:46px; }
+.noise { position:fixed; inset:0; pointer-events:none; z-index:9000; opacity:.022; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size:180px 180px; }
+nav { position:fixed; top:0; left:0; right:0; z-index:200; padding:20px 64px; display:flex; align-items:center; gap:16px; background:linear-gradient(to bottom, rgba(2,4,7,.97) 60%, transparent); border-bottom:1px solid rgba(255,255,255,.03); }
+.nav-logo { font-family:'Bebas Neue',sans-serif; font-size:21px; letter-spacing:.12em; color:var(--d-white); }
+.nav-logo em { color:var(--accent); font-style:normal; }
+.nav-official { font-family:'Playfair Display',serif; font-style:italic; font-size:13px; color:var(--d-dim); }
+.article-header { position:relative; z-index:2; background:var(--d-bg); padding:120px 64px 72px; border-bottom:4px solid var(--accent); }
+.article-back { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.26em; color:var(--d-dim); text-transform:uppercase; display:inline-flex; align-items:center; gap:8px; margin-bottom:40px; transition:color .2s; }
+.article-back:hover { color:var(--accent); }
+.article-domain { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.2em; padding:3px 12px; border:1px solid rgba(1,201,254,.35); color:rgba(1,201,254,.95); text-transform:uppercase; display:inline-block; margin-bottom:24px; }
+.article-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(48px,7vw,88px); line-height:.92; letter-spacing:-.01em; color:var(--d-white); max-width:900px; margin-bottom:32px; }
+.article-meta { display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
+.article-author { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.2em; color:var(--accent); text-transform:uppercase; }
+.article-date { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.16em; color:var(--d-dim); }
+.article-read { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.16em; color:var(--d-dim); }
+.article-body { background:var(--l-bg); padding:80px 64px 120px; }
+.article-content { max-width:720px; margin:0 auto; }
+.article-content p { font-family:'Playfair Display',serif; font-size:20px; line-height:1.9; color:var(--l-text2); margin-bottom:32px; }
+.article-content p strong { color:var(--l-text); font-weight:700; font-family:'Syne',sans-serif; }
+.article-content h2 { font-family:'Share Tech Mono',monospace; font-size:11px; letter-spacing:.36em; color:var(--l-accent); text-transform:uppercase; margin:56px 0 20px; display:flex; align-items:center; gap:12px; }
+.article-content h2::after { content:''; height:1px; flex:1; background:rgba(0,56,204,.18); }
+.article-content blockquote { border-left:3px solid var(--l-accent); padding:8px 0 8px 28px; margin:40px 0; }
+.article-content blockquote p { font-size:24px; font-style:italic; color:var(--l-text); margin-bottom:0; line-height:1.65; }
+.stat-block { background:var(--l-bg2); border:1px solid var(--l-border); border-left:3px solid var(--l-accent); padding:28px 32px; margin:40px 0; }
+.stat-row { display:flex; align-items:baseline; gap:18px; padding:10px 0; border-bottom:1px solid var(--l-border); }
+.stat-row:last-child { border-bottom:none; padding-bottom:0; }
+.stat-num { font-family:'Bebas Neue',sans-serif; font-size:38px; color:var(--l-accent); line-height:1; flex-shrink:0; min-width:72px; }
+.stat-label { font-family:'Syne',sans-serif; font-size:14px; color:var(--l-text2); line-height:1.5; }
+.related-reading { margin-top:72px; padding-top:40px; border-top:1px solid var(--l-border); }
+.rr-label { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.38em; color:var(--l-accent); text-transform:uppercase; margin-bottom:20px; }
+.rr-links { display:flex; flex-direction:column; gap:10px; }
+.rr-link { display:flex; align-items:center; gap:20px; padding:16px 20px; border:1px solid var(--l-border); background:var(--l-bg2); transition:border-color .2s,background .2s; cursor:none; }
+.rr-link:hover { border-color:var(--l-accent); background:var(--l-bg); }
+.rr-domain { font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:.18em; color:var(--l-text2); text-transform:uppercase; white-space:nowrap; min-width:160px; flex-shrink:0; }
+.rr-title { font-family:'Playfair Display',serif; font-size:17px; color:var(--l-text); line-height:1.35; transition:color .2s; }
+.rr-link:hover .rr-title { color:var(--l-accent); }
+footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid var(--l-border); background:var(--l-bg3); display:flex; justify-content:space-between; align-items:center; }
+.foot-copy { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.22em; color:var(--l-text2); }
+.foot-right { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.16em; color:var(--l-text2); opacity:.6; }
+@media (max-width:768px) {
+  nav, .article-header, .article-body, footer { padding-left:24px; padding-right:24px; }
+  .article-header { padding-top:100px; padding-bottom:48px; }
+  .article-body { padding-top:48px; padding-bottom:72px; }
+  .rr-domain { display:none; }
+  .stat-num { font-size:28px; min-width:56px; }
+}
+</style>
+</head>
+<body>
+<div class="noise"></div>
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<nav>
+  <a href="../index.html" class="nav-logo">ANTHONY W<em>.</em> LICAUSI</a>
+  <span class="nav-official">Official Site</span>
+</nav>
+
+<header class="article-header">
+  <a href="../index.html#thinking" class="article-back">&larr; Back to Writing</a>
+  <div class="article-domain">Behavioral Finance &times; Trading</div>
+  <h1 class="article-title">The Trade You Don't Remember</h1>
+  <div class="article-meta">
+    <span class="article-author">Anthony W. Licausi</span>
+    <span class="article-date">July 2026</span>
+    <span class="article-read">7 min read</span>
+  </div>
+</header>
+
+<main class="article-body">
+  <div class="article-content">
+
+    <p>Ask any trader with a few years behind them to tell you about a bad trade, and they'll have one ready before you finish the question. The size. The setup. The exact moment they knew it was wrong and didn't get out. It plays back like a scene, with dialogue. That vividness feels like proof the lesson landed. It's actually the opposite kind of evidence &mdash; a sign the memory has been rehearsed so many times it's been reshaped into a story, and stories are optimized for being memorable, not for being representative.</p>
+
+    <p>The trade you remember in that kind of detail is, almost by definition, not a typical trade. It was unusually large, unusually painful, or unusually public &mdash; which is exactly why it got encoded so deeply in the first place. The five hundred ordinary trades on either side of it, the ones that were neither disasters nor triumphs, left no scene behind. They didn't need one. And that's the problem: the record you're drawing lessons from was never a fair sample of your actual behavior. It's a highlight reel, and highlight reels are curated for drama, not for signal.</p>
+
+    <h2>The Mechanism Has a Name</h2>
+
+    <p>Kahneman and Tversky's research on the availability heuristic describes exactly this: people judge the frequency or importance of something by how easily examples come to mind, not by how often it actually occurs. A vivid, emotionally charged event is far more available to memory than a routine one, so it gets weighted as though it were far more common or far more informative than it was. Applied to a trading record, the effect is specific and costly: the one catastrophic loss teaches you a rule &mdash; never do that again &mdash; that may have nothing to do with why you actually lose money over a full year.</p>
+
+    <blockquote>
+      <p>"You don't have a bias toward bad decisions. You have a bias toward remembering the decisions that felt like something &mdash; and most of what determines your results doesn't feel like anything at all."</p>
+    </blockquote>
+
+    <h2>What the Vivid Trade Actually Costs You</h2>
+
+    <p>The damage isn't just that you overweight one data point. It's that the vivid trade becomes the story you tell yourself about who you are as a trader &mdash; reckless, or too cautious, or bad at cutting losses &mdash; and you start managing risk against a character instead of against a pattern. I've watched this in my own history: a single position that went badly enough to remember in detail led to months of underweighting an entire setup that, looked at honestly across every instance rather than the one that hurt, had a perfectly fine edge. The lesson I drew from the scene wasn't the lesson the full ledger would have supported. It was just the lesson that was easiest to retrieve.</p>
+
+    <div class="stat-block">
+      <div class="stat-row"><span class="stat-num">1</span><span class="stat-label">the number of trades most traders can describe from memory in vivid, specific detail from a given month &mdash; almost always the largest win or loss, never the median trade</span></div>
+      <div class="stat-row"><span class="stat-num">&infin;</span><span class="stat-label">the number of times that one trade gets replayed as "the lesson," compared to the dozens of unremarkable ones that actually built the track record</span></div>
+    </div>
+
+    <h2>The Boring Trades Are the Real Signal</h2>
+
+    <p>If a vivid memory is a bad sample, the fix isn't a better memory &mdash; it's not relying on memory at all. The trades that actually tell you whether you have an edge are the unremarkable ones: the setup you take forty times a quarter, that wins a little more than it loses, that never makes for a good story at dinner because nothing dramatic happened. That's precisely why it never gets reviewed. Nobody sits down and deliberately reconstructs their most boring week. But the boring week, repeated fifty times, is the whole business. The dramatic week is a rounding error dressed up as a lesson.</p>
+
+    <p>This is why a written record has to capture everything, logged at the moment of the decision rather than reconstructed afterward from memory, and reviewed as a full distribution rather than as a set of anecdotes. The moment you let memory curate which trades are worth examining, you've already lost the sample &mdash; because memory curates for emotional intensity, and emotional intensity is almost uncorrelated with what actually made or lost you money over the long run.</p>
+
+    <h2>Why I Built It As a Journal, Not a Highlight Reel</h2>
+
+    <p><a href="https://dealithic.co/tradecoach" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);">TradeCoach</a> exists because of that gap. It's a decision journal, not a trophy case &mdash; every position logged at the moment it's opened, with the reasoning attached, reviewed later as a full record rather than a set of memorable outliers. The point isn't to relive the trade that hurt. It's to see the pattern that memory alone would never surface, because memory was never built to be a fair archive. It was built to remember what felt important, and feeling important and being important are two different distributions that only sometimes overlap.</p>
+
+    <p>The trader who remembers every detail of their worst trade and none of their best forty ordinary ones isn't learning from experience. They're learning from whichever experience happened to leave a scar. A record doesn't have that bias. That's the entire argument for keeping one.</p>
+
+    <div class="related-reading">
+      <div class="rr-label">Related Reading</div>
+      <div class="rr-links">
+        <a href="bayesian-investor.html" class="rr-link">
+          <span class="rr-domain">Psychology &times; Finance</span>
+          <span class="rr-title">The Bayesian Investor: How Updating Beliefs Changes Everything &rarr;</span>
+        </a>
+        <a href="kelly-criterion.html" class="rr-link">
+          <span class="rr-domain">Mathematics &times; Finance</span>
+          <span class="rr-title">Why Kelly Criterion Is a Life Philosophy, Not Just a Betting System &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <span class="foot-copy">&copy; 2026 ANTHONY W. LICAUSI &middot; NEW YORK</span>
+  <span class="foot-right">ALWAYS BUILDING</span>
+</footer>
+
+<script>
+const cur = document.getElementById('cur');
+const ring = document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
+document.querySelectorAll('a').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
+});
+(function loop(){ rx+=(mx-rx)*0.1; ry+=(my-ry)*0.1; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(loop); })();
+</script>
+</body>
+</html>

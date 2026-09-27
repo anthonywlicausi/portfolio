@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Founder Attention Tax: Why I Automated My Own Fundraise | Anthony W. Licausi</title>
+<meta name="description" content="A raise is unusually bad among founder tasks: high-stakes and repetitive at the same time. On the difference between coordination and judgment, and why I built RYRA to take the first one off my plate.">
+<meta name="author" content="Anthony W. Licausi">
+<meta property="og:title" content="The Founder Attention Tax: Why I Automated My Own Fundraise | Anthony W. Licausi">
+<meta property="og:description" content="A raise is unusually bad among founder tasks: high-stakes and repetitive at the same time. On the difference between coordination and judgment, and why I built RYRA to take the first one off my plate.">
+<meta property="og:url" content="https://anthonywlicausi.com/writing/founder-attention-tax.html">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@anthonywlicausi">
+<meta name="twitter:title" content="The Founder Attention Tax: Why I Automated My Own Fundraise | Anthony W. Licausi">
+<meta name="twitter:description" content="A raise is unusually bad among founder tasks: high-stakes and repetitive at the same time. On the difference between coordination and judgment, and why I built RYRA to take the first one off my plate.">
+<link rel="canonical" href="https://anthonywlicausi.com/writing/founder-attention-tax.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "The Founder Attention Tax: Why I Automated My Own Fundraise",
+  "author": {"@type": "Person", "name": "Anthony W. Licausi", "url": "https://anthonywlicausi.com"},
+  "publisher": {"@type": "Person", "name": "Anthony W. Licausi"},
+  "datePublished": "2026-06-08",
+  "description": "A raise is unusually bad among founder tasks: high-stakes and repetitive at the same time. On the difference between coordination and judgment, and why I built RYRA to take the first one off my plate.",
+  "url": "https://anthonywlicausi.com/writing/founder-attention-tax.html",
+  "keywords": "founder attention, attention residue, fundraising automation, RYRA, coordination vs judgment, Dealithic, Anthony Licausi",
+  "about": [
+    {"@type": "Thing", "name": "Fundraising"},
+    {"@type": "Thing", "name": "Founder Psychology"},
+    {"@type": "Thing", "name": "Automation"}
+  ],
+  "mentions": [
+    {"@type": "Organization", "name": "DEALITHIC", "url": "https://dealithic.co"},
+    {"@type": "Product", "name": "RYRA", "url": "https://dealithic.co/demo"}
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Syne:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --d-bg: #020407; --d-bg2: #060a10; --d-border: rgba(255,255,255,0.055);
+  --d-text: rgba(234,236,242,0.78); --d-dim: rgba(234,236,242,0.40); --d-white: #eaecf2;
+  --l-bg: #f7f4ef; --l-bg2: #ffffff; --l-bg3: #ede9e2;
+  --l-text: #1a1410; --l-text2: rgba(26,20,16,0.62); --l-border: rgba(26,20,16,0.09);
+  --accent: #01C9FE; --l-accent: #0038CC;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { background: var(--d-bg); font-family: 'Syne', sans-serif; font-weight: 400; cursor: none; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+a { text-decoration: none; color: inherit; }
+#cur { position:fixed; width:8px; height:8px; background:var(--accent); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); box-shadow:0 0 12px var(--accent); }
+#cur-ring { position:fixed; width:28px; height:28px; border:1px solid rgba(1,201,254,.4); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:width .22s,height .22s; }
+body.hov #cur-ring { width:46px; height:46px; }
+.noise { position:fixed; inset:0; pointer-events:none; z-index:9000; opacity:.022; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size:180px 180px; }
+nav { position:fixed; top:0; left:0; right:0; z-index:200; padding:20px 64px; display:flex; align-items:center; gap:16px; background:linear-gradient(to bottom, rgba(2,4,7,.97) 60%, transparent); border-bottom:1px solid rgba(255,255,255,.03); }
+.nav-logo { font-family:'Bebas Neue',sans-serif; font-size:21px; letter-spacing:.12em; color:var(--d-white); }
+.nav-logo em { color:var(--accent); font-style:normal; }
+.nav-official { font-family:'Playfair Display',serif; font-style:italic; font-size:13px; color:var(--d-dim); }
+.article-header { position:relative; z-index:2; background:var(--d-bg); padding:120px 64px 72px; border-bottom:4px solid var(--accent); }
+.article-back { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.26em; color:var(--d-dim); text-transform:uppercase; display:inline-flex; align-items:center; gap:8px; margin-bottom:40px; transition:color .2s; }
+.article-back:hover { color:var(--accent); }
+.article-domain { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.2em; padding:3px 12px; border:1px solid rgba(1,201,254,.35); color:rgba(1,201,254,.95); text-transform:uppercase; display:inline-block; margin-bottom:24px; }
+.article-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(48px,7vw,88px); line-height:.92; letter-spacing:-.01em; color:var(--d-white); max-width:900px; margin-bottom:32px; }
+.article-meta { display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
+.article-author { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.2em; color:var(--accent); text-transform:uppercase; }
+.article-date { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.16em; color:var(--d-dim); }
+.article-read { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.16em; color:var(--d-dim); }
+.article-body { background:var(--l-bg); padding:80px 64px 120px; }
+.article-content { max-width:720px; margin:0 auto; }
+.article-content p { font-family:'Playfair Display',serif; font-size:20px; line-height:1.9; color:var(--l-text2); margin-bottom:32px; }
+.article-content p strong { color:var(--l-text); font-weight:700; font-family:'Syne',sans-serif; }
+.article-content h2 { font-family:'Share Tech Mono',monospace; font-size:11px; letter-spacing:.36em; color:var(--l-accent); text-transform:uppercase; margin:56px 0 20px; display:flex; align-items:center; gap:12px; }
+.article-content h2::after { content:''; height:1px; flex:1; background:rgba(0,56,204,.18); }
+.article-content blockquote { border-left:3px solid var(--l-accent); padding:8px 0 8px 28px; margin:40px 0; }
+.article-content blockquote p { font-size:24px; font-style:italic; color:var(--l-text); margin-bottom:0; line-height:1.65; }
+.stat-block { background:var(--l-bg2); border:1px solid var(--l-border); border-left:3px solid var(--l-accent); padding:28px 32px; margin:40px 0; }
+.stat-row { display:flex; align-items:baseline; gap:18px; padding:10px 0; border-bottom:1px solid var(--l-border); }
+.stat-row:last-child { border-bottom:none; padding-bottom:0; }
+.stat-num { font-family:'Bebas Neue',sans-serif; font-size:38px; color:var(--l-accent); line-height:1; flex-shrink:0; min-width:72px; }
+.stat-label { font-family:'Syne',sans-serif; font-size:14px; color:var(--l-text2); line-height:1.5; }
+.related-reading { margin-top:72px; padding-top:40px; border-top:1px solid var(--l-border); }
+.rr-label { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.38em; color:var(--l-accent); text-transform:uppercase; margin-bottom:20px; }
+.rr-links { display:flex; flex-direction:column; gap:10px; }
+.rr-link { display:flex; align-items:center; gap:20px; padding:16px 20px; border:1px solid var(--l-border); background:var(--l-bg2); transition:border-color .2s,background .2s; cursor:none; }
+.rr-link:hover { border-color:var(--l-accent); background:var(--l-bg); }
+.rr-domain { font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:.18em; color:var(--l-text2); text-transform:uppercase; white-space:nowrap; min-width:160px; flex-shrink:0; }
+.rr-title { font-family:'Playfair Display',serif; font-size:17px; color:var(--l-text); line-height:1.35; transition:color .2s; }
+.rr-link:hover .rr-title { color:var(--l-accent); }
+footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid var(--l-border); background:var(--l-bg3); display:flex; justify-content:space-between; align-items:center; }
+.foot-copy { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.22em; color:var(--l-text2); }
+.foot-right { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.16em; color:var(--l-text2); opacity:.6; }
+@media (max-width:768px) {
+  nav, .article-header, .article-body, footer { padding-left:24px; padding-right:24px; }
+  .article-header { padding-top:100px; padding-bottom:48px; }
+  .article-body { padding-top:48px; padding-bottom:72px; }
+  .rr-domain { display:none; }
+  .stat-num { font-size:28px; min-width:56px; }
+}
+</style>
+</head>
+<body>
+<div class="noise"></div>
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<nav>
+  <a href="../index.html" class="nav-logo">ANTHONY W<em>.</em> LICAUSI</a>
+  <span class="nav-official">Official Site</span>
+</nav>
+
+<header class="article-header">
+  <a href="../index.html#thinking" class="article-back">&larr; Back to Writing</a>
+  <div class="article-domain">Founder Psychology &times; Building</div>
+  <h1 class="article-title">The Founder Attention Tax: Why I Automated My Own Fundraise</h1>
+  <div class="article-meta">
+    <span class="article-author">Anthony W. Licausi</span>
+    <span class="article-date">June 2026</span>
+    <span class="article-read">7 min read</span>
+  </div>
+</header>
+
+<main class="article-body">
+  <div class="article-content">
+
+    <p>Every founder task belongs to one of two categories. There are decisions &mdash; the handful of calls each week that only you can make, because they require judgment nobody else has: which term to hold, which hire to make, which investor's silence means no. And there is coordination &mdash; the much larger volume of work required to keep the decisions moving: chasing a signature, updating a tracker, remembering who you told what and when you told them.</p>
+
+    <p>Most founders don't distinguish between the two. I didn't, for a long time. Coordination feels like work &mdash; it fills the day, it produces the satisfying sensation of having done something &mdash; so it gets treated as equivalent to the decisions it's supposed to be in service of. It isn't. And the gap between the two is where a raise quietly goes wrong.</p>
+
+    <h2>A Uniquely Bad Combination</h2>
+
+    <p>Most repetitive tasks are low-stakes. Most high-stakes tasks are rare enough that you can afford to do them carefully, one at a time. A fundraise breaks that pattern: it is simultaneously high-stakes and repetitive. You are having the same conversation, at a different point in its lifecycle, with forty different people, over three months &mdash; and a mistake in any single instance of that repetition can cost you the outcome the entire process was for.</p>
+
+    <p>Forget the strategic parts for a moment &mdash; the pitch, the terms, the read on an investor's real interest versus their politeness. Underneath all of that sits a logistics problem: who did I send the deck to, who asked a follow-up question I haven't answered, who went quiet and for how long, whose diligence request is sitting unanswered in a thread I haven't opened in six days. None of that requires judgment. All of it requires memory. And memory is exactly the resource a founder mid-raise has the least of, because it's being spent everywhere else at the same time.</p>
+
+    <blockquote>
+      <p>"The work that eats a founder's attention during a raise isn't the hard part. It's the part that was never supposed to require attention at all."</p>
+    </blockquote>
+
+    <h2>The Cost You Don't See Until Later</h2>
+
+    <p>There's a concept from organizational psychology called attention residue: when you switch from one task to another before the first one is finished, part of your attention stays behind, attached to the unfinished task, degrading your performance on whatever comes next. It was originally studied in the context of meetings and email. A fundraise is a machine for generating it at scale &mdash; you're never fully present in any one investor conversation, because a fragment of your attention is still on the three you left hanging that morning.</p>
+
+    <p>I ran my own raise the way most founders run theirs: a spreadsheet, a calendar, and the belief that I'd remember the important things because they were, in fact, important. That belief is where it breaks. The investor who mattered most wasn't the one I forgot to follow up with out of carelessness &mdash; it was the one I forgot because I was mid-conversation with someone else when their reply came in, and by the time I resurfaced, four days had passed and the warmth had gone out of it. Nothing about that failure required bad judgment. It required perfect memory operating under constant interruption, which no one has.</p>
+
+    <div class="stat-block">
+      <div class="stat-row"><span class="stat-num">1</span><span class="stat-label">the number of judgment calls in a fundraise conversation that actually needs a founder &mdash; whether to move forward. Everything upstream of that call is coordination.</span></div>
+      <div class="stat-row"><span class="stat-num">40+</span><span class="stat-label">the number of parallel threads a founder is typically running by the middle of a raise, each at a different stage, each competing for the same finite attention</span></div>
+    </div>
+
+    <h2>What Actually Deserves the Attention Tax</h2>
+
+    <p>The instinct, once you notice this, is to try to get more organized &mdash; a better spreadsheet, a stricter calendar block, more discipline. I tried that too. It doesn't work, because the problem isn't a tooling problem inside the old category. The spreadsheet is still asking a human to remember to update it. The calendar block is still competing with whatever crisis is happening that day. You cannot discipline your way out of a structural mismatch between how much coordination a raise generates and how much attention a single person has to give it.</p>
+
+    <p>What actually works is separating the two categories completely, and building the coordination layer so it runs without you. Not because coordination doesn't matter &mdash; it matters enormously, since a dropped follow-up can end a relationship a strategic call never would have &mdash; but because it doesn't require <em>you</em>, specifically, to matter. It requires consistency, timeliness, and memory. Those are the properties of a system, not a person.</p>
+
+    <p>That's the design behind <a href="https://dealithic.co/demo" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);">RYRA</a>. It runs the mechanics of a capital raise &mdash; the tracking, the follow-ups, the data room, the question of who's gone quiet and for how long &mdash; so the only thing left on a founder's desk is the conversation that actually needs their judgment: is this a yes. I built it because I was living the alternative, and the alternative was costing me relationships that had nothing to do with the strength of the deal.</p>
+
+    <h2>The Reallocation, Not the Removal</h2>
+
+    <p>This isn't an argument for automating founders out of their own raise &mdash; the opposite. It's an argument for automating everything <em>around</em> the raise so that the founder shows up fully present for the parts that were always supposed to be theirs. Attention is the scarcest resource in a small company, scarcer than capital, because capital can be raised in a round and attention has to be spent fresh every single day. Spending it on remembering who you already told something is not a strategy. It's a tax. And like any tax, the founders who stop paying it end up with more of everything else.</p>
+
+    <div class="related-reading">
+      <div class="rr-label">Related Reading</div>
+      <div class="rr-links">
+        <a href="speed-as-competitive-moat.html" class="rr-link">
+          <span class="rr-domain">Philosophy &times; Tech</span>
+          <span class="rr-title">Speed as a Competitive Moat: A Founder's Theory of Unfair Advantage &rarr;</span>
+        </a>
+        <a href="psychology-of-conviction.html" class="rr-link">
+          <span class="rr-domain">Psychology &times; Finance</span>
+          <span class="rr-title">The Psychology of Conviction: Why Smart People Fold Too Early &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <span class="foot-copy">&copy; 2026 ANTHONY W. LICAUSI &middot; NEW YORK</span>
+  <span class="foot-right">ALWAYS BUILDING</span>
+</footer>
+
+<script>
+const cur = document.getElementById('cur');
+const ring = document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
+document.querySelectorAll('a').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
+});
+(function loop(){ rx+=(mx-rx)*0.1; ry+=(my-ry)*0.1; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(loop); })();
+</script>
+</body>
+</html>
