@@ -8,6 +8,13 @@ rules, color system). This file is the backlog.
 - Nothing currently open on this page. Next likely touch: re-diff the Products section against
   trans-intel's `SiteNav.tsx` once Anthony's Deal Engine rename lands there, and again whenever
   dealithic.co's nav changes (see `CLAUDE.md` — no automated link between the two repos).
+- Monthly essay cadence now runs through September 2026 — next one due ~October if the cadence
+  continues. Ideas not yet used from the September pitch round: Deal Engine ("What AI Can't
+  Underwrite"), QUARRY ("Deals Are Made By People Who Remember You"), DEALITHIC/Investor Network
+  ("Why I Gave the Map Away").
+- The 7 pre-existing essays (everything before June 2026) still use the old dark-blue accent
+  (`#1155FF`) in their headers, not the Node Cyan the homepage and the 4 new essays now use —
+  minor cross-page inconsistency, not fixed yet since it wasn't asked for.
 
 ## 🏗 Ops & architecture (stable)
 
@@ -20,6 +27,18 @@ rules, color system). This file is the backlog.
 
 ## ✅ Shipped (newest first)
 
+- **2026-09-26 — 4 new essays added, one per month June–September, each backlinking a product.**
+  RYRA ("The Founder Attention Tax"), TradeCoach ("The Trade You Don't Remember"), STEADSPARK
+  ("The Myth of the Leap"), Obsidian Quant ("The Discipline of the Pre-Registered Bet"). Picked
+  from a 7-idea pitch after checking dealithic.co/insights to confirm no topic overlap (that site
+  runs tactical/regulatory research pieces; this site runs personal philosophy essays — different
+  registers, safe to coexist). The Obsidian piece was written carefully around the existing
+  public-copy rule: never call Obsidian's own process a "backtest," frame it as a research ledger
+  that may reject ideas but never silently promotes them. Restructured the homepage Writing
+  section (new feat + 2 sm + 8-card grid, "11 · ESSAYS PUBLISHED"), and fixed the grid accent-color
+  CSS which only cycled the first 4 `nth-child`s.
+- **2026-09-26 — Ticker speed doubled**, 44s → 20s per loop (was too slow at the larger text size
+  from the legibility fix below).
 - **2026-09-26 — Products section expanded 3 → 11 rows.** Added Deal Engine, RYRA, Investor
   Network, DEALITHIC IR, DEALITHIC Enterprise, Agents API, QUARRY (renamed from D:CRM),
   STEADSPARK, TradeCoach alongside DEALITHIC and OBSIDIAN QUANT. Copy/links sourced from
