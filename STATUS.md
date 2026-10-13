@@ -84,3 +84,8 @@ rules, color system). This file is the backlog.
 - No build/lint/test step of any kind — every change ships straight to prod on push. Preview
   locally (`python3 -m http.server` + Chrome) before pushing anything content-sensitive, since
   this page is now linked from an investor-facing email signature.
+
+## 2026-10-13 — speed/a11y audit fixes
+- Darkened `--l-text2` / `.eq-comment` greys to 0.78 alpha (contrast), added `<main>` landmark.
+- TRADECOACH → FALSIFIRE (display text, JSON-LD name, essay copy). Links still point at `dealithic.co/tradecoach` — `/falsifire` is a 404 there; update links when the Dealithic route is renamed.
+- Favicon 404 fixed with an inline SVG icon. Not done: self-hosting fonts (Syne still in use — global rule says no Syne; separate redesign decision).
