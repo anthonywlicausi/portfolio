@@ -70,3 +70,10 @@ message and branch name must say it. **If you are Grok (Grokbot):**
 
 Find an agent's work later: `git log --grep "Co-Authored-By: Grok"` (Grok) or
 `--grep "Co-Authored-By: Claude"` (Claude).
+
+## Documentation rule — raised 2026-10-13
+
+At the end of any session that builds or fixes something, write down: **what exists, how it was set up,
+where the code and credentials live (name the env var / vault / dashboard — never paste the secret),
+and how to check it works.** It goes in the repo's `ROADMAP.md` or `TODO.md` AND in a memory entry.
+Do it in the same session, before closing out.

@@ -46,3 +46,10 @@ link between the repos). Re-diff against `SiteNav.tsx` when touching this sectio
 Known drift as of 2026-09-26: trans-intel's nav still labels the Deal Engine row "Deal
 Intelligence" (route `/products/deal-engine`) — Anthony is renaming it to "Deal Engine" in that
 repo directly; this page already uses "Deal Engine."
+
+## Documentation rule — raised 2026-10-13
+
+At the end of any session that builds or fixes something, write down: **what exists, how it was set up,
+where the code and credentials live (name the env var / vault / dashboard — never paste the secret),
+and how to check it works.** It goes in the repo's `ROADMAP.md` or `TODO.md` AND in a memory entry.
+Do it in the same session, before closing out.
