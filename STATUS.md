@@ -8,8 +8,10 @@ rules, color system). This file is the backlog.
 - Nothing currently open on this page. Next likely touch: re-diff the Products section against
   trans-intel's `SiteNav.tsx` once Anthony's Deal Engine rename lands there, and again whenever
   dealithic.co's nav changes (see `CLAUDE.md` — no automated link between the two repos).
-- Monthly essay cadence now runs through September 2026 — next one due ~October if the cadence
-  continues. Ideas not yet used from the September pitch round: Deal Engine ("What AI Can't
+- Essay cadence is now weekly (Tuesdays, auto-published). Queue after "Paper Money Doesn't Sweat":
+  Revenge Trading Is Just Grief With a Margin Account → 4,100 Commits, No Engineering Team → You Don't Get
+  the Average Return → My Best Customer Doesn't Have a Pulse. Older ideas not yet used from the
+  September pitch round: Deal Engine ("What AI Can't
   Underwrite"), QUARRY ("Deals Are Made By People Who Remember You"), DEALITHIC/Investor Network
   ("Why I Gave the Map Away").
 - The 7 pre-existing essays (everything before June 2026) still use the old dark-blue accent
@@ -27,6 +29,12 @@ rules, color system). This file is the backlog.
 
 ## ✅ Shipped (newest first)
 
+- **2026-10-13 — Weekly essay #1: "Paper Money Doesn't Sweat"** (`writing/paper-money-doesnt-sweat.html`,
+  plugs Obsidian Quant). First run of the weekly Tuesday auto-publish series. All figures pulled from the
+  live performance page as of the 2026-10-12 close and stated as a paper account; no "backtest" language.
+  Homepage Writing section rotated: new feat, Pre-Registered Bet + Myth of the Leap as sm cards, Trade You
+  Don't Remember moved into the grid (now 9 cards), count bumped to "12 · ESSAYS PUBLISHED". Stat labels on
+  the new page set to 16px (older essays still use 14px).
 - **2026-09-27 — Hero polish pass.** Fixed `.hero-right { display:none; }` under 1024px, which was
   hiding the entire stat panel on every tablet/phone (leftover from the old Live Products panel,
   never revisited after that panel was replaced) — now stacks below the headline with a top
