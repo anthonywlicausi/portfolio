@@ -29,6 +29,17 @@ rules, color system). This file is the backlog.
 
 ## ✅ Shipped (newest first)
 
+- **2026-10-19 — readability + facts pass (homepage only).** Every sub-16px text size raised to 16px
+  (eyebrows, footer, contact links, pills, dates, "Currently" labels); grey text lightened; Playfair
+  italics set upright (Playfair is still the serif, just not italic); Syne → Manrope per house font rule;
+  ticker 20s → 13s per loop; "trader" → "quant trader" (hero kicker, meta/og/twitter, JSON-LD jobTitle);
+  Raising widget → $3M Seed, Post-Money Valuation $18M ($15M pre); Location → New York | Tel Aviv
+  (footer too); Building → DEALITHIC (no v2). **"Currently → Writing" now updates itself:** a small script
+  at the bottom of `index.html` copies the title/link of the `.essay-card.feat` card in #thinking, so
+  publishing a new essay as the featured card updates it (static markup is the fallback). Reading row
+  left on Gödel, Escher, Bach pending Anthony's pick. Essay pages under `writing/` were NOT touched
+  (still older sizes/italics).
+
 - **2026-10-13 — Weekly essay #1: "Paper Money Doesn't Sweat"** (`writing/paper-money-doesnt-sweat.html`,
   plugs Obsidian Quant). First run of the weekly Tuesday auto-publish series. All figures pulled from the
   live performance page as of the 2026-10-12 close and stated as a paper account; no "backtest" language.
