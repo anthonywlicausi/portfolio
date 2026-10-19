@@ -37,7 +37,7 @@ rules, color system). This file is the backlog.
   (footer too); Building → DEALITHIC (no v2). **"Currently → Writing" now updates itself:** a small script
   at the bottom of `index.html` copies the title/link of the `.essay-card.feat` card in #thinking, so
   publishing a new essay as the featured card updates it (static markup is the fallback). Reading row
-  left on Gödel, Escher, Bach pending Anthony's pick. Essay pages under `writing/` were NOT touched
+  now The Man Who Solved the Market (Zuckerman), Anthony's pick. Essay pages under `writing/` were NOT touched
   (still older sizes/italics).
 
 - **2026-10-13 — Weekly essay #1: "Paper Money Doesn't Sweat"** (`writing/paper-money-doesnt-sweat.html`,
