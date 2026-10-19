@@ -29,6 +29,12 @@ rules, color system). This file is the backlog.
 
 ## ✅ Shipped (newest first)
 
+- **2026-10-19 (later) — nav menu + bigger eyebrows.** Top nav now has anchor links Products (#work),
+  Writing (#thinking), Contact (#contact), smooth-scroll with `scroll-margin-top` so headings clear the
+  fixed nav; on phones (<700px) the nav wraps to two rows and the ticker is pushed down to match.
+  Dark-blue eyebrows (`.m-label` "01 · The Operating Principle", `.section-meta-light`) are now 19px
+  Manrope 800 instead of 16px mono. Reading row = The Man Who Solved the Market.
+
 - **2026-10-19 — readability + facts pass (homepage only).** Every sub-16px text size raised to 16px
   (eyebrows, footer, contact links, pills, dates, "Currently" labels); grey text lightened; Playfair
   italics set upright (Playfair is still the serif, just not italic); Syne → Manrope per house font rule;

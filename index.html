@@ -95,6 +95,10 @@ nav {
 }
 .nav-logo { font-family:'Bebas Neue',sans-serif; font-size:21px; letter-spacing:.12em; color:var(--d-white); text-decoration:none; }
 .nav-logo em { color:var(--cyan); font-style:normal; }
+.nav-links { margin-left:auto; display:flex; gap:32px; }
+.nav-links a { font-family:'Manrope',sans-serif; font-size:16px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--d-white); text-decoration:none; padding:6px 0; border-bottom:2px solid transparent; transition:color .2s, border-color .2s; }
+.nav-links a:hover, .nav-links a:focus-visible { color:var(--cyan); border-bottom-color:var(--cyan); }
+#work, #thinking, #about, #contact { scroll-margin-top:72px; }
 .nav-official { font-family:'Playfair Display',serif; font-style:normal; font-size:16px; color:var(--d-dim); }
 
 /* ── Ticker ────────────────────────────────── */
@@ -177,7 +181,7 @@ h1.hero-headline .outline-text { -webkit-text-stroke:1px rgba(234,236,242,.2); c
   padding:100px 64px;
 }
 .thinking-header { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:end; margin-bottom:64px; }
-.section-meta-light { font-family:'Share Tech Mono',monospace; font-size:16px; letter-spacing:.42em; color:var(--l-amber); text-transform:uppercase; margin-bottom:18px; display:flex; align-items:center; gap:14px; }
+.section-meta-light { font-family:'Manrope',sans-serif; font-size:19px; font-weight:800; letter-spacing:.2em; color:var(--l-amber); text-transform:uppercase; margin-bottom:18px; display:flex; align-items:center; gap:14px; }
 .section-meta-light::after { content:''; height:1px; width:56px; background:var(--l-amber); opacity:.35; }
 .section-mega-light { font-family:'Bebas Neue',sans-serif; font-size:clamp(52px,7.5vw,96px); line-height:.9; letter-spacing:-.005em; color:var(--l-text); }
 .section-mega-light span { color:var(--l-amber); }
@@ -231,7 +235,7 @@ h1.hero-headline .outline-text { -webkit-text-stroke:1px rgba(234,236,242,.2); c
 }
 .about-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(60px,8vw,100px); line-height:.88; color:var(--l-text); margin-bottom:48px; }
 .manifesto { display:flex; flex-direction:column; gap:40px; }
-.m-label { font-family:'Share Tech Mono',monospace; font-size:16px; letter-spacing:.22em; color:var(--l-amber); margin-bottom:14px; text-transform:uppercase; display:flex; align-items:center; gap:12px; font-weight:600; }
+.m-label { font-family:'Manrope',sans-serif; font-size:19px; letter-spacing:.1em; color:var(--l-amber); margin-bottom:14px; text-transform:uppercase; display:flex; align-items:center; gap:12px; font-weight:800; }
 .m-label::after { content:''; width:32px; height:1px; background:rgba(0,56,204,.32); }
 .manifesto-block p { font-family:'Playfair Display',serif; font-size:clamp(20px,1.9vw,26px); line-height:1.92; color:var(--l-text2); }
 .manifesto-block p strong { color:var(--l-text); font-style:normal; font-family:'Manrope',sans-serif; font-weight:700; }
@@ -284,6 +288,13 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 @keyframes ticker  { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
 /* ── Mobile ────────────────────────────────── */
+@media (max-width:700px) {
+  nav { flex-wrap:wrap; row-gap:8px; padding-top:14px; padding-bottom:12px; }
+  .nav-official { display:none; }
+  .nav-links { margin-left:0; width:100%; gap:24px; }
+  .ticker-wrap { padding-top:104px; }
+  #work, #thinking, #about, #contact { scroll-margin-top:108px; }
+}
 @media (max-width:1024px) {
   nav, #hero, #work, #thinking, #about, #contact, footer { padding-left:24px; padding-right:24px; }
   #hero { grid-template-columns:1fr; }
@@ -315,6 +326,11 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 <nav>
   <a href="#" class="nav-logo">ANTHONY W<em>.</em> LICAUSI</a>
   <span class="nav-official">Official Site</span>
+  <div class="nav-links">
+    <a href="#work">Products</a>
+    <a href="#thinking">Writing</a>
+    <a href="#contact">Contact</a>
+  </div>
 </nav>
 
 <!-- TICKER -->
