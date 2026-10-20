@@ -8,9 +8,9 @@ rules, color system). This file is the backlog.
 - Nothing currently open on this page. Next likely touch: re-diff the Products section against
   trans-intel's `SiteNav.tsx` once Anthony's Deal Engine rename lands there, and again whenever
   dealithic.co's nav changes (see `CLAUDE.md` — no automated link between the two repos).
-- Essay cadence is now weekly (Tuesdays, auto-published). Queue after "Paper Money Doesn't Sweat":
-  Revenge Trading Is Just Grief With a Margin Account → 4,100 Commits, No Engineering Team → You Don't Get
-  the Average Return → My Best Customer Doesn't Have a Pulse. Older ideas not yet used from the
+- Essay cadence is now weekly (Tuesdays, auto-published). Queue after "Revenge Trading Is Just Grief With
+  a Margin Account": 4,100 Commits, No Engineering Team → You Don't Get the Average Return → My Best
+  Customer Doesn't Have a Pulse. Older ideas not yet used from the
   September pitch round: Deal Engine ("What AI Can't
   Underwrite"), QUARRY ("Deals Are Made By People Who Remember You"), DEALITHIC/Investor Network
   ("Why I Gave the Map Away").
@@ -29,6 +29,14 @@ rules, color system). This file is the backlog.
 
 ## ✅ Shipped (newest first)
 
+- **2026-10-20 — Weekly essay #2: "Revenge Trading Is Just Grief With a Margin Account"**
+  (`writing/revenge-trading-grief.html`, plugs FalsiFire via `https://www.dealithic.co/falsifire`, which is
+  now live). Figures cited inline to their sources: Tversky & Kahneman 1992 (λ = 2.25), Brown et al. 2024 JEL
+  meta-analysis (mean 1.955 over 607 estimates), Thaler & Johnson 1990 (break-even effect), Coval & Shumway
+  2005 (CBOT 31.2% vs 27.0%, 38% of price-setting trades), Chague/De-Losso/Giovannetti (97% of 300+-day
+  Brazilian day traders lost money). Homepage Writing rotated: new feat, Paper Money + Pre-Registered Bet as
+  sm cards, Myth of the Leap moved into the grid (now 10 cards), count "13 · ESSAYS PUBLISHED", Currently →
+  Writing fallback updated. Older essays still link `dealithic.co/tradecoach` (it still resolves).
 - **2026-10-19 (later) — nav menu + bigger eyebrows.** Top nav now has anchor links Products (#work),
   Writing (#thinking), Contact (#contact), smooth-scroll with `scroll-margin-top` so headings clear the
   fixed nav; on phones (<700px) the nav wraps to two rows and the ticker is pushed down to match.
