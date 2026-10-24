@@ -29,6 +29,14 @@ rules, color system). This file is the backlog.
 
 ## ✅ Shipped (newest first)
 
+- **2026-10-24 — Essay: "You Can't Underwrite a Feature Anymore"** (`writing/cant-underwrite-a-feature.html`,
+  AI × Finance, published on Anthony's approval outside the Tuesday queue). Mosaic/Keye rebuild timings from
+  transaction-intelligence commit history; Lightfield comparison; rebuttals; DEALITHIC framed as ambition.
+  Catalyst/Fragment "next two" section deliberately omitted until built. Source notes:
+  transaction-intelligence `docs/competitive/` (PR #273). This page uses a 15px floor on all small text,
+  16px h2, 20px body, Manrope instead of Syne. Homepage: new feat, Revenge Trading + Paper Money as sm cards,
+  Pre-Registered Bet moved to grid, "14 · ESSAYS PUBLISHED". Check: curl the URL for 200 + title.
+
 - **2026-10-20 — Weekly essay #2: "Revenge Trading Is Just Grief With a Margin Account"**
   (`writing/revenge-trading-grief.html`, plugs FalsiFire via `https://www.dealithic.co/falsifire`, which is
   now live). Figures cited inline to their sources: Tversky & Kahneman 1992 (λ = 2.25), Brown et al. 2024 JEL
