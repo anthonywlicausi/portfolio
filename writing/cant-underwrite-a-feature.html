@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You Can't Underwrite a Feature Anymore | Anthony W. Licausi</title>
+<meta name="description" content="AI collapsed the cost of building software. The parts of a deal that can't be rebuilt in a weekend are the only parts worth paying for.">
+<meta name="author" content="Anthony W. Licausi">
+<meta property="og:title" content="You Can't Underwrite a Feature Anymore | Anthony W. Licausi">
+<meta property="og:description" content="AI collapsed the cost of building software. The parts of a deal that can't be rebuilt in a weekend are the only parts worth paying for.">
+<meta property="og:url" content="https://anthonywlicausi.com/writing/cant-underwrite-a-feature.html">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@anthonywlicausi">
+<meta name="twitter:title" content="You Can't Underwrite a Feature Anymore | Anthony W. Licausi">
+<meta name="twitter:description" content="AI collapsed the cost of building software. The parts of a deal that can't be rebuilt in a weekend are the only parts worth paying for.">
+<link rel="canonical" href="https://anthonywlicausi.com/writing/cant-underwrite-a-feature.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "You Can't Underwrite a Feature Anymore",
+  "author": {"@type": "Person", "name": "Anthony W. Licausi", "url": "https://anthonywlicausi.com"},
+  "publisher": {"@type": "Person", "name": "Anthony W. Licausi"},
+  "datePublished": "2026-10-24",
+  "description": "AI collapsed the cost of building software. The parts of a deal that can't be rebuilt in a weekend are the only parts worth paying for.",
+  "url": "https://anthonywlicausi.com/writing/cant-underwrite-a-feature.html",
+  "keywords": "venture capital, underwriting, software moats, AI coding, private equity, deal engine, DEALITHIC, QUARRY, Anthony Licausi",
+  "about": [
+    {"@type": "Thing", "name": "Venture Capital"},
+    {"@type": "Thing", "name": "Artificial Intelligence"}
+  ],
+  "mentions": [
+    {"@type": "Organization", "name": "DEALITHIC", "url": "https://www.dealithic.co"}
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Manrope:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --d-bg: #020407; --d-bg2: #060a10; --d-border: rgba(255,255,255,0.055);
+  --d-text: rgba(234,236,242,0.78); --d-dim: rgba(234,236,242,0.40); --d-white: #eaecf2;
+  --l-bg: #f7f4ef; --l-bg2: #ffffff; --l-bg3: #ede9e2;
+  --l-text: #1a1410; --l-text2: rgba(26,20,16,0.62); --l-border: rgba(26,20,16,0.09);
+  --accent: #01C9FE; --l-accent: #0038CC;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { background: var(--d-bg); font-family: 'Syne', sans-serif; font-weight: 400; cursor: none; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+a { text-decoration: none; color: inherit; }
+#cur { position:fixed; width:8px; height:8px; background:var(--accent); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); box-shadow:0 0 12px var(--accent); }
+#cur-ring { position:fixed; width:28px; height:28px; border:1px solid rgba(1,201,254,.4); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:width .22s,height .22s; }
+body.hov #cur-ring { width:46px; height:46px; }
+.noise { position:fixed; inset:0; pointer-events:none; z-index:9000; opacity:.022; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size:180px 180px; }
+nav { position:fixed; top:0; left:0; right:0; z-index:200; padding:20px 64px; display:flex; align-items:center; gap:16px; background:linear-gradient(to bottom, rgba(2,4,7,.97) 60%, transparent); border-bottom:1px solid rgba(255,255,255,.03); }
+.nav-logo { font-family:'Bebas Neue',sans-serif; font-size:21px; letter-spacing:.12em; color:var(--d-white); }
+.nav-logo em { color:var(--accent); font-style:normal; }
+.nav-official { font-family:'Playfair Display',serif; font-style:italic; font-size:15px; color:var(--d-dim); }
+.article-header { position:relative; z-index:2; background:var(--d-bg); padding:120px 64px 72px; border-bottom:4px solid var(--accent); }
+.article-back { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.26em; color:var(--d-dim); text-transform:uppercase; display:inline-flex; align-items:center; gap:8px; margin-bottom:40px; transition:color .2s; }
+.article-back:hover { color:var(--accent); }
+.article-domain { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.2em; padding:3px 12px; border:1px solid rgba(1,201,254,.35); color:rgba(1,201,254,.95); text-transform:uppercase; display:inline-block; margin-bottom:24px; }
+.article-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(46px,6.8vw,86px); line-height:.94; letter-spacing:-.01em; color:var(--d-white); max-width:900px; margin-bottom:32px; }
+.article-meta { display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
+.article-author { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.2em; color:var(--accent); text-transform:uppercase; }
+.article-date { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.16em; color:var(--d-dim); }
+.article-read { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.16em; color:var(--d-dim); }
+.article-body { background:var(--l-bg); padding:80px 64px 120px; }
+.article-content { max-width:720px; margin:0 auto; }
+.article-content p { font-family:'Playfair Display',serif; font-size:20px; line-height:1.9; color:var(--l-text2); margin-bottom:32px; }
+.article-content p strong { color:var(--l-text); font-weight:700; font-family:'Manrope',sans-serif; }
+.article-content h2 { font-family:'Share Tech Mono',monospace; font-size:16px; letter-spacing:.36em; color:var(--l-accent); text-transform:uppercase; margin:56px 0 20px; display:flex; align-items:center; gap:12px; }
+.article-content h2::after { content:''; height:1px; flex:1; background:rgba(0,56,204,.18); }
+.article-content blockquote { border-left:3px solid var(--l-accent); padding:8px 0 8px 28px; margin:40px 0; }
+.article-content blockquote p { font-size:24px; font-style:italic; color:var(--l-text); margin-bottom:0; line-height:1.65; }
+.stat-block { background:var(--l-bg2); border:1px solid var(--l-border); border-left:3px solid var(--l-accent); padding:28px 32px; margin:40px 0; }
+.stat-row { display:flex; align-items:baseline; gap:18px; padding:10px 0; border-bottom:1px solid var(--l-border); }
+.stat-row:last-child { border-bottom:none; padding-bottom:0; }
+.stat-num { font-family:'Bebas Neue',sans-serif; font-size:38px; color:var(--l-accent); line-height:1; flex-shrink:0; min-width:72px; }
+.stat-label { font-family:'Manrope',sans-serif; font-size:16px; color:var(--l-text2); line-height:1.5; }
+.related-reading { margin-top:72px; padding-top:40px; border-top:1px solid var(--l-border); }
+.rr-label { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.38em; color:var(--l-accent); text-transform:uppercase; margin-bottom:20px; }
+.rr-links { display:flex; flex-direction:column; gap:10px; }
+.rr-link { display:flex; align-items:center; gap:20px; padding:16px 20px; border:1px solid var(--l-border); background:var(--l-bg2); transition:border-color .2s,background .2s; cursor:none; }
+.rr-link:hover { border-color:var(--l-accent); background:var(--l-bg); }
+.rr-domain { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.18em; color:var(--l-text2); text-transform:uppercase; white-space:nowrap; min-width:160px; flex-shrink:0; }
+.rr-title { font-family:'Playfair Display',serif; font-size:17px; color:var(--l-text); line-height:1.35; transition:color .2s; }
+.rr-link:hover .rr-title { color:var(--l-accent); }
+footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid var(--l-border); background:var(--l-bg3); display:flex; justify-content:space-between; align-items:center; }
+.foot-copy { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.22em; color:var(--l-text2); }
+.foot-right { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.16em; color:var(--l-text2); opacity:.6; }
+@media (max-width:768px) {
+  nav, .article-header, .article-body, footer { padding-left:24px; padding-right:24px; }
+  .article-header { padding-top:100px; padding-bottom:48px; }
+  .article-body { padding-top:48px; padding-bottom:72px; }
+  .rr-domain { display:none; }
+  .stat-num { font-size:28px; min-width:56px; }
+}
+</style>
+</head>
+<body>
+<div class="noise"></div>
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<nav>
+  <a href="../index.html" class="nav-logo">ANTHONY W<em>.</em> LICAUSI</a>
+  <span class="nav-official">Official Site</span>
+</nav>
+
+<header class="article-header">
+  <a href="../index.html#thinking" class="article-back">&larr; Back to Writing</a>
+  <div class="article-domain">AI &times; Finance</div>
+  <h1 class="article-title">You Can&rsquo;t Underwrite a Feature Anymore</h1>
+  <div class="article-meta">
+    <span class="article-author">Anthony W. Licausi</span>
+    <span class="article-date">October 24, 2026</span>
+    <span class="article-read">6 min read</span>
+  </div>
+</header>
+
+<main class="article-body">
+  <div class="article-content">
+
+    <p>On April 22, Mosaic announced an $18 million Series A led by Radical Ventures. Good company. Deterministic deal modeling for private equity, used by firms like Warburg Pincus, CVC and Evercore. If you&rsquo;ve ever spent a Saturday night as an associate chasing a broken link in an LBO, you know exactly why that product exists.</p>
+
+    <p>Four days later, on April 26, I sat down to build the same core into DEALITHIC&rsquo;s Deal Engine.</p>
+
+    <p>The first commit, a rollback checkpoint, went in at 1:48 AM. Color-coded Excel, IRR decomposition and a value creation library landed at 12:48 PM. The LBO export with live formulas, the piece I&rsquo;d labeled &ldquo;Mosaic parity complete,&rdquo; went in at 2:02 PM.</p>
+
+    <p>About twelve hours.</p>
+
+    <p>Then on October 20, a research bot I run flagged Keye, an AI due-diligence platform for PE. Keye raised a $5 million seed led by Sorenson Capital, with General Catalyst and Y Combinator in the round. Smart product. Source tracing, raw-data analytics, deterministic math, benchmarking against your own past deals.</p>
+
+    <p>I asked how it compared to our engine around 3 PM. Deterministic answers shipped at 3:38. Source tracing, where every number in the memo cites its CIM page and gets flagged as an estimate if the quote can&rsquo;t be found, shipped at 5:07. Cohorts, NRR, customer concentration and revenue bridges from a raw CSV shipped at 5:58. Benchmarking, the feature we&rsquo;d labeled &ldquo;later,&rdquo; shipped at 5:59.</p>
+
+    <p>About three hours. Everything is shipped to our codebase, with commit timestamps.</p>
+
+    <p>I&rsquo;m not telling you this to dunk on anyone. Both teams built real products and both rounds made sense on the information their investors had. I&rsquo;m telling you because if a guy with a laptop and a pot of coffee can rebuild the core of a funded product in an afternoon, then the core was never what the check was paying for. And a lot of term sheets still read like it was.</p>
+
+    <h2>The old math</h2>
+
+    <p>For twenty years the venture logic on software was simple. Building was expensive and slow. A good team that could ship a hard product had a head start measured in years, and the code itself was the moat. Hire twenty engineers, burn eighteen months, and anyone who wants to catch you has to do the same.</p>
+
+    <p>That math is dead.</p>
+
+    <p>I&rsquo;ve been writing code for thirty years and working in finance and investment banking for twenty. The coding tools I use today don&rsquo;t make me twice as fast. They change what &ldquo;a lot of work&rdquo; even means. The part that used to take a team a quarter, the plumbing, the CRUD, the parsers, the export formatting, now takes an evening. What&rsquo;s left is the part that was always hard: knowing exactly what an IC memo needs to say, which number a partner is going to poke at, and where the model is lying to you.</p>
+
+    <p>That&rsquo;s domain knowledge. It used to be the input to the product. Now it&rsquo;s most of the product.</p>
+
+    <h2>Where it gets honest: Lightfield</h2>
+
+    <p>Here&rsquo;s a harder case. Lightfield raised a $47 million Series A led by a16z in September. It&rsquo;s an AI-native CRM that builds itself from your email and calls, and it&rsquo;s very good. More than 5,000 companies have signed up since its November 2025 launch, and the founders have disclosed 400% net dollar retention.</p>
+
+    <p>QUARRY, our CRM, is not a better Lightfield. It&rsquo;s a different animal. QUARRY has an AI voice dialer working the phones today, with do-not-call checks, calling-hours limits and voicemail detection built in. On Lightfield&rsquo;s pricing page that dialer is &ldquo;coming soon.&rdquo; QUARRY plugs straight into a map of 93,000+ funds, family offices and angels, a deal engine, and the fundraising tools founders actually use to raise. It&rsquo;s built for people raising and deploying capital, not for every B2B sales team on earth.</p>
+
+    <p>Lightfield is ahead where it counts for its market. The polish is better. It has SOC 2 Type II and HIPAA. It ships a changelog every week. And 400% NDR is not something you rebuild over a weekend. You earn it, customer by customer.</p>
+
+    <p>That&rsquo;s the point. The features are rebuildable. The trust isn&rsquo;t.</p>
+
+    <h2>&ldquo;Yeah, but they have…&rdquo;</h2>
+
+    <p>I&rsquo;ve heard all of these already. Fair questions. Here are the answers.</p>
+
+    <p><strong>&ldquo;They have 5,000 customers.&rdquo;</strong> They do, and that&rsquo;s the real asset. Code got cheap; getting in front of customers didn&rsquo;t. That&rsquo;s exactly why it&rsquo;s the thing to underwrite.</p>
+
+    <p><strong>&ldquo;400% net dollar retention.&rdquo;</strong> Can&rsquo;t fake it, won&rsquo;t try. We have two paying clients. That metric is earned, and it&rsquo;s worth more than the feature list.</p>
+
+    <p><strong>&ldquo;SOC 2, HIPAA, enterprise security.&rdquo;</strong> That&rsquo;s an audit, months and money, not code. Concede it. It&rsquo;s a real moat and it should be priced like one.</p>
+
+    <p><strong>&ldquo;The team is stacked.&rdquo;</strong> It usually is. Talent is still a moat. The question is whether you&rsquo;re paying for talent to rebuild commodity features or for talent that builds distribution and trust.</p>
+
+    <p><strong>&ldquo;Their data compounds.&rdquo;</strong> Agreed, and that&rsquo;s the best argument any of these companies has. It&rsquo;s also the opposite of a feature argument.</p>
+
+    <p><strong>&ldquo;You copied the demo, not the company.&rdquo;</strong> Correct. That&rsquo;s my whole argument.</p>
+
+    <h2>What this means if you write checks</h2>
+
+    <p>If the core product can be rebuilt in days, you should underwrite three things harder than you did five years ago.</p>
+
+    <p>Distribution. Who already has the customer, and what does it cost them to get the next one?</p>
+
+    <p>Trust. Certifications, track record, the fact that a mega-fund lets you anywhere near its models. That takes years and it&rsquo;s the part a weekend can&rsquo;t touch.</p>
+
+    <p>Data. What does the company see that nobody else sees, and does it get better with every customer?</p>
+
+    <p>The feature list should be the last slide, not the first one. A demo that wows a partner on Tuesday can be rebuilt by Saturday.</p>
+
+    <h2>So what&rsquo;s DEALITHIC</h2>
+
+    <p>I&rsquo;m building DEALITHIC to be the operating infrastructure for private capital formation. Shape a company, build the raise, match it to the right investors, run it afterward. We&rsquo;re not there yet. Two paying clients is a start, not a victory lap.</p>
+
+    <p>But the bet is the same one this essay makes. Features are cheap now, so we build them fast and spend our time on the parts that compound: the investor map, the deal data, and the trust of the people who use it.</p>
+
+    <p>If you underwrite private markets software, ask me for the commit history. It&rsquo;s more interesting than the deck.</p>
+
+    <div class="related-reading">
+      <div class="rr-label">Related Reading</div>
+      <div class="rr-links">
+        <a href="speed-as-competitive-moat.html" class="rr-link">
+          <span class="rr-domain">Philosophy &times; Technology</span>
+          <span class="rr-title">Speed as a Competitive Moat &rarr;</span>
+        </a>
+        <a href="ai-cost-trap.html" class="rr-link">
+          <span class="rr-domain">AI &times; Finance</span>
+          <span class="rr-title">The AI Cost Trap &rarr;</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <span class="foot-copy">&copy; 2026 ANTHONY W. LICAUSI &middot; NEW YORK</span>
+  <span class="foot-right">ALWAYS BUILDING</span>
+</footer>
+
+<script>
+const cur = document.getElementById('cur');
+const ring = document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
+document.querySelectorAll('a').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
+});
+(function loop(){ rx+=(mx-rx)*0.1; ry+=(my-ry)*0.1; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(loop); })();
+</script>
+</body>
+</html>
