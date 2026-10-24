@@ -41,7 +41,7 @@
   --d-bg: #020407; --d-bg2: #060a10; --d-border: rgba(255,255,255,0.055);
   --d-text: rgba(234,236,242,0.78); --d-dim: rgba(234,236,242,0.40); --d-white: #eaecf2;
   --l-bg: #f7f4ef; --l-bg2: #ffffff; --l-bg3: #ede9e2;
-  --l-text: #1a1410; --l-text2: rgba(26,20,16,0.62); --l-border: rgba(26,20,16,0.09);
+  --l-text: #1a1410; --l-text2: rgba(26,20,16,0.86); --l-border: rgba(26,20,16,0.09);
   --accent: #01C9FE; --l-accent: #0038CC;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -122,19 +122,19 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 <main class="article-body">
   <div class="article-content">
 
-    <p>On April 22, Mosaic announced an $18 million Series A led by Radical Ventures. Good company. Deterministic deal modeling for private equity, used by firms like Warburg Pincus, CVC and Evercore. If you&rsquo;ve ever spent a Saturday night as an associate chasing a broken link in an LBO, you know exactly why that product exists.</p>
+    <p>On April 22, <a href="https://www.mosaic.pe" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">Mosaic</a> <a href="https://www.mosaic.pe/news-blog-posts/series-a" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">announced an $18 million Series A</a> led by <a href="https://radical.vc" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">Radical Ventures</a>. Good company. Deterministic deal modeling for private equity, used by firms like <a href="https://www.warburgpincus.com" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">Warburg Pincus</a>, <a href="https://www.cvc.com" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">CVC</a> and <a href="https://www.evercore.com" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">Evercore</a>. If you&rsquo;ve ever spent a Saturday night as an associate chasing a broken link in an LBO, you know exactly why that product exists.</p>
 
-    <p>Four days later, on April 26, I sat down to build the same core into DEALITHIC&rsquo;s Deal Engine.</p>
+    <p>Four days later, on April 26, I sat down to build the same core into <a href="https://www.dealithic.co" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">DEALITHIC</a>&rsquo;s <a href="https://www.dealithic.co/products/deal-engine" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">Deal Engine</a>.</p>
 
     <p>The first commit, a rollback checkpoint, went in at 1:48 AM. Color-coded Excel, IRR decomposition and a value creation library landed at 12:48 PM. The LBO export with live formulas, the piece I&rsquo;d labeled &ldquo;Mosaic parity complete,&rdquo; went in at 2:02 PM.</p>
 
-    <p>About twelve hours.</p>
+    <p><strong>About twelve hours.</strong></p>
 
-    <p>Then on October 20, a research bot I run flagged Keye, an AI due-diligence platform for PE. Keye raised a $5 million seed led by Sorenson Capital, with General Catalyst and Y Combinator in the round. Smart product. Source tracing, raw-data analytics, deterministic math, benchmarking against your own past deals.</p>
+    <p>Then on October 20, a research bot I run flagged <a href="https://www.keye.co" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">Keye</a>, an AI due-diligence platform for PE. Keye <a href="https://www.keye.co/post/keye-we-built-the-diligence-platform-we-wish-we-had" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">raised a $5 million seed</a> led by <a href="https://www.sorensoncapital.com" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">Sorenson Capital</a>, with <a href="https://www.generalcatalyst.com" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">General Catalyst</a> and <a href="https://www.ycombinator.com" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">Y Combinator</a> in the round. Smart product. Source tracing, raw-data analytics, deterministic math, benchmarking against your own past deals.</p>
 
     <p>I asked how it compared to our engine around 3 PM. Deterministic answers shipped at 3:38. Source tracing, where every number in the memo cites its CIM page and gets flagged as an estimate if the quote can&rsquo;t be found, shipped at 5:07. Cohorts, NRR, customer concentration and revenue bridges from a raw CSV shipped at 5:58. Benchmarking, the feature we&rsquo;d labeled &ldquo;later,&rdquo; shipped at 5:59.</p>
 
-    <p>About three hours. Everything is shipped to our codebase, with commit timestamps.</p>
+    <p><strong>About three hours.</strong> Everything is shipped to our codebase, with commit timestamps.</p>
 
     <p>I&rsquo;m not telling you this to dunk on anyone. Both teams built real products and both rounds made sense on the information their investors had. I&rsquo;m telling you because if a guy with a laptop and a pot of coffee can rebuild the core of a funded product in an afternoon, then the core was never what the check was paying for. And a lot of term sheets still read like it was.</p>
 
@@ -142,21 +142,21 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 
     <p>For twenty years the venture logic on software was simple. Building was expensive and slow. A good team that could ship a hard product had a head start measured in years, and the code itself was the moat. Hire twenty engineers, burn eighteen months, and anyone who wants to catch you has to do the same.</p>
 
-    <p>That math is dead.</p>
+    <p><strong>That math is dead.</strong></p>
 
     <p>I&rsquo;ve been writing code for thirty years and working in finance and investment banking for twenty. The coding tools I use today don&rsquo;t make me twice as fast. They change what &ldquo;a lot of work&rdquo; even means. The part that used to take a team a quarter, the plumbing, the CRUD, the parsers, the export formatting, now takes an evening. What&rsquo;s left is the part that was always hard: knowing exactly what an IC memo needs to say, which number a partner is going to poke at, and where the model is lying to you.</p>
 
-    <p>That&rsquo;s domain knowledge. It used to be the input to the product. Now it&rsquo;s most of the product.</p>
+    <p>That&rsquo;s domain knowledge. It used to be the input to the product. <strong>Now it&rsquo;s most of the product.</strong></p>
 
     <h2>Where it gets honest: Lightfield</h2>
 
-    <p>Here&rsquo;s a harder case. Lightfield raised a $47 million Series A led by a16z in September. It&rsquo;s an AI-native CRM that builds itself from your email and calls, and it&rsquo;s very good. More than 5,000 companies have signed up since its November 2025 launch, and the founders have disclosed 400% net dollar retention.</p>
+    <p>Here&rsquo;s a harder case. <a href="https://lightfield.app" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">Lightfield</a> <a href="https://a16z.com/announcement/investing-in-lightfield/" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">raised a $47 million Series A</a> led by <a href="https://a16z.com" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">a16z</a> in September. It&rsquo;s an AI-native CRM that builds itself from your email and calls, and it&rsquo;s very good. More than 5,000 companies have signed up since its November 2025 launch, and the founders have disclosed 400% net dollar retention.</p>
 
-    <p>QUARRY, our CRM, is not a better Lightfield. It&rsquo;s a different animal. QUARRY has an AI voice dialer working the phones today, with do-not-call checks, calling-hours limits and voicemail detection built in. On Lightfield&rsquo;s pricing page that dialer is &ldquo;coming soon.&rdquo; QUARRY plugs straight into a map of 93,000+ funds, family offices and angels, a deal engine, and the fundraising tools founders actually use to raise. It&rsquo;s built for people raising and deploying capital, not for every B2B sales team on earth.</p>
+    <p><a href="https://crm.dealithic.co" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">QUARRY</a>, our CRM, is not a better Lightfield. It&rsquo;s a different animal. QUARRY has an AI voice dialer working the phones today, with do-not-call checks, calling-hours limits and voicemail detection built in. On Lightfield&rsquo;s pricing page that dialer is &ldquo;coming soon.&rdquo; QUARRY plugs straight into a map of 93,000+ funds, family offices and angels, a deal engine, and the fundraising tools founders actually use to raise. It&rsquo;s built for people raising and deploying capital, not for every B2B sales team on earth.</p>
 
     <p>Lightfield is ahead where it counts for its market. The polish is better. It has SOC 2 Type II and HIPAA. It ships a changelog every week. And 400% NDR is not something you rebuild over a weekend. You earn it, customer by customer.</p>
 
-    <p>That&rsquo;s the point. The features are rebuildable. The trust isn&rsquo;t.</p>
+    <p>That&rsquo;s the point. <strong>The features are rebuildable. The trust isn&rsquo;t.</strong></p>
 
     <h2>&ldquo;Yeah, but they have…&rdquo;</h2>
 
@@ -178,13 +178,13 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 
     <p>If the core product can be rebuilt in days, you should underwrite three things harder than you did five years ago.</p>
 
-    <p>Distribution. Who already has the customer, and what does it cost them to get the next one?</p>
+    <p><strong>Distribution.</strong> Who already has the customer, and what does it cost them to get the next one?</p>
 
-    <p>Trust. Certifications, track record, the fact that a mega-fund lets you anywhere near its models. That takes years and it&rsquo;s the part a weekend can&rsquo;t touch.</p>
+    <p><strong>Trust.</strong> Certifications, track record, the fact that a mega-fund lets you anywhere near its models. That takes years and it&rsquo;s the part a weekend can&rsquo;t touch.</p>
 
-    <p>Data. What does the company see that nobody else sees, and does it get better with every customer?</p>
+    <p><strong>Data.</strong> What does the company see that nobody else sees, and does it get better with every customer?</p>
 
-    <p>The feature list should be the last slide, not the first one. A demo that wows a partner on Tuesday can be rebuilt by Saturday.</p>
+    <p><strong>The feature list should be the last slide, not the first one.</strong> A demo that wows a partner on Tuesday can be rebuilt by Saturday.</p>
 
     <h2>So what&rsquo;s DEALITHIC</h2>
 
@@ -192,7 +192,7 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 
     <p>But the bet is the same one this essay makes. Features are cheap now, so we build them fast and spend our time on the parts that compound: the investor map, the deal data, and the trust of the people who use it.</p>
 
-    <p>If you underwrite private markets software, ask me for the commit history. It&rsquo;s more interesting than the deck.</p>
+    <p><strong>If you underwrite private markets software, ask me for the commit history.</strong> It&rsquo;s more interesting than the deck.</p>
 
     <div class="related-reading">
       <div class="rr-label">Related Reading</div>
