@@ -8,6 +8,20 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-4QRVHW1HL2');
+  // Clicks through to DEALITHIC properties = the conversion this site exists for
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    try {
+      var u = new URL(a.href, location.href);
+      if (/(^|\.)dealithic\.co$/.test(u.hostname)) {
+        gtag('event', 'dealithic_click', { link_host: u.hostname, link_path: u.pathname, page_path: location.pathname });
+      }
+      if (/(^|\.)barenbergcapital\.com$/.test(u.hostname)) {
+        gtag('event', 'obsidian_click', { link_host: u.hostname, link_path: u.pathname, page_path: location.pathname });
+      }
+    } catch (err) {}
+  });
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,18 +59,18 @@
   ]
 }
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Syne:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Manrope:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 <style>
 :root {
   --d-bg: #020407; --d-bg2: #060a10; --d-border: rgba(255,255,255,0.055);
   --d-text: rgba(234,236,242,0.78); --d-dim: rgba(234,236,242,0.40); --d-white: #eaecf2;
   --l-bg: #f7f4ef; --l-bg2: #ffffff; --l-bg3: #ede9e2;
-  --l-text: #1a1410; --l-text2: rgba(26,20,16,0.62); --l-border: rgba(26,20,16,0.09);
+  --l-text: #1a1410; --l-text2: rgba(26,20,16,0.86); --l-border: rgba(26,20,16,0.09);
   --accent: #1155FF; --l-accent: #0038CC;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 16px; }
-body { background: var(--d-bg); font-family: 'Syne', sans-serif; font-weight: 400; cursor: none; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+body { background: var(--d-bg); font-family: 'Manrope', sans-serif; font-weight: 400; cursor: none; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 a { text-decoration: none; color: inherit; }
 #cur { position:fixed; width:8px; height:8px; background:var(--accent); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); box-shadow:0 0 12px var(--accent); }
 #cur-ring { position:fixed; width:28px; height:28px; border:1px solid rgba(17,85,255,.4); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:width .22s,height .22s; }
@@ -65,41 +79,51 @@ body.hov #cur-ring { width:46px; height:46px; }
 nav { position:fixed; top:0; left:0; right:0; z-index:200; padding:20px 64px; display:flex; align-items:center; gap:16px; background:linear-gradient(to bottom, rgba(2,4,7,.97) 60%, transparent); border-bottom:1px solid rgba(255,255,255,.03); }
 .nav-logo { font-family:'Bebas Neue',sans-serif; font-size:21px; letter-spacing:.12em; color:var(--d-white); }
 .nav-logo em { color:var(--accent); font-style:normal; }
-.nav-official { font-family:'Playfair Display',serif; font-style:italic; font-size:13px; color:var(--d-dim); }
+.nav-official { font-family:'Playfair Display',serif; font-style:italic; font-size:15px; color:var(--d-dim); }
 
 .article-header { position:relative; z-index:2; background:var(--d-bg); padding:120px 64px 72px; border-bottom:4px solid var(--accent); }
-.article-back { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.26em; color:var(--d-dim); text-transform:uppercase; display:inline-flex; align-items:center; gap:8px; margin-bottom:40px; transition:color .2s; }
+.article-back { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.26em; color:var(--d-dim); text-transform:uppercase; display:inline-flex; align-items:center; gap:8px; margin-bottom:40px; transition:color .2s; }
 .article-back:hover { color:var(--accent); }
-.article-domain { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.2em; padding:3px 12px; border:1px solid rgba(17,85,255,.35); color:rgba(17,85,255,.9); text-transform:uppercase; display:inline-block; margin-bottom:24px; }
+.article-domain { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.2em; padding:3px 12px; border:1px solid rgba(17,85,255,.35); color:rgba(17,85,255,.9); text-transform:uppercase; display:inline-block; margin-bottom:24px; }
 .article-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(48px,7vw,88px); line-height:.92; letter-spacing:-.01em; color:var(--d-white); max-width:900px; margin-bottom:32px; }
 .article-meta { display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
-.article-author { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.2em; color:var(--accent); text-transform:uppercase; }
-.article-date { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.16em; color:var(--d-dim); }
-.article-read { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.16em; color:var(--d-dim); }
+.article-author { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.2em; color:var(--accent); text-transform:uppercase; }
+.article-date { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.16em; color:var(--d-dim); }
+.article-read { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.16em; color:var(--d-dim); }
 
 .article-body { background:var(--l-bg); padding:80px 64px 120px; }
 .article-content { max-width:720px; margin:0 auto; }
 .article-content p { font-family:'Playfair Display',serif; font-size:20px; line-height:1.9; color:var(--l-text2); margin-bottom:32px; }
-.article-content p strong { color:var(--l-text); font-weight:700; font-family:'Syne',sans-serif; }
-.article-content h2 { font-family:'Share Tech Mono',monospace; font-size:11px; letter-spacing:.36em; color:var(--l-accent); text-transform:uppercase; margin:56px 0 20px; display:flex; align-items:center; gap:12px; }
+.article-content p strong { color:#0d0a08; font-weight:700; font-family:inherit; }
+.article-content p strong a { font-weight:700; }
+.article-content h2 { font-family:'Share Tech Mono',monospace; font-size:16px; letter-spacing:.36em; color:var(--l-accent); text-transform:uppercase; margin:56px 0 20px; display:flex; align-items:center; gap:12px; }
 .article-content h2::after { content:''; height:1px; flex:1; background:rgba(0,56,204,.18); }
 .article-content blockquote { border-left:3px solid var(--l-accent); padding:8px 0 8px 28px; margin:40px 0; }
 .article-content blockquote p { font-size:24px; font-style:italic; color:var(--l-text); margin-bottom:0; line-height:1.65; }
 .article-content .equation { font-family:'Share Tech Mono',monospace; font-size:15px; background:var(--l-bg3); border:1px solid var(--l-border); padding:24px 28px; margin:40px 0; color:var(--l-text); line-height:2; }
-.article-content .equation .eq-comment { color:rgba(26,20,16,.45); font-size:12px; }
+.article-content .equation .eq-comment { color:rgba(26,20,16,.45); font-size:15px; }
 .article-content .equation .eq-key { color:var(--l-accent); }
+.cta-box { margin-top:56px; padding:36px 40px; background:var(--d-bg); border-left:4px solid #01C9FE; }
+.cta-label { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.2em; color:#01C9FE; text-transform:uppercase; margin-bottom:14px; }
+.cta-head { font-family:'Bebas Neue',sans-serif; font-size:clamp(32px,4.4vw,46px); line-height:1; letter-spacing:.01em; color:var(--d-white); margin-bottom:14px; }
+.article-content .cta-text { font-family:'Manrope',sans-serif; font-size:18px; line-height:1.6; color:var(--d-white); margin-bottom:26px; max-width:620px; }
+.cta-buttons { display:flex; flex-wrap:wrap; gap:14px; }
+.cta-btn { font-family:'Share Tech Mono',monospace; font-size:16px; letter-spacing:.16em; text-transform:uppercase; padding:16px 26px; border:1px solid #01C9FE; color:var(--d-white); transition:background .2s,color .2s; cursor:none; }
+.cta-btn.primary { background:#01C9FE; color:#020407; font-weight:700; }
+.cta-btn:hover { background:var(--d-white); color:#020407; border-color:var(--d-white); }
+@media(max-width:700px){ .cta-box { padding:28px 22px; } .cta-btn { width:100%; text-align:center; } }
 .related-reading { margin-top:72px; padding-top:40px; border-top:1px solid var(--l-border); }
-.rr-label { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.38em; color:var(--l-accent); text-transform:uppercase; margin-bottom:20px; }
+.rr-label { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.38em; color:var(--l-accent); text-transform:uppercase; margin-bottom:20px; }
 .rr-links { display:flex; flex-direction:column; gap:10px; }
 .rr-link { display:flex; align-items:center; gap:20px; padding:16px 20px; border:1px solid var(--l-border); background:var(--l-bg2); transition:border-color .2s,background .2s; cursor:none; }
 .rr-link:hover { border-color:var(--l-accent); background:var(--l-bg); }
-.rr-domain { font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:.18em; color:var(--l-text2); text-transform:uppercase; white-space:nowrap; min-width:160px; flex-shrink:0; }
+.rr-domain { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.18em; color:var(--l-text2); text-transform:uppercase; white-space:nowrap; min-width:160px; flex-shrink:0; }
 .rr-title { font-family:'Playfair Display',serif; font-size:17px; color:var(--l-text); line-height:1.35; transition:color .2s; }
 .rr-link:hover .rr-title { color:var(--l-accent); }
 
 footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid var(--l-border); background:var(--l-bg3); display:flex; justify-content:space-between; align-items:center; }
-.foot-copy { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.22em; color:var(--l-text2); }
-.foot-right { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.16em; color:var(--l-text2); opacity:.6; }
+.foot-copy { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.22em; color:var(--l-text2); }
+.foot-right { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.16em; color:var(--l-text2); opacity:.6; }
 
 @media (max-width:768px) {
   nav, .article-header, .article-body, footer { padding-left:24px; padding-right:24px; }
@@ -132,9 +156,9 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 <main class="article-body">
   <div class="article-content">
 
-    <p>Most people learn the Kelly formula and immediately start calculating position sizes. They're missing the deeper point entirely.</p>
+    <p>Most people learn the <a href="https://en.wikipedia.org/wiki/Kelly_criterion" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">Kelly formula</a> and immediately start calculating position sizes. They're missing the deeper point entirely.</p>
 
-    <p>The formula: <strong>f* = (bp - q) / b</strong>. Where b = net odds received on a win, p = probability of winning, q = 1 - p. Simple enough. But what Kelly is actually expressing is the fraction of capital to allocate to any opportunity in order to maximize long-run geometric growth rate. Not expected value. Geometric growth rate. That distinction matters more than most people realize.</p>
+    <p>The formula: <strong>f* = (bp - q) / b</strong>. Where b = net odds received on a win, p = probability of winning, q = 1 - p. Simple enough. But what Kelly is actually expressing is the fraction of capital to allocate to any opportunity in order to maximize long-run geometric growth rate. <strong>Not expected value. Geometric growth rate.</strong> That distinction matters more than most people realize.</p>
 
     <div class="equation">
       <div><span class="eq-comment">// Kelly Criterion</span></div>
@@ -153,7 +177,7 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 
     <p>Most introductions to Kelly focus on gambling or trading: if you have a 60% edge on a coin flip that pays 1:1, Kelly says bet 20% of your bankroll. Bet more, and variance kills you before the edge pays out. Bet less, and you're leaving compounding on the table. The math is clean. The application is usually wrong.</p>
 
-    <p>The common mistake is treating Kelly as a precision tool in an imprecise world. You never actually know your edge with certainty. You never know your probability of winning exactly. The formula requires inputs you don't have. So practitioners use half-Kelly, quarter-Kelly — deliberately undershooting the theoretical optimum to protect against the overconfidence baked into their own estimates.</p>
+    <p><strong>The common mistake is treating Kelly as a precision tool in an imprecise world.</strong> You never actually know your edge with certainty. You never know your probability of winning exactly. The formula requires inputs you don't have. So practitioners use half-Kelly, quarter-Kelly — deliberately undershooting the theoretical optimum to protect against the overconfidence baked into their own estimates.</p>
 
     <p>That's the right lesson for trading. But it's still thinking too small.</p>
 
@@ -161,7 +185,7 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 
     <p>Kelly is a statement about the relationship between edge, variance, and time. Apply it to any repeated decision under uncertainty and it gives you the same answer: the optimal commitment fraction is proportional to your edge divided by your variance. High edge, low variance — commit heavily. Low edge, high variance — stay small or stay out entirely.</p>
 
-    <p>Negative Kelly (when the formula returns a negative number) isn't just a technical result. It's the math telling you: do not play this game. At zero Kelly, you're in a fair game — no edge, no reason to bet. Positive Kelly means you have edge and should commit proportionally. The formula is a decision filter as much as a sizing tool.</p>
+    <p>Negative Kelly (when the formula returns a negative number) isn't just a technical result. It's the math telling you: do not play this game. At zero Kelly, you're in a fair game — no edge, no reason to bet. Positive Kelly means you have edge and should commit proportionally. <strong>The formula is a decision filter as much as a sizing tool.</strong></p>
 
     <blockquote>
       <p>“Kelly isn't telling you how much to bet. It's telling you whether you should be playing at all — and how seriously to take your own edge estimate.”</p>
@@ -173,15 +197,15 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 
     <p><strong>Starting a company:</strong> What's your edge in this market? What's the variance — how wide is the distribution of outcomes? How much of your time, capital, and energy should you allocate? Kelly gives you a framework for answering all three. High edge (massive market inefficiency, no AI-native solution, domain expertise), manageable variance (bootstrapped, max loss defined) — Kelly says bet significantly.</p>
 
-    <p><strong>Holding a belief:</strong> How much should you update your worldview based on new information? Kelly translates: what's the evidence-to-noise ratio? How much should you shift your credence? Overconfident priors are the epistemic equivalent of overbetting. Permanent skepticism leaves compounding on the table.</p>
+    <p><strong>Holding a belief:</strong> How much should you update your worldview based on new information? Kelly translates: what's the evidence-to-noise ratio? How much should you shift your credence? Overconfident <a href="bayesian-investor.html" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);">priors</a> are the epistemic equivalent of overbetting. Permanent skepticism leaves compounding on the table.</p>
 
     <p><strong>Building a team:</strong> How much should you invest in a relationship or partnership? Edge (track record, alignment, complementary skills) divided by variance (reliability, conflict potential, opportunity cost). Kelly still works.</p>
 
     <h2>The Obsidian Quant Connection</h2>
 
-    <p>I didn't build Obsidian Quant as a prediction engine. I built it as an edge-and-variance accounting engine. The algorithm isn't trying to forecast what happens next — it's trying to allocate capital optimally given estimated edge and variance at each moment. That's a fundamentally different frame.</p>
+    <p><strong>I didn't build <a href="https://quant.barenbergcapital.com/performance?utm_source=anthonywlicausi&utm_medium=essay&utm_campaign=kelly-criterion" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">Obsidian Quant</a> as a prediction engine. I built it as an edge-and-variance accounting engine.</strong> The algorithm isn't trying to forecast what happens next — it's trying to allocate capital optimally given estimated edge and variance at each moment. That's a fundamentally different frame.</p>
 
-    <p>Most retail traders lose money because they bet based on conviction, not edge. They feel certain something will go up, so they bet large. Kelly would ask: what's your actual win rate at this setup? What's the average win vs. average loss? Run the numbers and most high-conviction bets are actually negative Kelly — the confidence isn't backed by edge.</p>
+    <p><strong>Most retail traders lose money because they bet based on conviction, not edge.</strong> They feel certain something will go up, so they bet large. Kelly would ask: what's your actual win rate at this setup? What's the average win vs. average loss? Run the numbers and most high-conviction bets are actually negative Kelly — the confidence isn't backed by edge.</p>
 
     <p>The algorithm removes that bias. It sizes positions based on measured historical edge, not felt conviction. The felt conviction is still there — I still have views. But Kelly keeps the sizing honest.</p>
 
@@ -193,7 +217,16 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 
     <p>Once you see decisions through that lens, you can't unsee it. Every allocation of capital, time, or energy becomes a question: what's my edge, what's my variance, and how does this compound over time? The formula is a lens. Applied consistently, it quietly separates the decisions that compound from the ones that blow you up.</p>
 
-    <p>That's not a trading philosophy. That's a philosophy of action.</p>
+    <p><strong>That's not a trading philosophy. That's a philosophy of action.</strong></p>
+
+    <div class="cta-box">
+      <div class="cta-label">Obsidian Quant &middot; Algorithmic Capital</div>
+      <div class="cta-head">The system behind this essay</div>
+      <p class="cta-text">The edge doesn&rsquo;t belong to the biggest fund anymore &mdash; it belongs to whoever wrote the better algorithm. The full record, disclosures included, sits on the public performance page.</p>
+      <div class="cta-buttons">
+        <a class="cta-btn primary" href="https://quant.barenbergcapital.com/performance?utm_source=anthonywlicausi&amp;utm_medium=essay&amp;utm_campaign=kelly-criterion&amp;utm_content=essay_cta" target="_blank" rel="noopener">See Obsidian Quant &rarr;</a>
+      </div>
+    </div>
 
     <div class="related-reading">
       <div class="rr-label">Related Reading</div>

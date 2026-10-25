@@ -8,6 +8,20 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-4QRVHW1HL2');
+  // Clicks through to DEALITHIC properties = the conversion this site exists for
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    try {
+      var u = new URL(a.href, location.href);
+      if (/(^|\.)dealithic\.co$/.test(u.hostname)) {
+        gtag('event', 'dealithic_click', { link_host: u.hostname, link_path: u.pathname, page_path: location.pathname });
+      }
+      if (/(^|\.)barenbergcapital\.com$/.test(u.hostname)) {
+        gtag('event', 'obsidian_click', { link_host: u.hostname, link_path: u.pathname, page_path: location.pathname });
+      }
+    } catch (err) {}
+  });
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">

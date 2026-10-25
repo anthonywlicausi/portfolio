@@ -8,6 +8,20 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-4QRVHW1HL2');
+  // Clicks through to DEALITHIC properties = the conversion this site exists for
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    try {
+      var u = new URL(a.href, location.href);
+      if (/(^|\.)dealithic\.co$/.test(u.hostname)) {
+        gtag('event', 'dealithic_click', { link_host: u.hostname, link_path: u.pathname, page_path: location.pathname });
+      }
+      if (/(^|\.)barenbergcapital\.com$/.test(u.hostname)) {
+        gtag('event', 'obsidian_click', { link_host: u.hostname, link_path: u.pathname, page_path: location.pathname });
+      }
+    } catch (err) {}
+  });
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,18 +60,18 @@
   ]
 }
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Syne:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Manrope:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 <style>
 :root {
   --d-bg: #020407; --d-bg2: #060a10; --d-border: rgba(255,255,255,0.055);
   --d-text: rgba(234,236,242,0.78); --d-dim: rgba(234,236,242,0.40); --d-white: #eaecf2;
   --l-bg: #f7f4ef; --l-bg2: #ffffff; --l-bg3: #ede9e2;
-  --l-text: #1a1410; --l-text2: rgba(26,20,16,0.62); --l-border: rgba(26,20,16,0.09);
+  --l-text: #1a1410; --l-text2: rgba(26,20,16,0.86); --l-border: rgba(26,20,16,0.09);
   --accent: #1155FF; --l-accent: #0038CC;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 16px; }
-body { background: var(--d-bg); font-family: 'Syne', sans-serif; font-weight: 400; cursor: none; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+body { background: var(--d-bg); font-family: 'Manrope', sans-serif; font-weight: 400; cursor: none; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 a { text-decoration: none; color: inherit; }
 #cur { position:fixed; width:8px; height:8px; background:var(--accent); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); box-shadow:0 0 12px var(--accent); }
 #cur-ring { position:fixed; width:28px; height:28px; border:1px solid rgba(17,85,255,.4); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:width .22s,height .22s; }
@@ -66,41 +80,51 @@ body.hov #cur-ring { width:46px; height:46px; }
 nav { position:fixed; top:0; left:0; right:0; z-index:200; padding:20px 64px; display:flex; align-items:center; gap:16px; background:linear-gradient(to bottom, rgba(2,4,7,.97) 60%, transparent); border-bottom:1px solid rgba(255,255,255,.03); }
 .nav-logo { font-family:'Bebas Neue',sans-serif; font-size:21px; letter-spacing:.12em; color:var(--d-white); }
 .nav-logo em { color:var(--accent); font-style:normal; }
-.nav-official { font-family:'Playfair Display',serif; font-style:italic; font-size:13px; color:var(--d-dim); }
+.nav-official { font-family:'Playfair Display',serif; font-style:italic; font-size:15px; color:var(--d-dim); }
 
 .article-header { position:relative; z-index:2; background:var(--d-bg); padding:120px 64px 72px; border-bottom:4px solid var(--accent); }
-.article-back { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.26em; color:var(--d-dim); text-transform:uppercase; display:inline-flex; align-items:center; gap:8px; margin-bottom:40px; transition:color .2s; }
+.article-back { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.26em; color:var(--d-dim); text-transform:uppercase; display:inline-flex; align-items:center; gap:8px; margin-bottom:40px; transition:color .2s; }
 .article-back:hover { color:var(--accent); }
-.article-domain { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.2em; padding:3px 12px; border:1px solid rgba(17,85,255,.35); color:rgba(17,85,255,.9); text-transform:uppercase; display:inline-block; margin-bottom:24px; }
+.article-domain { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.2em; padding:3px 12px; border:1px solid rgba(17,85,255,.35); color:rgba(17,85,255,.9); text-transform:uppercase; display:inline-block; margin-bottom:24px; }
 .article-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(48px,7vw,88px); line-height:.92; letter-spacing:-.01em; color:var(--d-white); max-width:900px; margin-bottom:32px; }
 .article-meta { display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
-.article-author { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.2em; color:var(--accent); text-transform:uppercase; }
-.article-date { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.16em; color:var(--d-dim); }
-.article-read { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.16em; color:var(--d-dim); }
+.article-author { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.2em; color:var(--accent); text-transform:uppercase; }
+.article-date { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.16em; color:var(--d-dim); }
+.article-read { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.16em; color:var(--d-dim); }
 
 .article-body { background:var(--l-bg); padding:80px 64px 120px; }
 .article-content { max-width:720px; margin:0 auto; }
 .article-content p { font-family:'Playfair Display',serif; font-size:20px; line-height:1.9; color:var(--l-text2); margin-bottom:32px; }
-.article-content p strong { color:var(--l-text); font-weight:700; font-family:'Syne',sans-serif; }
-.article-content h2 { font-family:'Share Tech Mono',monospace; font-size:11px; letter-spacing:.36em; color:var(--l-accent); text-transform:uppercase; margin:56px 0 20px; display:flex; align-items:center; gap:12px; }
+.article-content p strong { color:#0d0a08; font-weight:700; font-family:inherit; }
+.article-content p strong a { font-weight:700; }
+.article-content h2 { font-family:'Share Tech Mono',monospace; font-size:16px; letter-spacing:.36em; color:var(--l-accent); text-transform:uppercase; margin:56px 0 20px; display:flex; align-items:center; gap:12px; }
 .article-content h2::after { content:''; height:1px; flex:1; background:rgba(0,56,204,.18); }
 .article-content blockquote { border-left:3px solid var(--l-accent); padding:8px 0 8px 28px; margin:40px 0; }
 .article-content blockquote p { font-size:24px; font-style:italic; color:var(--l-text); margin-bottom:0; line-height:1.65; }
 .article-content .equation { font-family:'Share Tech Mono',monospace; font-size:15px; background:var(--l-bg3); border:1px solid var(--l-border); padding:24px 28px; margin:40px 0; color:var(--l-text); line-height:2; }
-.article-content .equation .eq-comment { color:rgba(26,20,16,.45); font-size:12px; }
+.article-content .equation .eq-comment { color:rgba(26,20,16,.45); font-size:15px; }
 .article-content .equation .eq-key { color:var(--l-accent); }
+.cta-box { margin-top:56px; padding:36px 40px; background:var(--d-bg); border-left:4px solid #01C9FE; }
+.cta-label { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.2em; color:#01C9FE; text-transform:uppercase; margin-bottom:14px; }
+.cta-head { font-family:'Bebas Neue',sans-serif; font-size:clamp(32px,4.4vw,46px); line-height:1; letter-spacing:.01em; color:var(--d-white); margin-bottom:14px; }
+.article-content .cta-text { font-family:'Manrope',sans-serif; font-size:18px; line-height:1.6; color:var(--d-white); margin-bottom:26px; max-width:620px; }
+.cta-buttons { display:flex; flex-wrap:wrap; gap:14px; }
+.cta-btn { font-family:'Share Tech Mono',monospace; font-size:16px; letter-spacing:.16em; text-transform:uppercase; padding:16px 26px; border:1px solid #01C9FE; color:var(--d-white); transition:background .2s,color .2s; cursor:none; }
+.cta-btn.primary { background:#01C9FE; color:#020407; font-weight:700; }
+.cta-btn:hover { background:var(--d-white); color:#020407; border-color:var(--d-white); }
+@media(max-width:700px){ .cta-box { padding:28px 22px; } .cta-btn { width:100%; text-align:center; } }
 .related-reading { margin-top:72px; padding-top:40px; border-top:1px solid var(--l-border); }
-.rr-label { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.38em; color:var(--l-accent); text-transform:uppercase; margin-bottom:20px; }
+.rr-label { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.38em; color:var(--l-accent); text-transform:uppercase; margin-bottom:20px; }
 .rr-links { display:flex; flex-direction:column; gap:10px; }
 .rr-link { display:flex; align-items:center; gap:20px; padding:16px 20px; border:1px solid var(--l-border); background:var(--l-bg2); transition:border-color .2s,background .2s; cursor:none; }
 .rr-link:hover { border-color:var(--l-accent); background:var(--l-bg); }
-.rr-domain { font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:.18em; color:var(--l-text2); text-transform:uppercase; white-space:nowrap; min-width:160px; flex-shrink:0; }
+.rr-domain { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.18em; color:var(--l-text2); text-transform:uppercase; white-space:nowrap; min-width:160px; flex-shrink:0; }
 .rr-title { font-family:'Playfair Display',serif; font-size:17px; color:var(--l-text); line-height:1.35; transition:color .2s; }
 .rr-link:hover .rr-title { color:var(--l-accent); }
 
 footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid var(--l-border); background:var(--l-bg3); display:flex; justify-content:space-between; align-items:center; }
-.foot-copy { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.22em; color:var(--l-text2); }
-.foot-right { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.16em; color:var(--l-text2); opacity:.6; }
+.foot-copy { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.22em; color:var(--l-text2); }
+.foot-right { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.16em; color:var(--l-text2); opacity:.6; }
 
 @media (max-width:768px) {
   nav, .article-header, .article-body, footer { padding-left:24px; padding-right:24px; }
@@ -133,9 +157,9 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 <main class="article-body">
   <div class="article-content">
 
-    <p>Whether Einstein actually called compound interest the eighth wonder of the world doesn't matter. The observation is correct. But the deeper point — the one that almost nobody makes explicitly — is that compounding isn't a financial phenomenon. It's a mathematical one. And it applies to everything that accumulates over time.</p>
+    <p>Whether Einstein actually called <a href="https://en.wikipedia.org/wiki/Compound_interest" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">compound interest</a> the eighth wonder of the world doesn't matter. The observation is correct. But the deeper point — the one that almost nobody makes explicitly — is that <strong>compounding isn't a financial phenomenon. It's a mathematical one.</strong> And it applies to everything that accumulates over time.</p>
 
-    <p>The tragedy is that most people treat it as a metaphor when it's actually a mechanism.</p>
+    <p>The tragedy is that <strong>most people treat it as a metaphor when it's actually a mechanism.</strong></p>
 
     <h2>The Mathematics</h2>
 
@@ -145,7 +169,7 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 
     <p>Geometric growth multiplies by a fixed rate per period. If each thing you learn increases your ability to learn subsequent things by a small fraction — because new knowledge connects to existing knowledge, opening new pathways — then the trajectory looks flat for a long time and then bends upward sharply.</p>
 
-    <p>The crossover point is the key insight. Linear growth looks better early. Geometric growth looks better always — eventually. The variable is time horizon. Compress the time horizon and compounding looks unimpressive. Extend it and compounding becomes the only game worth playing.</p>
+    <p>The crossover point is the key insight. <strong>Linear growth looks better early. Geometric growth looks better always — eventually.</strong> The variable is time horizon. Compress the time horizon and compounding looks unimpressive. Extend it and compounding becomes the only game worth playing.</p>
 
     <p>The problem is that humans are wired for short time horizons. We evolved to solve immediate problems. Compounding rewards the opposite instinct: patience, consistency, deferred gratification, and the willingness to look unimpressive for long periods in exchange for eventually looking untouchable.</p>
 
@@ -167,7 +191,7 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 
     <p>Most people approach these domains the way they'd approach a savings account with a fixed deposit: what do I get from each individual investment of time, energy, or capital?</p>
 
-    <p>This is the wrong frame. The question isn't what each unit of investment returns in isolation. It's what the accumulated position is worth in ten years.</p>
+    <p>This is the wrong frame. <strong>The question isn't what each unit of investment returns in isolation. It's what the accumulated position is worth in ten years.</strong></p>
 
     <p>A founder who asks “what does this relationship give me right now?” will underinvest consistently. A founder who asks “what does this relationship compound into over a decade of mutual value creation?” will invest at the correct level — which usually looks like overinvestment in the short term and turns out to be the most productive capital allocation of the whole decade.</p>
 
@@ -175,11 +199,11 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 
     <h2>The Dark Side</h2>
 
-    <p>Negative compounding is equally powerful and considerably more dangerous.</p>
+    <p><strong>Negative compounding is equally powerful and considerably more dangerous.</strong></p>
 
     <p>Bad habits compound. A decision to cut corners on diligence once becomes a pattern. A pattern becomes a culture. A culture becomes a catastrophic failure that looks sudden from the outside and was invisible from the inside because it arrived through compounding rather than a single event.</p>
 
-    <p>Wrong beliefs compound. An incorrect mental model, held confidently and applied repeatedly, generates an expanding body of apparently-confirming evidence — because humans are confirmation-biased interpreters of experience. The longer a wrong belief compounds, the more work is required to update it.</p>
+    <p>Wrong beliefs compound. An incorrect mental model, held confidently and applied repeatedly, generates an expanding body of apparently-confirming evidence — because humans are <a href="https://en.wikipedia.org/wiki/Confirmation_bias" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">confirmation-biased</a> interpreters of experience. The longer a wrong belief compounds, the more work is required to update it.</p>
 
     <p>Damaged reputation compounds in the direction of damage. A single breach of trust, unaddressed, generates a second — because the trust deficit changes how the next counterparty approaches you, which generates the behavior that confirms the deficit. The compounding runs in both directions with equal efficiency.</p>
 
@@ -187,11 +211,20 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 
     <p>Every significant decision I've made has been evaluated through a compounding lens. Not “what is the return on this decision?” but “what is the compound growth rate of this path, and how long am I willing to hold it?”</p>
 
-    <p>The choice to build DEALITHIC rather than take a more lucrative short-term path was a compounding decision. Each feature adds to a platform that compounds in value. Each customer adds to a network that compounds in utility. Each deal processed adds to a dataset that compounds in intelligence. The platform is not three years of work. It's three years of compounding.</p>
+    <p>The choice to build <a href="https://www.dealithic.co?utm_source=anthonywlicausi&utm_medium=essay&utm_campaign=on-compounding" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">DEALITHIC</a> rather than take a more lucrative short-term path was a compounding decision. Each feature adds to a platform that compounds in value. Each customer adds to a network that compounds in utility. Each deal processed adds to a dataset that compounds in intelligence. The platform is not three years of work. It's three years of compounding.</p>
 
-    <p>The choice to run Obsidian Quant is a compounding decision. Each market cycle adds to a body of pattern recognition that makes the next cycle more navigable. The algorithm improves with data. The data compounds with time.</p>
+    <p>The choice to run <a href="https://quant.barenbergcapital.com/performance?utm_source=anthonywlicausi&utm_medium=essay&utm_campaign=on-compounding" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">Obsidian Quant</a> is a compounding decision. Each market cycle adds to a body of pattern recognition that makes the next cycle more navigable. The algorithm improves with data. The data compounds with time.</p>
 
-    <p>The most important question you can ask about any allocation of time, capital, or energy is not “what's the return?” It's “what's the compound growth rate, and how long am I willing to let it run?” Answer those two questions correctly and consistently, and most of the rest — the tactics, the specific decisions, the day-to-day execution — follows naturally. Compounding isn't a finance concept that also works elsewhere. It's the fundamental principle of how value accumulates in the universe. Everything else is a special case.</p>
+    <p>The most important question you can ask about any allocation of time, capital, or energy is not “what's the return?” It's “what's the compound growth rate, and how long am I willing to let it run?” Answer those two questions correctly and consistently, and most of the rest — the tactics, the specific decisions, the day-to-day execution — follows naturally. <strong>Compounding isn't a finance concept that also works elsewhere.</strong> It's the fundamental principle of how value accumulates in the universe. Everything else is a special case.</p>
+
+    <div class="cta-box">
+      <div class="cta-label">DEALITHIC &middot; Private Markets Platform</div>
+      <div class="cta-head">What I&rsquo;m building</div>
+      <p class="cta-text">The operating system for a private-markets transaction, start to finish. Deal intelligence, a 93,000+ investor network, full-stack IR, trading technology, and enterprise deployments &mdash; one platform instead of a different vendor at every stage.</p>
+      <div class="cta-buttons">
+        <a class="cta-btn primary" href="https://www.dealithic.co/?utm_source=anthonywlicausi&amp;utm_medium=essay&amp;utm_campaign=on-compounding&amp;utm_content=essay_cta" target="_blank" rel="noopener">Visit DEALITHIC &rarr;</a>
+      </div>
+    </div>
 
     <div class="related-reading">
       <div class="rr-label">Related Reading</div>

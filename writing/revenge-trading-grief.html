@@ -8,6 +8,20 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-4QRVHW1HL2');
+  // Clicks through to DEALITHIC properties = the conversion this site exists for
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    try {
+      var u = new URL(a.href, location.href);
+      if (/(^|\.)dealithic\.co$/.test(u.hostname)) {
+        gtag('event', 'dealithic_click', { link_host: u.hostname, link_path: u.pathname, page_path: location.pathname });
+      }
+      if (/(^|\.)barenbergcapital\.com$/.test(u.hostname)) {
+        gtag('event', 'obsidian_click', { link_host: u.hostname, link_path: u.pathname, page_path: location.pathname });
+      }
+    } catch (err) {}
+  });
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,18 +58,18 @@
   ]
 }
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Syne:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Manrope:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 <style>
 :root {
   --d-bg: #020407; --d-bg2: #060a10; --d-border: rgba(255,255,255,0.055);
   --d-text: rgba(234,236,242,0.78); --d-dim: rgba(234,236,242,0.40); --d-white: #eaecf2;
   --l-bg: #f7f4ef; --l-bg2: #ffffff; --l-bg3: #ede9e2;
-  --l-text: #1a1410; --l-text2: rgba(26,20,16,0.62); --l-border: rgba(26,20,16,0.09);
+  --l-text: #1a1410; --l-text2: rgba(26,20,16,0.86); --l-border: rgba(26,20,16,0.09);
   --accent: #01C9FE; --l-accent: #0038CC;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 16px; }
-body { background: var(--d-bg); font-family: 'Syne', sans-serif; font-weight: 400; cursor: none; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+body { background: var(--d-bg); font-family: 'Manrope', sans-serif; font-weight: 400; cursor: none; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 a { text-decoration: none; color: inherit; }
 #cur { position:fixed; width:8px; height:8px; background:var(--accent); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); box-shadow:0 0 12px var(--accent); }
 #cur-ring { position:fixed; width:28px; height:28px; border:1px solid rgba(1,201,254,.4); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:width .22s,height .22s; }
@@ -64,21 +78,22 @@ body.hov #cur-ring { width:46px; height:46px; }
 nav { position:fixed; top:0; left:0; right:0; z-index:200; padding:20px 64px; display:flex; align-items:center; gap:16px; background:linear-gradient(to bottom, rgba(2,4,7,.97) 60%, transparent); border-bottom:1px solid rgba(255,255,255,.03); }
 .nav-logo { font-family:'Bebas Neue',sans-serif; font-size:21px; letter-spacing:.12em; color:var(--d-white); }
 .nav-logo em { color:var(--accent); font-style:normal; }
-.nav-official { font-family:'Playfair Display',serif; font-style:italic; font-size:13px; color:var(--d-dim); }
+.nav-official { font-family:'Playfair Display',serif; font-style:italic; font-size:15px; color:var(--d-dim); }
 .article-header { position:relative; z-index:2; background:var(--d-bg); padding:120px 64px 72px; border-bottom:4px solid var(--accent); }
-.article-back { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.26em; color:var(--d-dim); text-transform:uppercase; display:inline-flex; align-items:center; gap:8px; margin-bottom:40px; transition:color .2s; }
+.article-back { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.26em; color:var(--d-dim); text-transform:uppercase; display:inline-flex; align-items:center; gap:8px; margin-bottom:40px; transition:color .2s; }
 .article-back:hover { color:var(--accent); }
-.article-domain { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.2em; padding:3px 12px; border:1px solid rgba(1,201,254,.35); color:rgba(1,201,254,.95); text-transform:uppercase; display:inline-block; margin-bottom:24px; }
+.article-domain { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.2em; padding:3px 12px; border:1px solid rgba(1,201,254,.35); color:rgba(1,201,254,.95); text-transform:uppercase; display:inline-block; margin-bottom:24px; }
 .article-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(46px,6.8vw,86px); line-height:.94; letter-spacing:-.01em; color:var(--d-white); max-width:900px; margin-bottom:32px; }
 .article-meta { display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
-.article-author { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.2em; color:var(--accent); text-transform:uppercase; }
-.article-date { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.16em; color:var(--d-dim); }
-.article-read { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.16em; color:var(--d-dim); }
+.article-author { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.2em; color:var(--accent); text-transform:uppercase; }
+.article-date { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.16em; color:var(--d-dim); }
+.article-read { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.16em; color:var(--d-dim); }
 .article-body { background:var(--l-bg); padding:80px 64px 120px; }
 .article-content { max-width:720px; margin:0 auto; }
 .article-content p { font-family:'Playfair Display',serif; font-size:20px; line-height:1.9; color:var(--l-text2); margin-bottom:32px; }
-.article-content p strong { color:var(--l-text); font-weight:700; font-family:'Syne',sans-serif; }
-.article-content h2 { font-family:'Share Tech Mono',monospace; font-size:11px; letter-spacing:.36em; color:var(--l-accent); text-transform:uppercase; margin:56px 0 20px; display:flex; align-items:center; gap:12px; }
+.article-content p strong { color:#0d0a08; font-weight:700; font-family:inherit; }
+.article-content p strong a { font-weight:700; }
+.article-content h2 { font-family:'Share Tech Mono',monospace; font-size:16px; letter-spacing:.36em; color:var(--l-accent); text-transform:uppercase; margin:56px 0 20px; display:flex; align-items:center; gap:12px; }
 .article-content h2::after { content:''; height:1px; flex:1; background:rgba(0,56,204,.18); }
 .article-content blockquote { border-left:3px solid var(--l-accent); padding:8px 0 8px 28px; margin:40px 0; }
 .article-content blockquote p { font-size:24px; font-style:italic; color:var(--l-text); margin-bottom:0; line-height:1.65; }
@@ -86,18 +101,27 @@ nav { position:fixed; top:0; left:0; right:0; z-index:200; padding:20px 64px; di
 .stat-row { display:flex; align-items:baseline; gap:18px; padding:10px 0; border-bottom:1px solid var(--l-border); }
 .stat-row:last-child { border-bottom:none; padding-bottom:0; }
 .stat-num { font-family:'Bebas Neue',sans-serif; font-size:38px; color:var(--l-accent); line-height:1; flex-shrink:0; min-width:72px; }
-.stat-label { font-family:'Syne',sans-serif; font-size:16px; color:var(--l-text2); line-height:1.5; }
+.stat-label { font-family:'Manrope',sans-serif; font-size:16px; color:var(--l-text2); line-height:1.5; }
+.cta-box { margin-top:56px; padding:36px 40px; background:var(--d-bg); border-left:4px solid #01C9FE; }
+.cta-label { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.2em; color:#01C9FE; text-transform:uppercase; margin-bottom:14px; }
+.cta-head { font-family:'Bebas Neue',sans-serif; font-size:clamp(32px,4.4vw,46px); line-height:1; letter-spacing:.01em; color:var(--d-white); margin-bottom:14px; }
+.article-content .cta-text { font-family:'Manrope',sans-serif; font-size:18px; line-height:1.6; color:var(--d-white); margin-bottom:26px; max-width:620px; }
+.cta-buttons { display:flex; flex-wrap:wrap; gap:14px; }
+.cta-btn { font-family:'Share Tech Mono',monospace; font-size:16px; letter-spacing:.16em; text-transform:uppercase; padding:16px 26px; border:1px solid #01C9FE; color:var(--d-white); transition:background .2s,color .2s; cursor:none; }
+.cta-btn.primary { background:#01C9FE; color:#020407; font-weight:700; }
+.cta-btn:hover { background:var(--d-white); color:#020407; border-color:var(--d-white); }
+@media(max-width:700px){ .cta-box { padding:28px 22px; } .cta-btn { width:100%; text-align:center; } }
 .related-reading { margin-top:72px; padding-top:40px; border-top:1px solid var(--l-border); }
-.rr-label { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.38em; color:var(--l-accent); text-transform:uppercase; margin-bottom:20px; }
+.rr-label { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.38em; color:var(--l-accent); text-transform:uppercase; margin-bottom:20px; }
 .rr-links { display:flex; flex-direction:column; gap:10px; }
 .rr-link { display:flex; align-items:center; gap:20px; padding:16px 20px; border:1px solid var(--l-border); background:var(--l-bg2); transition:border-color .2s,background .2s; cursor:none; }
 .rr-link:hover { border-color:var(--l-accent); background:var(--l-bg); }
-.rr-domain { font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:.18em; color:var(--l-text2); text-transform:uppercase; white-space:nowrap; min-width:160px; flex-shrink:0; }
+.rr-domain { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.18em; color:var(--l-text2); text-transform:uppercase; white-space:nowrap; min-width:160px; flex-shrink:0; }
 .rr-title { font-family:'Playfair Display',serif; font-size:17px; color:var(--l-text); line-height:1.35; transition:color .2s; }
 .rr-link:hover .rr-title { color:var(--l-accent); }
 footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid var(--l-border); background:var(--l-bg3); display:flex; justify-content:space-between; align-items:center; }
-.foot-copy { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.22em; color:var(--l-text2); }
-.foot-right { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.16em; color:var(--l-text2); opacity:.6; }
+.foot-copy { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.22em; color:var(--l-text2); }
+.foot-right { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.16em; color:var(--l-text2); opacity:.6; }
 @media (max-width:768px) {
   nav, .article-header, .article-body, footer { padding-left:24px; padding-right:24px; }
   .article-header { padding-top:100px; padding-bottom:48px; }
@@ -131,23 +155,23 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 <main class="article-body">
   <div class="article-content">
 
-    <p>The loss is usually survivable. A stop gets hit, a thesis breaks, an earnings print goes the wrong way, and the account is down a number that stings but doesn't change much. Sized properly, a single loss is a rounding error on a career. Then comes the next trade. The one with no setup and no plan, bigger than the last, placed because the screen is red and sitting still feels unbearable. That's the one that does the damage, and almost every trader can tell you exactly when they placed theirs.</p>
+    <p>The loss is usually survivable. A stop gets hit, a thesis breaks, an earnings print goes the wrong way, and the account is down a number that stings but doesn't change much. Sized properly, a single loss is a rounding error on a career. Then comes the next trade. The one with no setup and no plan, bigger than the last, placed because the screen is red and sitting still feels unbearable. <strong>That's the one that does the damage, and almost every trader can tell you exactly when they placed theirs.</strong></p>
 
-    <p>Traders call it revenge trading, which makes it sound like a fight with the market. I think that framing is wrong, and the wrong framing is part of why it's so hard to stop. The market doesn't know you exist. There's nobody to get revenge on. What's actually happening looks a lot more like grief.</p>
+    <p>Traders call it revenge trading, which makes it sound like a fight with the market. I think that framing is wrong, and the wrong framing is part of why it's so hard to stop. The market doesn't know you exist. There's nobody to get revenge on. <strong>What's actually happening looks a lot more like grief.</strong></p>
 
     <h2>Five Stages, One Afternoon</h2>
 
-    <p>In 1969 Elisabeth K&uuml;bler-Ross described five stages people move through after a loss: denial, anger, bargaining, depression and acceptance. Grief researchers have since pushed back on the idea that anyone moves through them in a neat order, and they're right to. But read the list with a trading screen open and it's hard to unsee. Denial is the stop you drag lower so it doesn't trigger. Anger is the market being rigged. Bargaining is the revenge trade itself: one more position, a little bigger, and if it works the loss never really happened. Acceptance is the only stage that involves closing the platform, which is why so few people reach it before the session ends.</p>
+    <p>In 1969 <a href="https://en.wikipedia.org/wiki/Elisabeth_K%C3%BCbler-Ross" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">Elisabeth K&uuml;bler-Ross</a> described five stages people move through after a loss: denial, anger, bargaining, depression and acceptance. Grief researchers have since pushed back on the idea that anyone moves through them in a neat order, and they're right to. But read the list with a trading screen open and it's hard to unsee. Denial is the stop you drag lower so it doesn't trigger. Anger is the market being rigged. Bargaining is the revenge trade itself: one more position, a little bigger, and if it works the loss never really happened. Acceptance is the only stage that involves closing the platform, which is why so few people reach it before the session ends.</p>
 
-    <p>Bargaining is the expensive one. It's the stage where you negotiate with something that isn't listening, and in a margin account the negotiation is denominated in dollars.</p>
+    <p><strong>Bargaining is the expensive one.</strong> It's the stage where you negotiate with something that isn't listening, and in a margin account the negotiation is denominated in dollars.</p>
 
     <h2>The Research Got There First</h2>
 
-    <p>Behavioral economists described this long before anyone posted about it. Kahneman and Tversky's prospect theory starts from the observation that losses hurt more than equal gains feel good, and their <a href="https://doi.org/10.1007/BF00122574" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);">1992 paper</a> put a number on it: the median participant behaved as if a loss weighed about 2.25 times as much as a gain of the same size. That estimate came from 25 graduate students, and a <a href="https://doi.org/10.1257/jel.20221698" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);">later meta-analysis</a> of 607 estimates in the Journal of Economic Literature lands lower, closer to 2. The exact figure moves around. The direction doesn't.</p>
+    <p>Behavioral economists described this long before anyone posted about it. Kahneman and Tversky's <a href="https://en.wikipedia.org/wiki/Prospect_theory" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">prospect theory</a> starts from the observation that losses hurt more than equal gains feel good, and their <a href="https://doi.org/10.1007/BF00122574" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);">1992 paper</a> put a number on it: the median participant behaved as if a loss weighed about 2.25 times as much as a gain of the same size. That estimate came from 25 graduate students, and a <a href="https://doi.org/10.1257/jel.20221698" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);">later meta-analysis</a> of 607 estimates in the Journal of Economic Literature lands lower, closer to 2. <strong>The exact figure moves around. The direction doesn't.</strong></p>
 
-    <p>Richard Thaler and Eric Johnson then looked at what happens after a loss has already landed. In their <a href="https://doi.org/10.1287/mnsc.36.6.643" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);">1990 study</a>, people who were behind found bets that offered a chance to get back to even especially attractive. They called it the break-even effect, and it explains why the revenge trade feels reasonable in the moment. The trade wasn't chosen because it was good. It was chosen because it might put the account back where it was this morning.</p>
+    <p><a href="https://en.wikipedia.org/wiki/Richard_Thaler" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">Richard Thaler</a> and Eric Johnson then looked at what happens after a loss has already landed. In their <a href="https://doi.org/10.1287/mnsc.36.6.643" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);">1990 study</a>, people who were behind found bets that offered a chance to get back to even especially attractive. They called it the break-even effect, and it explains why the revenge trade feels reasonable in the moment. The trade wasn't chosen because it was good. It was chosen because it might put the account back where it was this morning.</p>
 
-    <p>The cleanest evidence comes from professionals. Joshua Coval and Tyler Shumway studied proprietary traders at the Chicago Board of Trade, people who trade their own capital for a living, and published the results in <a href="https://doi.org/10.1111/j.1540-6261.2005.00723.x" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);">the Journal of Finance in 2005</a>. Traders who lost money in the morning took above-average risk in the afternoon 31.2% of the time, against 27.0% for traders coming off a profitable morning. That makes a losing trader 15.5% more likely to swing harder after lunch. They also got pushier about price: traders were down on the morning 32.9% of the time, yet those losing traders placed 38% of the afternoon trades that moved the price.</p>
+    <p>The cleanest evidence comes from professionals. Joshua Coval and Tyler Shumway studied proprietary traders at the <a href="https://en.wikipedia.org/wiki/Chicago_Board_of_Trade" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">Chicago Board of Trade</a>, people who trade their own capital for a living, and published the results in <a href="https://doi.org/10.1111/j.1540-6261.2005.00723.x" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);">the Journal of Finance in 2005</a>. Traders who lost money in the morning took above-average risk in the afternoon 31.2% of the time, against 27.0% for traders coming off a profitable morning. That makes a losing trader 15.5% more likely to swing harder after lunch. They also got pushier about price: traders were down on the morning 32.9% of the time, yet those losing traders placed 38% of the afternoon trades that moved the price.</p>
 
     <div class="stat-block">
       <div class="stat-row"><span class="stat-num">2.25&times;</span><span class="stat-label">how much heavier a loss weighed than an equal gain for the median participant in Tversky and Kahneman's 1992 study; a later meta-analysis puts the average closer to 2</span></div>
@@ -156,7 +180,7 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
       <div class="stat-row"><span class="stat-num">97%</span><span class="stat-label">of individuals who began day trading Brazilian equity futures from 2013 to 2015 and kept at it for at least 300 days lost money (Chague, De-Losso and Giovannetti)</span></div>
     </div>
 
-    <p>The detail I keep coming back to is what the market did with those trades. Prices set by traders trying to recover a morning loss reversed significantly faster than prices set by everyone else. The market could tell. It treated the revenge trade as noise, because that's what it was: plenty of emotion, no information, and a counterparty happy to get paid for knowing the difference.</p>
+    <p>The detail I keep coming back to is what the market did with those trades. Prices set by traders trying to recover a morning loss reversed significantly faster than prices set by everyone else. <strong>The market could tell.</strong> It treated the revenge trade as noise, because that's what it was: plenty of emotion, no information, and a counterparty happy to get paid for knowing the difference.</p>
 
     <blockquote>
       <p>&ldquo;The market doesn&rsquo;t know you lost money this morning. The only person in the trade who knows is the one who shouldn&rsquo;t be placing it.&rdquo;</p>
@@ -170,15 +194,24 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 
     <h2>Willpower Loses</h2>
 
-    <p>Every trader has a rule for this. Stop after two losses. Walk away after a red morning. Cut size in half until you're green again. The rules are fine. The problem is that the person enforcing them at 11:40 a.m. is the same person who just lost money and wants it back. A rule you can renegotiate mid-session is a suggestion.</p>
+    <p>Every trader has a rule for this. Stop after two losses. Walk away after a red morning. Cut size in half until you're green again. The rules are fine. The problem is that the person enforcing them at 11:40 a.m. is the same person who just lost money and wants it back. <strong>A rule you can renegotiate mid-session is a suggestion.</strong></p>
 
-    <p>What works is moving the decision earlier, to a moment when you're calm, and making it hard to edit afterward. Write down, before the trade, what would prove you wrong. Then look at what you actually did after your losses across months, not across one bad afternoon. Most people have never seen that record. They remember the revenge trades that worked, because those make good stories, and forget the ones that turned a bad day into a bad month. I wrote about that memory problem in <a href="trade-you-dont-remember.html" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);">The Trade You Don't Remember</a>. Revenge trading is where it gets expensive.</p>
+    <p><strong>What works is moving the decision earlier, to a moment when you're calm, and making it hard to edit afterward.</strong> Write down, before the trade, what would prove you wrong. Then look at what you actually did after your losses across months, not across one bad afternoon. Most people have never seen that record. They remember the revenge trades that worked, because those make good stories, and forget the ones that turned a bad day into a bad month. I wrote about that memory problem in <a href="trade-you-dont-remember.html" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);">The Trade You Don't Remember</a>. Revenge trading is where it gets expensive.</p>
 
     <h2>Why I Built FalsiFire</h2>
 
-    <p><a href="https://www.dealithic.co/falsifire" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);">FalsiFire</a> grew out of two decades of trading, which is long enough to learn that the story a trader tells after the fact is the least reliable data he has. Before every trade, you write down what would prove you wrong and the biggest assumption you're making. FalsiFire keeps it unedited and shows it back once you know how the trade ended, so the verdict is about the decision instead of the P&amp;L. Over time it shows you which calls hold up, whether your confidence means anything, and what you do after a loss, with streaks, tilt and revenge trades included. It works for someone trading their own account and for a portfolio manager running a book, and it's free to start.</p>
+    <p><a href="https://www.dealithic.co/falsifire?utm_source=anthonywlicausi&utm_medium=essay&utm_campaign=revenge-trading-grief" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);">FalsiFire</a> grew out of two decades of trading, which is long enough to learn that the story a trader tells after the fact is the least reliable data he has. Before every trade, you write down what would prove you wrong and the biggest assumption you're making. FalsiFire keeps it unedited and shows it back once you know how the trade ended, so the verdict is about the decision instead of the P&amp;L. Over time it shows you which calls hold up, whether your confidence means anything, and what you do after a loss, with streaks, tilt and revenge trades included. It works for someone trading their own account and for a portfolio manager running a book, and it's free to start.</p>
 
-    <p>The loss was never the problem. Losses are the cost of being in the game, and a good process budgets for them in advance. The problem is the twelve minutes after, when grief puts on a trading jacket and goes looking for a way to make the loss not count. You can't stop feeling it. You can make sure there's a record of what you decided before you were upset, waiting for you when you're ready to look.</p>
+    <p><strong>The loss was never the problem.</strong> Losses are the cost of being in the game, and a good process budgets for them in advance. The problem is the twelve minutes after, when grief puts on a trading jacket and goes looking for a way to make the loss not count. You can't stop feeling it. You can make sure there's a record of what you decided before you were upset, waiting for you when you're ready to look.</p>
+
+    <div class="cta-box">
+      <div class="cta-label">FALSIFIRE &middot; Behavioral Finance Meets the Trade Blotter</div>
+      <div class="cta-head">The journal behind this essay</div>
+      <p class="cta-text">A decision journal for traders and portfolio managers. Where behavioral finance meets the P&amp;L &mdash; built to catch the psychological leaks that show up in a trading record long before they show up in year-end performance.</p>
+      <div class="cta-buttons">
+        <a class="cta-btn primary" href="https://www.dealithic.co/falsifire?utm_source=anthonywlicausi&amp;utm_medium=essay&amp;utm_campaign=revenge-trading-grief&amp;utm_content=essay_cta" target="_blank" rel="noopener">See FalsiFire &rarr;</a>
+      </div>
+    </div>
 
     <div class="related-reading">
       <div class="rr-label">Related Reading</div>

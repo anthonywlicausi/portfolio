@@ -8,6 +8,20 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-4QRVHW1HL2');
+  // Clicks through to DEALITHIC properties = the conversion this site exists for
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    try {
+      var u = new URL(a.href, location.href);
+      if (/(^|\.)dealithic\.co$/.test(u.hostname)) {
+        gtag('event', 'dealithic_click', { link_host: u.hostname, link_path: u.pathname, page_path: location.pathname });
+      }
+      if (/(^|\.)barenbergcapital\.com$/.test(u.hostname)) {
+        gtag('event', 'obsidian_click', { link_host: u.hostname, link_path: u.pathname, page_path: location.pathname });
+      }
+    } catch (err) {}
+  });
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,7 +68,7 @@
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 16px; }
-body { background: var(--d-bg); font-family: 'Syne', sans-serif; font-weight: 400; cursor: none; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+body { background: var(--d-bg); font-family: 'Manrope', sans-serif; font-weight: 400; cursor: none; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 a { text-decoration: none; color: inherit; }
 #cur { position:fixed; width:8px; height:8px; background:var(--accent); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); box-shadow:0 0 12px var(--accent); }
 #cur-ring { position:fixed; width:28px; height:28px; border:1px solid rgba(1,201,254,.4); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:width .22s,height .22s; }
@@ -87,6 +101,15 @@ nav { position:fixed; top:0; left:0; right:0; z-index:200; padding:20px 64px; di
 .stat-row:last-child { border-bottom:none; padding-bottom:0; }
 .stat-num { font-family:'Bebas Neue',sans-serif; font-size:38px; color:var(--l-accent); line-height:1; flex-shrink:0; min-width:72px; }
 .stat-label { font-family:'Manrope',sans-serif; font-size:16px; color:var(--l-text2); line-height:1.5; }
+.cta-box { margin-top:56px; padding:36px 40px; background:var(--d-bg); border-left:4px solid #01C9FE; }
+.cta-label { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.32em; color:#01C9FE; text-transform:uppercase; margin-bottom:14px; }
+.cta-head { font-family:'Bebas Neue',sans-serif; font-size:clamp(32px,4.4vw,46px); line-height:1; letter-spacing:.01em; color:var(--d-white); margin-bottom:14px; }
+.article-content .cta-text { font-family:'Manrope',sans-serif; font-size:18px; line-height:1.6; color:var(--d-white); margin-bottom:26px; max-width:620px; }
+.cta-buttons { display:flex; flex-wrap:wrap; gap:14px; }
+.cta-btn { font-family:'Share Tech Mono',monospace; font-size:16px; letter-spacing:.16em; text-transform:uppercase; padding:16px 26px; border:1px solid #01C9FE; color:var(--d-white); transition:background .2s,color .2s; cursor:none; }
+.cta-btn.primary { background:#01C9FE; color:#020407; font-weight:700; }
+.cta-btn:hover { background:var(--d-white); color:#020407; border-color:var(--d-white); }
+@media(max-width:700px){ .cta-box { padding:28px 22px; } .cta-btn { width:100%; text-align:center; } }
 .related-reading { margin-top:72px; padding-top:40px; border-top:1px solid var(--l-border); }
 .rr-label { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.38em; color:var(--l-accent); text-transform:uppercase; margin-bottom:20px; }
 .rr-links { display:flex; flex-direction:column; gap:10px; }
@@ -133,7 +156,7 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 
     <p>On April 22, <a href="https://www.mosaic.pe" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">Mosaic</a> <strong><a href="https://www.mosaic.pe/news-blog-posts/series-a" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">announced an $18 million Series A</a></strong> led by <a href="https://radical.vc" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">Radical Ventures</a>. Good company. Deterministic deal modeling for private equity, used by firms like <a href="https://www.warburgpincus.com" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">Warburg Pincus</a>, <a href="https://www.cvc.com" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">CVC</a> and <a href="https://www.evercore.com" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">Evercore</a>. If you&rsquo;ve ever spent a Saturday night as an associate chasing a broken link in an LBO, you know exactly why that product exists.</p>
 
-    <p><strong>Four days later, on April 26, I sat down to build the same core into <a href="https://www.dealithic.co" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">DEALITHIC</a>&rsquo;s <a href="https://www.dealithic.co/products/deal-engine" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">Deal Engine</a>.</strong></p>
+    <p><strong>Four days later, on April 26, I sat down to build the same core into <a href="https://www.dealithic.co?utm_source=anthonywlicausi&utm_medium=essay&utm_campaign=cant-underwrite-a-feature" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">DEALITHIC</a>&rsquo;s <a href="https://www.dealithic.co/products/deal-engine?utm_source=anthonywlicausi&utm_medium=essay&utm_campaign=cant-underwrite-a-feature" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">Deal Engine</a>.</strong></p>
 
     <p>The first commit, a rollback checkpoint, went in at 1:48 AM. Color-coded Excel, IRR decomposition and a value creation library landed at 12:48 PM. The LBO export with live formulas, <strong>the piece I&rsquo;d labeled &ldquo;Mosaic parity complete,&rdquo; went in at 2:02 PM.</strong></p>
 
@@ -161,7 +184,7 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 
     <p>Here&rsquo;s a harder case. <strong><a href="https://lightfield.app" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">Lightfield</a> <a href="https://a16z.com/announcement/investing-in-lightfield/" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">raised a $47 million Series A</a> led by <a href="https://a16z.com" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">a16z</a> in September.</strong> It&rsquo;s an AI-native CRM that builds itself from your email and calls, and it&rsquo;s very good. More than 5,000 companies have signed up since its November 2025 launch, and the founders have disclosed <strong>400% net dollar retention.</strong></p>
 
-    <p><a href="https://crm.dealithic.co" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">QUARRY</a>, our CRM, is not a better Lightfield. It&rsquo;s a different animal. <strong>QUARRY has an AI voice dialer working the phones today</strong>, with do-not-call checks, calling-hours limits and voicemail detection built in. On Lightfield&rsquo;s pricing page that dialer is &ldquo;coming soon.&rdquo; QUARRY plugs straight into a map of 93,000+ funds, family offices and angels, a deal engine, and the fundraising tools founders actually use to raise. It&rsquo;s built for people raising and deploying capital, not for every B2B sales team on earth.</p>
+    <p><a href="https://crm.dealithic.co?utm_source=anthonywlicausi&utm_medium=essay&utm_campaign=cant-underwrite-a-feature" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">QUARRY</a>, our CRM, is not a better Lightfield. It&rsquo;s a different animal. <strong>QUARRY has an AI voice dialer working the phones today</strong>, with do-not-call checks, calling-hours limits and voicemail detection built in. On Lightfield&rsquo;s pricing page that dialer is &ldquo;coming soon.&rdquo; QUARRY plugs straight into a map of 93,000+ funds, family offices and angels, a deal engine, and the fundraising tools founders actually use to raise. It&rsquo;s built for people raising and deploying capital, not for every B2B sales team on earth.</p>
 
     <p>Lightfield is ahead where it counts for its market. The polish is better. <strong>It has SOC 2 Type II and HIPAA.</strong> It ships a changelog every week. And 400% NDR is not something you rebuild over a weekend. You earn it, customer by customer.</p>
 
@@ -204,6 +227,15 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
     <p><strong>We build in days what others raise rounds to build.</strong></p>
 
     <p><strong>If you underwrite private markets software, ask me for the commit history.</strong> It&rsquo;s more interesting than the deck.</p>
+
+    <div class="cta-box">
+      <div class="cta-label">See it yourself</div>
+      <div class="cta-head">What I&rsquo;m building</div>
+      <p class="cta-text">Raising capital usually means stitching together a data room tool, an investor database, a CRM and a stack of documents. With DEALITHIC you can now shape the company, build the raise, match it across 93,000+ funds, family offices and angels, and use our agentic AI programmed as your business partner to help run it afterwards.</p>
+      <div class="cta-buttons">
+        <a class="cta-btn primary" href="https://www.dealithic.co/?utm_source=anthonywlicausi&utm_medium=essay&utm_campaign=cant-underwrite-a-feature&amp;utm_content=essay_cta" target="_blank" rel="noopener">Visit DEALITHIC &rarr;</a>
+      </div>
+    </div>
 
     <div class="related-reading">
       <div class="rr-label">Related Reading</div>

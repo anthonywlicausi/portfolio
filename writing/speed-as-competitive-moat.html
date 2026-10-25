@@ -8,6 +8,20 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-4QRVHW1HL2');
+  // Clicks through to DEALITHIC properties = the conversion this site exists for
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    try {
+      var u = new URL(a.href, location.href);
+      if (/(^|\.)dealithic\.co$/.test(u.hostname)) {
+        gtag('event', 'dealithic_click', { link_host: u.hostname, link_path: u.pathname, page_path: location.pathname });
+      }
+      if (/(^|\.)barenbergcapital\.com$/.test(u.hostname)) {
+        gtag('event', 'obsidian_click', { link_host: u.hostname, link_path: u.pathname, page_path: location.pathname });
+      }
+    } catch (err) {}
+  });
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,18 +60,18 @@
   ]
 }
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Syne:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Manrope:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 <style>
 :root {
   --d-bg: #020407; --d-bg2: #060a10; --d-border: rgba(255,255,255,0.055);
   --d-text: rgba(234,236,242,0.78); --d-dim: rgba(234,236,242,0.40); --d-white: #eaecf2;
   --l-bg: #f7f4ef; --l-bg2: #ffffff; --l-bg3: #ede9e2;
-  --l-text: #1a1410; --l-text2: rgba(26,20,16,0.62); --l-border: rgba(26,20,16,0.09);
+  --l-text: #1a1410; --l-text2: rgba(26,20,16,0.86); --l-border: rgba(26,20,16,0.09);
   --accent: #1155FF; --l-accent: #0038CC;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 16px; }
-body { background: var(--d-bg); font-family: 'Syne', sans-serif; font-weight: 400; cursor: none; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+body { background: var(--d-bg); font-family: 'Manrope', sans-serif; font-weight: 400; cursor: none; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 a { text-decoration: none; color: inherit; }
 #cur { position:fixed; width:8px; height:8px; background:var(--accent); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); box-shadow:0 0 12px var(--accent); }
 #cur-ring { position:fixed; width:28px; height:28px; border:1px solid rgba(17,85,255,.4); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:width .22s,height .22s; }
@@ -66,41 +80,51 @@ body.hov #cur-ring { width:46px; height:46px; }
 nav { position:fixed; top:0; left:0; right:0; z-index:200; padding:20px 64px; display:flex; align-items:center; gap:16px; background:linear-gradient(to bottom, rgba(2,4,7,.97) 60%, transparent); border-bottom:1px solid rgba(255,255,255,.03); }
 .nav-logo { font-family:'Bebas Neue',sans-serif; font-size:21px; letter-spacing:.12em; color:var(--d-white); }
 .nav-logo em { color:var(--accent); font-style:normal; }
-.nav-official { font-family:'Playfair Display',serif; font-style:italic; font-size:13px; color:var(--d-dim); }
+.nav-official { font-family:'Playfair Display',serif; font-style:italic; font-size:15px; color:var(--d-dim); }
 
 .article-header { position:relative; z-index:2; background:var(--d-bg); padding:120px 64px 72px; border-bottom:4px solid var(--accent); }
-.article-back { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.26em; color:var(--d-dim); text-transform:uppercase; display:inline-flex; align-items:center; gap:8px; margin-bottom:40px; transition:color .2s; }
+.article-back { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.26em; color:var(--d-dim); text-transform:uppercase; display:inline-flex; align-items:center; gap:8px; margin-bottom:40px; transition:color .2s; }
 .article-back:hover { color:var(--accent); }
-.article-domain { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.2em; padding:3px 12px; border:1px solid rgba(17,85,255,.35); color:rgba(17,85,255,.9); text-transform:uppercase; display:inline-block; margin-bottom:24px; }
+.article-domain { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.2em; padding:3px 12px; border:1px solid rgba(17,85,255,.35); color:rgba(17,85,255,.9); text-transform:uppercase; display:inline-block; margin-bottom:24px; }
 .article-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(48px,7vw,88px); line-height:.92; letter-spacing:-.01em; color:var(--d-white); max-width:900px; margin-bottom:32px; }
 .article-meta { display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
-.article-author { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.2em; color:var(--accent); text-transform:uppercase; }
-.article-date { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.16em; color:var(--d-dim); }
-.article-read { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.16em; color:var(--d-dim); }
+.article-author { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.2em; color:var(--accent); text-transform:uppercase; }
+.article-date { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.16em; color:var(--d-dim); }
+.article-read { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.16em; color:var(--d-dim); }
 
 .article-body { background:var(--l-bg); padding:80px 64px 120px; }
 .article-content { max-width:720px; margin:0 auto; }
 .article-content p { font-family:'Playfair Display',serif; font-size:20px; line-height:1.9; color:var(--l-text2); margin-bottom:32px; }
-.article-content p strong { color:var(--l-text); font-weight:700; font-family:'Syne',sans-serif; }
-.article-content h2 { font-family:'Share Tech Mono',monospace; font-size:11px; letter-spacing:.36em; color:var(--l-accent); text-transform:uppercase; margin:56px 0 20px; display:flex; align-items:center; gap:12px; }
+.article-content p strong { color:#0d0a08; font-weight:700; font-family:inherit; }
+.article-content p strong a { font-weight:700; }
+.article-content h2 { font-family:'Share Tech Mono',monospace; font-size:16px; letter-spacing:.36em; color:var(--l-accent); text-transform:uppercase; margin:56px 0 20px; display:flex; align-items:center; gap:12px; }
 .article-content h2::after { content:''; height:1px; flex:1; background:rgba(0,56,204,.18); }
 .article-content blockquote { border-left:3px solid var(--l-accent); padding:8px 0 8px 28px; margin:40px 0; }
 .article-content blockquote p { font-size:24px; font-style:italic; color:var(--l-text); margin-bottom:0; line-height:1.65; }
 .article-content .equation { font-family:'Share Tech Mono',monospace; font-size:15px; background:var(--l-bg3); border:1px solid var(--l-border); padding:24px 28px; margin:40px 0; color:var(--l-text); line-height:2; }
-.article-content .equation .eq-comment { color:rgba(26,20,16,.45); font-size:12px; }
+.article-content .equation .eq-comment { color:rgba(26,20,16,.45); font-size:15px; }
 .article-content .equation .eq-key { color:var(--l-accent); }
+.cta-box { margin-top:56px; padding:36px 40px; background:var(--d-bg); border-left:4px solid #01C9FE; }
+.cta-label { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.2em; color:#01C9FE; text-transform:uppercase; margin-bottom:14px; }
+.cta-head { font-family:'Bebas Neue',sans-serif; font-size:clamp(32px,4.4vw,46px); line-height:1; letter-spacing:.01em; color:var(--d-white); margin-bottom:14px; }
+.article-content .cta-text { font-family:'Manrope',sans-serif; font-size:18px; line-height:1.6; color:var(--d-white); margin-bottom:26px; max-width:620px; }
+.cta-buttons { display:flex; flex-wrap:wrap; gap:14px; }
+.cta-btn { font-family:'Share Tech Mono',monospace; font-size:16px; letter-spacing:.16em; text-transform:uppercase; padding:16px 26px; border:1px solid #01C9FE; color:var(--d-white); transition:background .2s,color .2s; cursor:none; }
+.cta-btn.primary { background:#01C9FE; color:#020407; font-weight:700; }
+.cta-btn:hover { background:var(--d-white); color:#020407; border-color:var(--d-white); }
+@media(max-width:700px){ .cta-box { padding:28px 22px; } .cta-btn { width:100%; text-align:center; } }
 .related-reading { margin-top:72px; padding-top:40px; border-top:1px solid var(--l-border); }
-.rr-label { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.38em; color:var(--l-accent); text-transform:uppercase; margin-bottom:20px; }
+.rr-label { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.38em; color:var(--l-accent); text-transform:uppercase; margin-bottom:20px; }
 .rr-links { display:flex; flex-direction:column; gap:10px; }
 .rr-link { display:flex; align-items:center; gap:20px; padding:16px 20px; border:1px solid var(--l-border); background:var(--l-bg2); transition:border-color .2s,background .2s; cursor:none; }
 .rr-link:hover { border-color:var(--l-accent); background:var(--l-bg); }
-.rr-domain { font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:.18em; color:var(--l-text2); text-transform:uppercase; white-space:nowrap; min-width:160px; flex-shrink:0; }
+.rr-domain { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.18em; color:var(--l-text2); text-transform:uppercase; white-space:nowrap; min-width:160px; flex-shrink:0; }
 .rr-title { font-family:'Playfair Display',serif; font-size:17px; color:var(--l-text); line-height:1.35; transition:color .2s; }
 .rr-link:hover .rr-title { color:var(--l-accent); }
 
 footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid var(--l-border); background:var(--l-bg3); display:flex; justify-content:space-between; align-items:center; }
-.foot-copy { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.22em; color:var(--l-text2); }
-.foot-right { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.16em; color:var(--l-text2); opacity:.6; }
+.foot-copy { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.22em; color:var(--l-text2); }
+.foot-right { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.16em; color:var(--l-text2); opacity:.6; }
 
 @media (max-width:768px) {
   nav, .article-header, .article-body, footer { padding-left:24px; padding-right:24px; }
@@ -133,7 +157,7 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 <main class="article-body">
   <div class="article-content">
 
-    <p>Speed isn't about working harder. It isn't about moving faster in the conventional hustle-culture sense. It's about one specific, compressible thing: the gap between hypothesis and data.</p>
+    <p>Speed isn't about working harder. It isn't about moving faster in the conventional hustle-culture sense. <strong>It's about one specific, compressible thing: the gap between hypothesis and data.</strong></p>
 
     <p>That gap is your constraint. Everything else is optimization theater.</p>
 
@@ -141,17 +165,17 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 
     <p>Every iteration of a product, a business model, or a strategy teaches you something your competitor hasn't learned yet. If your feedback loop runs 10x faster than theirs, you're not 10 iterations ahead — you're compounding at 10x their learning rate. The gap is exponential, not linear.</p>
 
-    <p>This is why the fastest companies aren't the ones with the best initial ideas. Initial ideas are almost always wrong in important ways. The fastest companies are the ones that find the right version of the idea fastest. They don't start better. They learn faster.</p>
+    <p>This is why the fastest companies aren't the ones with the best initial ideas. Initial ideas are almost always wrong in important ways. The fastest companies are the ones that find the right version of the idea fastest. <strong>They don't start better. They learn faster.</strong></p>
 
     <p>The implication is uncomfortable for founders who believe in vision: the quality of your initial insight matters less than the speed at which you can test and revise it. A good team with a mediocre idea and a fast loop will outperform a great team with a brilliant idea and a slow loop, given enough time.</p>
 
     <h2>What Slow Looks Like</h2>
 
-    <p>The conventional startup failure mode isn't laziness. It's certainty.</p>
+    <p><strong>The conventional startup failure mode isn't laziness. It's certainty.</strong></p>
 
     <p>Slow founders wait to ship until they're confident. They build the full version of the idea because they're sure it's right. They run the long research cycle before committing. The reasoning sounds responsible. It isn't.</p>
 
-    <p>Every week you're not in the market is a week you're not learning. Your competitor — who shipped something imperfect six months ago — has six months of real customer feedback, six months of iteration data, six months of compounding learning. The gap between your perfect plan and their messy reality widens every day they're in market and you're not.</p>
+    <p><strong>Every week you're not in the market is a week you're not learning.</strong> Your competitor — who shipped something imperfect six months ago — has six months of real customer feedback, six months of iteration data, six months of compounding learning. The gap between your perfect plan and their messy reality widens every day they're in market and you're not.</p>
 
     <p>The best founders I've watched build have a specific relationship with being wrong. They're not bothered by it. Being wrong in market means you're learning. Being wrong in theory means you're just behind.</p>
 
@@ -161,31 +185,40 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 
     <h2>How I Built Three Products</h2>
 
-    <p>Dealithic, D:CRM, and Obsidian Quant were built in a period when AI tools compressed every layer of the development loop. Writing code faster, generating drafts faster, testing with users faster. Each individual compression is incremental. Combined, they changed the shape of what was buildable.</p>
+    <p><a href="https://www.dealithic.co?utm_source=anthonywlicausi&utm_medium=essay&utm_campaign=speed-as-competitive-moat" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">DEALITHIC</a>, <a href="https://crm.dealithic.co?utm_source=anthonywlicausi&utm_medium=essay&utm_campaign=speed-as-competitive-moat" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">QUARRY</a>, and <a href="https://quant.barenbergcapital.com/performance?utm_source=anthonywlicausi&utm_medium=essay&utm_campaign=speed-as-competitive-moat" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">Obsidian Quant</a> were built in a period when AI tools compressed every layer of the development loop. Writing code faster, generating drafts faster, testing with users faster. Each individual compression is incremental. Combined, they changed the shape of what was buildable.</p>
 
     <p>The result wasn't that I worked less. I probably worked the same number of hours. The result was that the same hours produced more iterations. More iterations produced more learning. More learning produced better products faster.</p>
 
-    <p>The moat isn't the products. It's the loop. By the time a competitor understands what I've built, I've iterated past it. The current version of any of these products is not the version worth copying. I'm already three versions ahead.</p>
+    <p><strong>The moat isn't the products. It's the loop.</strong> By the time a competitor understands what I've built, I've iterated past it. The current version of any of these products is not the version worth copying. I'm already three versions ahead.</p>
 
     <h2>Speed as a Philosophical Position</h2>
 
     <p>Here's the part that doesn't get talked about enough: speed is a statement about how you relate to uncertainty.</p>
 
-    <p>Slow founders are trying to resolve uncertainty before they ship. They want to know the answer before they move. This is epistemically backwards. In complex systems — markets, customer behavior, technology — you can't resolve uncertainty analytically. You can only resolve it empirically. You have to ship to know.</p>
+    <p>Slow founders are trying to resolve uncertainty before they ship. They want to know the answer before they move. This is epistemically backwards. <strong>In complex systems — markets, customer behavior, technology — you can't resolve uncertainty analytically. You can only resolve it empirically.</strong> You have to ship to know.</p>
 
     <p>Fast founders treat the ship itself as the search for certainty. The product is a hypothesis. Customers are the test. The iteration is the data collection. This isn't recklessness — it's a more accurate model of how knowledge is acquired in uncertain environments.</p>
 
-    <p>The philosophy is essentially Bayesian: you start with a prior (your initial idea), you collect evidence (market feedback), and you update. The faster you collect evidence, the faster your posterior converges on the truth. Waiting longer to ship doesn't give you better evidence. It gives you delayed evidence. The distribution doesn't improve with delay.</p>
+    <p>The philosophy is essentially <a href="bayesian-investor.html" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);">Bayesian</a>: you start with a prior (your initial idea), you collect evidence (market feedback), and you update. The faster you collect evidence, the faster your posterior converges on the truth. Waiting longer to ship doesn't give you better evidence. It gives you delayed evidence. The distribution doesn't improve with delay.</p>
 
     <h2>The Sustainable Edge</h2>
 
     <p>Most competitive advantages erode. Technology gets commoditized. Networks get copied. Brand gets diluted. Capital gets competed away.</p>
 
-    <p>Learning rate is the one advantage that compounds rather than erodes. A team that has run 200 iterations in a market has built institutional knowledge that can't be bought, cloned, or reverse-engineered. Every iteration added to that base makes the next iteration more valuable. The moat deepens with use.</p>
+    <p><strong>Learning rate is the one advantage that compounds rather than erodes.</strong> A team that has run 200 iterations in a market has built institutional knowledge that can't be bought, cloned, or reverse-engineered. Every iteration added to that base makes the next iteration more valuable. The moat deepens with use.</p>
 
     <p>This is why speed compounds into something that eventually looks like an insurmountable lead. It's not because the fast team got lucky early. It's because 200 iterations of real market feedback is a genuinely different asset than any amount of pre-market analysis.</p>
 
     <p>The right question isn't “how do we build this?” It's “how do we find out if we should have built this — as fast as possible?” Answer that correctly, and you'll be surprised how quickly the lead becomes unassailable.</p>
+
+    <div class="cta-box">
+      <div class="cta-label">DEALITHIC &middot; Private Markets Platform</div>
+      <div class="cta-head">What I&rsquo;m building</div>
+      <p class="cta-text">The operating system for a private-markets transaction, start to finish. Deal intelligence, a 93,000+ investor network, full-stack IR, trading technology, and enterprise deployments &mdash; one platform instead of a different vendor at every stage.</p>
+      <div class="cta-buttons">
+        <a class="cta-btn primary" href="https://www.dealithic.co/?utm_source=anthonywlicausi&amp;utm_medium=essay&amp;utm_campaign=speed-as-competitive-moat&amp;utm_content=essay_cta" target="_blank" rel="noopener">Visit DEALITHIC &rarr;</a>
+      </div>
+    </div>
 
     <div class="related-reading">
       <div class="rr-label">Related Reading</div>

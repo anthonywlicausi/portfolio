@@ -8,6 +8,20 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-4QRVHW1HL2');
+  // Clicks through to DEALITHIC properties = the conversion this site exists for
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    try {
+      var u = new URL(a.href, location.href);
+      if (/(^|\.)dealithic\.co$/.test(u.hostname)) {
+        gtag('event', 'dealithic_click', { link_host: u.hostname, link_path: u.pathname, page_path: location.pathname });
+      }
+      if (/(^|\.)barenbergcapital\.com$/.test(u.hostname)) {
+        gtag('event', 'obsidian_click', { link_host: u.hostname, link_path: u.pathname, page_path: location.pathname });
+      }
+    } catch (err) {}
+  });
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,18 +60,18 @@
   ]
 }
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Syne:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Manrope:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 <style>
 :root {
   --d-bg: #020407; --d-bg2: #060a10; --d-border: rgba(255,255,255,0.055);
   --d-text: rgba(234,236,242,0.78); --d-dim: rgba(234,236,242,0.40); --d-white: #eaecf2;
   --l-bg: #f7f4ef; --l-bg2: #ffffff; --l-bg3: #ede9e2;
-  --l-text: #1a1410; --l-text2: rgba(26,20,16,0.62); --l-border: rgba(26,20,16,0.09);
+  --l-text: #1a1410; --l-text2: rgba(26,20,16,0.86); --l-border: rgba(26,20,16,0.09);
   --accent: #01C9FE; --l-accent: #0038CC;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 16px; }
-body { background: var(--d-bg); font-family: 'Syne', sans-serif; font-weight: 400; cursor: none; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+body { background: var(--d-bg); font-family: 'Manrope', sans-serif; font-weight: 400; cursor: none; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 a { text-decoration: none; color: inherit; }
 #cur { position:fixed; width:8px; height:8px; background:var(--accent); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); box-shadow:0 0 12px var(--accent); }
 #cur-ring { position:fixed; width:28px; height:28px; border:1px solid rgba(1,201,254,.4); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:width .22s,height .22s; }
@@ -66,43 +80,53 @@ body.hov #cur-ring { width:46px; height:46px; }
 nav { position:fixed; top:0; left:0; right:0; z-index:200; padding:20px 64px; display:flex; align-items:center; gap:16px; background:linear-gradient(to bottom, rgba(2,4,7,.97) 60%, transparent); border-bottom:1px solid rgba(255,255,255,.03); }
 .nav-logo { font-family:'Bebas Neue',sans-serif; font-size:21px; letter-spacing:.12em; color:var(--d-white); }
 .nav-logo em { color:var(--accent); font-style:normal; }
-.nav-official { font-family:'Playfair Display',serif; font-style:italic; font-size:13px; color:var(--d-dim); }
+.nav-official { font-family:'Playfair Display',serif; font-style:italic; font-size:15px; color:var(--d-dim); }
 .article-header { position:relative; z-index:2; background:var(--d-bg); padding:120px 64px 72px; border-bottom:4px solid var(--accent); }
-.article-back { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.26em; color:var(--d-dim); text-transform:uppercase; display:inline-flex; align-items:center; gap:8px; margin-bottom:40px; transition:color .2s; }
+.article-back { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.26em; color:var(--d-dim); text-transform:uppercase; display:inline-flex; align-items:center; gap:8px; margin-bottom:40px; transition:color .2s; }
 .article-back:hover { color:var(--accent); }
-.article-domain { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.2em; padding:3px 12px; border:1px solid rgba(1,201,254,.35); color:rgba(1,201,254,.95); text-transform:uppercase; display:inline-block; margin-bottom:24px; }
+.article-domain { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.2em; padding:3px 12px; border:1px solid rgba(1,201,254,.35); color:rgba(1,201,254,.95); text-transform:uppercase; display:inline-block; margin-bottom:24px; }
 .article-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(42px,6.4vw,80px); line-height:.96; letter-spacing:-.01em; color:var(--d-white); max-width:920px; margin-bottom:32px; }
 .article-meta { display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
-.article-author { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.2em; color:var(--accent); text-transform:uppercase; }
-.article-date { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.16em; color:var(--d-dim); }
-.article-read { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:.16em; color:var(--d-dim); }
+.article-author { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.2em; color:var(--accent); text-transform:uppercase; }
+.article-date { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.16em; color:var(--d-dim); }
+.article-read { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.16em; color:var(--d-dim); }
 .article-body { background:var(--l-bg); padding:80px 64px 120px; }
 .article-content { max-width:720px; margin:0 auto; }
 .article-content p { font-family:'Playfair Display',serif; font-size:20px; line-height:1.9; color:var(--l-text2); margin-bottom:32px; }
-.article-content p strong { color:var(--l-text); font-weight:700; font-family:'Syne',sans-serif; }
-.article-content h2 { font-family:'Share Tech Mono',monospace; font-size:11px; letter-spacing:.36em; color:var(--l-accent); text-transform:uppercase; margin:56px 0 20px; display:flex; align-items:center; gap:12px; }
+.article-content p strong { color:#0d0a08; font-weight:700; font-family:inherit; }
+.article-content p strong a { font-weight:700; }
+.article-content h2 { font-family:'Share Tech Mono',monospace; font-size:16px; letter-spacing:.36em; color:var(--l-accent); text-transform:uppercase; margin:56px 0 20px; display:flex; align-items:center; gap:12px; }
 .article-content h2::after { content:''; height:1px; flex:1; background:rgba(0,56,204,.18); }
 .article-content blockquote { border-left:3px solid var(--l-accent); padding:8px 0 8px 28px; margin:40px 0; }
 .article-content blockquote p { font-size:24px; font-style:italic; color:var(--l-text); margin-bottom:0; line-height:1.65; }
 .article-content .equation { font-family:'Share Tech Mono',monospace; font-size:15px; background:var(--l-bg3); border:1px solid var(--l-border); padding:24px 28px; margin:40px 0; color:var(--l-text); line-height:2; }
-.article-content .equation .eq-comment { color:rgba(26,20,16,.45); font-size:12px; }
+.article-content .equation .eq-comment { color:rgba(26,20,16,.45); font-size:15px; }
 .article-content .equation .eq-key { color:var(--l-accent); }
 .stat-block { background:var(--l-bg2); border:1px solid var(--l-border); border-left:3px solid var(--l-accent); padding:28px 32px; margin:40px 0; }
 .stat-row { display:flex; align-items:baseline; gap:18px; padding:10px 0; border-bottom:1px solid var(--l-border); }
 .stat-row:last-child { border-bottom:none; padding-bottom:0; }
 .stat-num { font-family:'Bebas Neue',sans-serif; font-size:38px; color:var(--l-accent); line-height:1; flex-shrink:0; min-width:72px; }
-.stat-label { font-family:'Syne',sans-serif; font-size:14px; color:var(--l-text2); line-height:1.5; }
+.stat-label { font-family:'Manrope',sans-serif; font-size:16px; color:var(--l-text2); line-height:1.5; }
+.cta-box { margin-top:56px; padding:36px 40px; background:var(--d-bg); border-left:4px solid #01C9FE; }
+.cta-label { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.2em; color:#01C9FE; text-transform:uppercase; margin-bottom:14px; }
+.cta-head { font-family:'Bebas Neue',sans-serif; font-size:clamp(32px,4.4vw,46px); line-height:1; letter-spacing:.01em; color:var(--d-white); margin-bottom:14px; }
+.article-content .cta-text { font-family:'Manrope',sans-serif; font-size:18px; line-height:1.6; color:var(--d-white); margin-bottom:26px; max-width:620px; }
+.cta-buttons { display:flex; flex-wrap:wrap; gap:14px; }
+.cta-btn { font-family:'Share Tech Mono',monospace; font-size:16px; letter-spacing:.16em; text-transform:uppercase; padding:16px 26px; border:1px solid #01C9FE; color:var(--d-white); transition:background .2s,color .2s; cursor:none; }
+.cta-btn.primary { background:#01C9FE; color:#020407; font-weight:700; }
+.cta-btn:hover { background:var(--d-white); color:#020407; border-color:var(--d-white); }
+@media(max-width:700px){ .cta-box { padding:28px 22px; } .cta-btn { width:100%; text-align:center; } }
 .related-reading { margin-top:72px; padding-top:40px; border-top:1px solid var(--l-border); }
-.rr-label { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.38em; color:var(--l-accent); text-transform:uppercase; margin-bottom:20px; }
+.rr-label { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.38em; color:var(--l-accent); text-transform:uppercase; margin-bottom:20px; }
 .rr-links { display:flex; flex-direction:column; gap:10px; }
 .rr-link { display:flex; align-items:center; gap:20px; padding:16px 20px; border:1px solid var(--l-border); background:var(--l-bg2); transition:border-color .2s,background .2s; cursor:none; }
 .rr-link:hover { border-color:var(--l-accent); background:var(--l-bg); }
-.rr-domain { font-family:'Share Tech Mono',monospace; font-size:8px; letter-spacing:.18em; color:var(--l-text2); text-transform:uppercase; white-space:nowrap; min-width:160px; flex-shrink:0; }
+.rr-domain { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.18em; color:var(--l-text2); text-transform:uppercase; white-space:nowrap; min-width:160px; flex-shrink:0; }
 .rr-title { font-family:'Playfair Display',serif; font-size:17px; color:var(--l-text); line-height:1.35; transition:color .2s; }
 .rr-link:hover .rr-title { color:var(--l-accent); }
 footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid var(--l-border); background:var(--l-bg3); display:flex; justify-content:space-between; align-items:center; }
-.foot-copy { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.22em; color:var(--l-text2); }
-.foot-right { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:.16em; color:var(--l-text2); opacity:.6; }
+.foot-copy { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.22em; color:var(--l-text2); }
+.foot-right { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.16em; color:var(--l-text2); opacity:.6; }
 @media (max-width:768px) {
   nav, .article-header, .article-body, footer { padding-left:24px; padding-right:24px; }
   .article-header { padding-top:100px; padding-bottom:48px; }
@@ -136,13 +160,13 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 <main class="article-body">
   <div class="article-content">
 
-    <p>Startup culture has one origin story it tells over and over: the founder who quit the job, burned the savings, and bet everything on the idea. It's told as though the size of the bet is what made the outcome possible &mdash; as if conviction is measured in how much you were willing to lose. That story is popular because it's dramatic. It is also, as decision theory, close to backwards.</p>
+    <p>Startup culture has one origin story it tells over and over: the founder who quit the job, burned the savings, and bet everything on the idea. It's told as though the size of the bet is what made the outcome possible &mdash; as if conviction is measured in how much you were willing to lose. That story is popular because it's dramatic. It is also, as <a href="https://en.wikipedia.org/wiki/Decision_theory" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);" target="_blank" rel="noopener">decision theory</a>, close to backwards.</p>
 
-    <p>Betting everything on an unproven idea isn't a signal of conviction. It's a signal that you didn't have a way to test the idea for less. The leap gets romanticized precisely because it looks like courage from the outside &mdash; but the founders who are actually good at this rarely take it. They find the smallest possible version of the bet that still tells them something true, and they only size up once the world has started confirming what they suspected.</p>
+    <p><strong>Betting everything on an unproven idea isn't a signal of conviction.</strong> It's a signal that you didn't have a way to test the idea for less. The leap gets romanticized precisely because it looks like courage from the outside &mdash; but the founders who are actually good at this rarely take it. They find the smallest possible version of the bet that still tells them something true, and they only size up once the world has started confirming what they suspected.</p>
 
     <h2>A Formula That Already Answers This</h2>
 
-    <p>I've written before about the Kelly criterion &mdash; the formula that tells you how much of your bankroll to stake on a favorable bet, given your edge and the odds. The math is precise, but the philosophy underneath it is simple: bet in proportion to what you actually know, not in proportion to how much you want it to be true. Bet everything, and a single unlucky outcome ends the game regardless of how good your long-run edge is. Bet nothing, and you never find out what your edge even was.</p>
+    <p>I've written before about the <a href="kelly-criterion.html" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);">Kelly criterion</a> &mdash; the formula that tells you how much of your bankroll to stake on a favorable bet, given your edge and the odds. The math is precise, but the philosophy underneath it is simple: <strong>bet in proportion to what you actually know, not in proportion to how much you want it to be true.</strong> Bet everything, and a single unlucky outcome ends the game regardless of how good your long-run edge is. Bet nothing, and you never find out what your edge even was.</p>
 
     <div class="equation">
       <div><span class="eq-comment">// f* = fraction of the bankroll to bet</span></div>
@@ -153,7 +177,7 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
       <div><span class="eq-comment">// everything the leap puts at risk simultaneously.</span></div>
     </div>
 
-    <p>Quitting your job on day one to chase an unvalidated idea is the entrepreneurial equivalent of betting the entire bankroll on a hand you haven't seen yet. You don't know your edge, because you haven't tested it. You're not sizing the bet to your information. You're sizing it to your enthusiasm, which is a different number entirely and has no relationship to whether the business will work.</p>
+    <p>Quitting your job on day one to chase an unvalidated idea is the entrepreneurial equivalent of betting the entire bankroll on a hand you haven't seen yet. You don't know your edge, because you haven't tested it. <strong>You're not sizing the bet to your information.</strong> You're sizing it to your enthusiasm, which is a different number entirely and has no relationship to whether the business will work.</p>
 
     <blockquote>
       <p>"The leap isn't brave. It's just a bet with no information behind it, dressed up as a character trait."</p>
@@ -170,13 +194,22 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 
     <h2>Validation Is the Small Bet, Not a Delay Before the Real One</h2>
 
-    <p>The mistake in how this advice usually gets given is treating validation as a speed bump on the way to the real decision &mdash; something to get through quickly so you can get to the leap. It isn't a speed bump. It <em>is</em> the bet, sized correctly: small enough that a wrong answer doesn't end you, informative enough that a right answer tells you something true about whether to size up. The founders who skip it aren't moving faster. They're just betting blind and calling it speed.</p>
+    <p>The mistake in how this advice usually gets given is treating validation as a speed bump on the way to the real decision &mdash; something to get through quickly so you can get to the leap. It isn't a speed bump. It <em>is</em> the bet, sized correctly: small enough that a wrong answer doesn't end you, informative enough that a right answer tells you something true about whether to size up. <strong>The founders who skip it aren't moving faster. They're just betting blind and calling it speed.</strong></p>
 
-    <p><a href="https://dealithic.co/steadspark" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);">STEADSPARK</a> exists for exactly this stage &mdash; free AI validation for a business idea before anyone quits anything. Not because quitting is wrong, but because quitting should be a decision made with information, sized to what you actually know, not a leap taken on the strength of how badly you want it to work. The spark doesn't need the leap to become steady income. It needs a correctly sized first bet, and then another, each one a little larger than the last, exactly the way the formula says it should.</p>
+    <p><a href="https://dealithic.co/steadspark?utm_source=anthonywlicausi&utm_medium=essay&utm_campaign=myth-of-the-leap" style="color:var(--l-accent);text-decoration:underline;text-decoration-color:rgba(0,56,204,.3);">STEADSPARK</a> exists for exactly this stage &mdash; free AI validation for a business idea before anyone quits anything. Not because quitting is wrong, but because quitting should be a decision made with information, sized to what you actually know, not a leap taken on the strength of how badly you want it to work. The spark doesn't need the leap to become steady income. It needs a correctly sized first bet, and then another, each one a little larger than the last, exactly the way the formula says it should.</p>
 
     <h2>The Real Risk Was Never the Small Bet</h2>
 
-    <p>Nobody looks back on their career and regrets the month they spent validating an idea before committing to it. The regret, when it comes, is almost always the other direction &mdash; the leap taken on conviction alone, sized to enthusiasm instead of evidence, that would have looked completely different with three months of small, cheap, informative bets first. The leap makes a better story. The correctly sized bet makes a better business. Those are not the same thing, and startup culture has spent a long time confusing them.</p>
+    <p>Nobody looks back on their career and regrets the month they spent validating an idea before committing to it. The regret, when it comes, is almost always the other direction &mdash; the leap taken on conviction alone, sized to enthusiasm instead of evidence, that would have looked completely different with three months of small, cheap, informative bets first. <strong>The leap makes a better story. The correctly sized bet makes a better business.</strong> Those are not the same thing, and startup culture has spent a long time confusing them.</p>
+
+    <div class="cta-box">
+      <div class="cta-label">STEADSPARK &middot; For First-Time Founders</div>
+      <div class="cta-head">The tool behind this essay</div>
+      <p class="cta-text">Free AI validation for a business idea before a first-time founder quits their job to chase it &mdash; the spark that becomes steady income.</p>
+      <div class="cta-buttons">
+        <a class="cta-btn primary" href="https://www.dealithic.co/steadspark?utm_source=anthonywlicausi&amp;utm_medium=essay&amp;utm_campaign=myth-of-the-leap&amp;utm_content=essay_cta" target="_blank" rel="noopener">Validate your idea &rarr;</a>
+      </div>
+    </div>
 
     <div class="related-reading">
       <div class="rr-label">Related Reading</div>
