@@ -53,14 +53,3 @@ At the end of any session that builds or fixes something, write down: **what exi
 where the code and credentials live (name the env var / vault / dashboard — never paste the secret),
 and how to check it works.** It goes in the repo's `ROADMAP.md` or `TODO.md` AND in a memory entry.
 Do it in the same session, before closing out.
-
-## Screenshots before every push of a visible change — standing rule, raised 2026-10-24
-
-⛔ **Before pushing any change that affects what a user sees (a page, component, style, copy on a
-live page, an email template), send Anthony screenshots of the changed result and wait for his
-go-ahead.** Desktop AND phone width, taken from the local build, not described in words.
-- Applies to every visible change, including "tiny" copy and CSS fixes.
-- Exempt: docs-only, config-only and backend changes with no visible effect. Say that is why you
-  are skipping them.
-- This does not replace the other rules: test locally, push once, straight to `main`, smoke-test
-  the live result after the push.
