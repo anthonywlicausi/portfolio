@@ -122,3 +122,5 @@ rules, color system). This file is the backlog.
 - Darkened `--l-text2` / `.eq-comment` greys to 0.78 alpha (contrast), added `<main>` landmark.
 - TRADECOACH → FALSIFIRE (display text, JSON-LD name, essay copy). Links still point at `dealithic.co/tradecoach` — `/falsifire` is a 404 there; update links when the Dealithic route is renamed.
 - Favicon 404 fixed with an inline SVG icon. Not done: self-hosting fonts (Syne still in use — global rule says no Syne; separate redesign decision).
+
+- **2026-10-24 — Google Analytics added.** GA4 property "Anthony W. Licausi (personal site)" (account Barenberg Capital 395510207), web stream anthonywlicausi.com, measurement ID `G-4QRVHW1HL2` (public tag id, not a secret). gtag snippet is the first thing in `<head>` of `index.html` and every `writing/*.html`. ⚠️ New essays must include the same snippet (copy from an existing essay page) or they won't be tracked. Check: GA > Reports > Realtime for this property; data can take up to 48h to show in standard reports.
