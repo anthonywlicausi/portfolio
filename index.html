@@ -139,8 +139,9 @@ nav {
   overflow:hidden;
 }
 .hero-left { padding:100px 0 80px; }
-.hero-kicker { font-family:'Share Tech Mono',monospace; font-size:16px; letter-spacing:.15em; color:var(--cyan); margin-bottom:28px; display:flex; align-items:center; gap:12px; opacity:0; animation:fadeUp .6s .2s forwards; }
+.hero-kicker { font-family:'Share Tech Mono',monospace; font-size:clamp(14px,3.8vw,16px); letter-spacing:.15em; white-space:nowrap; color:var(--cyan); margin-bottom:28px; display:flex; align-items:center; gap:12px; opacity:0; animation:fadeUp .6s .2s forwards; }
 .hero-kicker::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--cyan); box-shadow:0 0 8px var(--cyan); animation:blink 1.4s infinite; flex-shrink:0; }
+@media (max-width:400px){ .hero-kicker { letter-spacing:.1em; gap:10px; } }
 h1.hero-headline { font-family:'Bebas Neue',sans-serif; font-size:clamp(78px,11vw,152px); line-height:.875; letter-spacing:-.01em; color:var(--d-white); opacity:0; animation:fadeUp .9s .35s cubic-bezier(.16,1,.3,1) forwards; }
 h1.hero-headline .hl { color:var(--cyan); }
 h1.hero-headline .outline-text { -webkit-text-stroke:1px rgba(234,236,242,.2); color:transparent; }
@@ -387,7 +388,7 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 <!-- HERO -->
 <section id="hero">
   <div class="hero-left">
-    <div class="hero-kicker">NEW YORK &middot; FOUNDER &middot; BUILDER &middot; QUANT TRADER</div>
+    <div class="hero-kicker">FOUNDER &middot; BUILDER &middot; QUANT TRADER</div>
     <h1 class="hero-headline">
       IDEAS IN.<br>
       <span class="hl">PRODUCTS</span><br>
