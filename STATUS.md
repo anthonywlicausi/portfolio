@@ -29,6 +29,8 @@ rules, color system). This file is the backlog.
 
 ## ✅ Shipped (newest first)
 
+- **2026-10-30 — Homepage pills + ticker variant B.** Approved CSS (blue `#1155FF` → cyan `#01C9FE` gradient, 999px radius, cyan glow) is in the real rules in `index.html` `<style>`, not a separate stylesheet and not `!important`. Applies to `.nav-links a` (Products, Writing, Contact only — `.nav-logo` stays plain text), `.prow-learn`, and `.btn-outline-light`. Ticker variant B is `.ticker-inner` (blue-to-cyan wash, cyan hairlines) and `.tick-arrow` (`#01C9FE`). `.ticker-wrap` padding-top is 96px on desktop and 120px under 700px so the taller pills clear the band; at ≤480px it returns to 104px because the pills shrink. Section `scroll-margin-top` is 96px (108px under 700px) so anchor jumps still clear the fixed nav. No credentials. `preview-split.html` and `preview-redesign.html` keep their own `<style>` blocks and were not changed. Check: open `index.html` at 1280px and ~390px — three nav pills on one line, Learn More and View all writing are the same pills, ticker arrows are cyan. Owner-approved exception: nav pill labels are 10px only at `max-width: 480px` so the three stay on one line; body copy stays 16px, and the label is white on the saturated gradient.
+
 - **2026-10-24 — Essay: "You Can't Underwrite a Feature Anymore"** (`writing/cant-underwrite-a-feature.html`,
   AI × Finance, published on Anthony's approval outside the Tuesday queue). Mosaic/Keye rebuild timings from
   transaction-intelligence commit history; Lightfield comparison; rebuttals; DEALITHIC framed as ambition.
