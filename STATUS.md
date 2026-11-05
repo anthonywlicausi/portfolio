@@ -29,6 +29,18 @@ rules, color system). This file is the backlog.
 
 ## ✅ Shipped (newest first)
 
+- **2026-11-05 — Article header readability (mobile + desktop).** Anthony circled four dark-header items on The New Alchemy. There is no shared stylesheet: each `writing/*.html` page carries its own `<style>`, and the same rules were updated on all 15 essays. Homepage `.nav-official` in `index.html` got the same tagline treatment. `preview-redesign.html` and `preview-split.html` were left alone.
+
+  What changed:
+  - Dark tokens on essays: `--d-text` and `--d-dim` are now `rgba(234,236,242,0.92)` (were 0.78 and 0.40). The circled text itself uses `--d-white` (`#eaecf2`) on `--d-bg` `#020407` (about 17:1).
+  - `.nav-official` ("Official Site"): Playfair upright, 18px, white. Homepage still hides this label under 700px so the three nav pills stay on one line.
+  - `.article-back`: 18px Share Tech Mono, white, letter-spacing `.08em` (was 15px, `.26em`, 40% white). `display:flex; width:fit-content` so the link sits on its own row above the category chip, with 28px before the chip.
+  - `.article-dek` (only The New Alchemy has one): Playfair upright, white, `clamp(20px, 2.2vw, 26px)`. Italics removed.
+  - Byline: `.article-author`, `.article-date`, `.article-read` are 18px. Date and read time are white; the name stays Node Cyan (`--accent`).
+  - At ≤768px the essay nav wraps and `.nav-logo` / `.nav-official` are `white-space:nowrap`, so a ~320px phone puts "Official Site" on a second line instead of splitting the words.
+
+  No credentials. Check: `python3 -m http.server` from the repo root, open `/writing/the-new-alchemy.html` at ~390px and at 1280px. Official Site, Back to Writing, the abstract, the date, and "7 min read" are upright, at least 18px, and near-white on black. The back link goes to `/index.html#thinking`.
+
 - **2026-10-30 — Homepage pills + ticker variant B.** Approved CSS (blue `#1155FF` → cyan `#01C9FE` gradient, 999px radius, cyan glow) is in the real rules in `index.html` `<style>`, not a separate stylesheet and not `!important`. Applies to `.nav-links a` (Products, Writing, Contact only — `.nav-logo` stays plain text), `.prow-learn`, and `.btn-outline-light`. Ticker variant B is `.ticker-inner` (blue-to-cyan wash, cyan hairlines) and `.tick-arrow` (`#01C9FE`). `.ticker-wrap` padding-top is 96px on desktop and 120px under 700px so the taller pills clear the band; at ≤480px it returns to 104px because the pills shrink. Section `scroll-margin-top` is 96px (108px under 700px) so anchor jumps still clear the fixed nav. No credentials. `preview-split.html` and `preview-redesign.html` keep their own `<style>` blocks and were not changed. Check: open `index.html` at 1280px and ~390px — three nav pills on one line, Learn More and View all writing are the same pills, ticker arrows are cyan. Owner-approved exception: nav pill labels are 10px only at `max-width: 480px` so the three stay on one line; body copy stays 16px, and the label is white on the saturated gradient.
 
 - **2026-10-24 — Essay: "You Can't Underwrite a Feature Anymore"** (`writing/cant-underwrite-a-feature.html`,
