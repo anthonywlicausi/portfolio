@@ -64,7 +64,7 @@
 <style>
 :root {
   --d-bg: #020407; --d-bg2: #060a10; --d-border: rgba(255,255,255,0.055);
-  --d-text: rgba(234,236,242,0.78); --d-dim: rgba(234,236,242,0.40); --d-white: #eaecf2;
+  --d-text: rgba(234,236,242,0.92); --d-dim: rgba(234,236,242,0.92); --d-white: #eaecf2;
   --l-bg: #f7f4ef; --l-bg2: #ffffff; --l-bg3: #ede9e2;
   --l-text: #1a1410; --l-text2: rgba(26,20,16,0.86); --l-border: rgba(26,20,16,0.09);
   --accent: #1155FF; --l-accent: #0038CC;
@@ -80,16 +80,16 @@ body.hov #cur-ring { width:46px; height:46px; }
 nav { position:fixed; top:0; left:0; right:0; z-index:200; padding:20px 64px; display:flex; align-items:center; gap:16px; background:linear-gradient(to bottom, rgba(2,4,7,.97) 60%, transparent); border-bottom:1px solid rgba(255,255,255,.03); }
 .nav-logo { font-family:'Bebas Neue',sans-serif; font-size:21px; letter-spacing:.12em; color:var(--d-white); }
 .nav-logo em { color:var(--accent); font-style:normal; }
-.nav-official { font-family:'Playfair Display',serif; font-style:italic; font-size:15px; color:var(--d-dim); }
+.nav-official { font-family:'Playfair Display',serif; font-style:normal; font-size:18px; line-height:1.35; color:var(--d-white); }
 .article-header { position:relative; z-index:2; background:var(--d-bg); padding:120px 64px 72px; border-bottom:4px solid var(--accent); }
-.article-back { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.26em; color:var(--d-dim); text-transform:uppercase; display:inline-flex; align-items:center; gap:8px; margin-bottom:40px; transition:color .2s; }
+.article-back { font-family:'Share Tech Mono',monospace; font-size:18px; letter-spacing:.08em; line-height:1.45; color:var(--d-white); text-transform:uppercase; display:flex; width:fit-content; align-items:center; gap:8px; margin-bottom:28px; transition:color .2s; }
 .article-back:hover { color:var(--accent); }
 .article-domain { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.2em; padding:3px 12px; border:1px solid rgba(17,85,255,.35); color:rgba(17,85,255,.9); text-transform:uppercase; display:inline-block; margin-bottom:24px; }
 .article-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(48px,7vw,88px); line-height:.92; letter-spacing:-.01em; color:var(--d-white); max-width:900px; margin-bottom:32px; }
-.article-meta { display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
-.article-author { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.2em; color:var(--accent); text-transform:uppercase; }
-.article-date { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.16em; color:var(--d-dim); }
-.article-read { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.16em; color:var(--d-dim); }
+.article-meta { display:flex; align-items:center; gap:8px 24px; flex-wrap:wrap; }
+.article-author { font-family:'Share Tech Mono',monospace; font-size:18px; letter-spacing:.08em; line-height:1.45; color:var(--accent); text-transform:uppercase; }
+.article-date { font-family:'Share Tech Mono',monospace; font-size:18px; letter-spacing:.04em; line-height:1.45; color:var(--d-white); }
+.article-read { font-family:'Share Tech Mono',monospace; font-size:18px; letter-spacing:.04em; line-height:1.45; color:var(--d-white); }
 .article-body { background:var(--l-bg); padding:80px 64px 120px; }
 .article-content { max-width:720px; margin:0 auto; }
 .article-content p { font-family:'Playfair Display',serif; font-size:20px; line-height:1.9; color:var(--l-text2); margin-bottom:32px; }
@@ -129,6 +129,8 @@ footer { position:relative; z-index:2; padding:24px 64px; border-top:1px solid v
 .foot-right { font-family:'Share Tech Mono',monospace; font-size:15px; letter-spacing:.16em; color:var(--l-text2); opacity:.6; }
 @media (max-width:768px) {
   nav, .article-header, .article-body, footer { padding-left:24px; padding-right:24px; }
+  nav { flex-wrap:wrap; row-gap:4px; }
+  .nav-logo, .nav-official { white-space:nowrap; }
   .article-header { padding-top:100px; padding-bottom:48px; }
   .article-body { padding-top:48px; padding-bottom:72px; }
   .rr-domain { display:none; }
